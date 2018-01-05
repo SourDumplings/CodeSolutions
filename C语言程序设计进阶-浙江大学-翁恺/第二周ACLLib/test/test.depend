@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1448456426 source:e:\程序代码\c语言程序设计进阶-浙江大学-翁恺\第二周acllib\acllib.c
+	"acllib.h"
+	<windows.h>
+	<olectl.h>
+	<stdio.h>
+
+1448456426 e:\程序代码\c语言程序设计进阶-浙江大学-翁恺\第二周acllib\acllib.h
+	<Windows.h>
+
+1448456426 source:e:\程序代码\c语言程序设计进阶-浙江大学-翁恺\第二周acllib\test\acllib.c
+	"acllib.h"
+	<windows.h>
+	<olectl.h>
+	<stdio.h>
+
+1448456426 e:\程序代码\c语言程序设计进阶-浙江大学-翁恺\第二周acllib\test\acllib.h
+	<Windows.h>
+
+1510541364 source:e:\程序代码\c语言程序设计进阶-浙江大学-翁恺\第二周acllib\test\main.c
+	"acllib.h"
+
