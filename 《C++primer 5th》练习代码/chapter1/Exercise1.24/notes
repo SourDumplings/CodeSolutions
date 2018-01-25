@@ -1,0 +1,4 @@
+在终端输入g++ -std=c++11 -o my_add_items my_add_items.cpp
+先将my_add_items.cpp编译成my_add_items.exe
+在cmd终端上运行 .\my_add_items <book_sales> results
+即可得到results文件
