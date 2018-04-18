@@ -14,8 +14,7 @@ Thread.o:Thread.cpp
 	$(CC) $(CPPFLAGS) -o $@ -c $^
 
 
-.PHONY:
-	clean
+.PHONY: clean
 
 clean:
-	rm Thread.o Thread
+	-del Thread.o Thread.exe
