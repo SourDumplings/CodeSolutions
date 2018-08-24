@@ -1,205 +1,191 @@
 /*
- @Date    : 2018-03-17 20:36:59
+ @Date    : 2018-08-25 00:30:51
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-https://www.patest.cn/contests/pat-a-practise/1026
+https://pintia.cn/problem-sets/994805342720868352/problems/994805472333250560
  */
 
 #include <iostream>
 #include <cstdio>
-#include <string>
-#include <vector>
+#include <deque>
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
-static const int INF = 999999;
+int N, K, M;
+const int MAXN = 10005, MAXK = 105, INF = 999999;
 
 struct Pair
 {
-    int arriveTime, serveTime = INF, needTime;
-    bool isVIP, isDelete = false;
+    int arriveTime, serveTime = INF, waitTime;
+    int playTime;
+    bool isVIP = false;
+    bool served = false;
 };
 
 struct Table
 {
-    int servedNum = 0;
-    bool isVIP = false;
     int resTime = 0;
+    bool isVIPTable = false;
+    int servedNum = 0;
 };
 
-int time_to_int(const string &timeInfo)
-{
-    int res = stoi(timeInfo.substr(0, 2)) * 3600 + stoi(timeInfo.substr(3, 2)) * 60 +
-    stoi(timeInfo.substr(6, 2));
-    return res;
-}
+Table T[MAXK];
+int nowTime = 0;
+deque<int> Q, vipQ;
+Pair P[MAXN];
 
-void int_to_time(char timeInfo[], int t)
+int find_avail_table()
 {
-    int h = t / 3600;
-    int s = t % 60;
-    int m = (t - h * 3600 - s) / 60;
-    sprintf(timeInfo, "%02d:%02d:%02d", h, m, s);
-    timeInfo[8] = '\0';
-    return;
-}
-
-static int N, K, M;
-static int nowTime = 0;
-static vector<int> VIPT;
-
-int find_VIP_pair(Pair P[], int d)
-{
-    for (unsigned i = d; i < N; ++i)
-    {
-        if (P[i].arriveTime > nowTime)
-        {
-            return -1;
-        }
-        if (P[i].isVIP && !P[i].isDelete)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-int find_avail_table(Table T[], Pair P[], int d)
-{
-    int minRes = INF, tAvail;
-    for (unsigned i = 0; i < K; ++i)
+    int minRes = INF, availW = -1;
+    for (int i = 0; i != K; ++i)
     {
         if (T[i].resTime < minRes)
         {
-            tAvail = i;
             minRes = T[i].resTime;
+            availW = i;
         }
     }
-    for (unsigned i = 0; i < K; ++i)
+    nowTime += minRes;
+    for (int i = 0; i != K; ++i)
     {
         T[i].resTime -= minRes;
     }
-    int VIP;
-    nowTime += minRes;
-    if ((VIP = find_VIP_pair(P, d)) != -1)
+
+    bool hasVIP = false;
+    if (!vipQ.empty() && P[vipQ.front()].arriveTime <= nowTime)
+        hasVIP = true;
+    if (hasVIP)
     {
-        for (unsigned i = 0; i < M; ++i)
+        for (int i = 0; i != K; ++i)
         {
-            if (T[VIPT[i]].resTime == 0)
+            if (T[i].resTime == 0 && T[i].isVIPTable)
             {
-                tAvail = VIPT[i];
+                availW = i;
                 break;
             }
         }
     }
-    return tAvail;
+    return availW;
 }
 
-int main(int argc, char const *argv[])
+int processTime(char aT[])
 {
-    scanf("%d\n", &N);
-    Pair P[N];
-    for (unsigned i = 0; i < N; ++i)
+    int h = (aT[0] - '0') * 10 + (aT[1] - '0');
+    int m = (aT[3] - '0') * 10 + (aT[4] - '0');
+    int s = (aT[6] - '0') * 10 + (aT[7] - '0');
+    return (h - 8) * 3600 + m * 60 + s;
+
+}
+
+string get_time(int st)
+{
+    int h = st / 3600;
+    int s = st % 60;
+    int m = (st - h * 3600 - s) / 60;
+    char ss[20];
+    sprintf(ss, "%02d:%02d:%02d", h + 8, m, s);
+    return string(ss);
+}
+
+void output_pair(const Pair &p)
+{
+    printf("%s %s %d\n", get_time(p.arriveTime).c_str(), get_time(p.serveTime).c_str(),
+           (p.serveTime - p.arriveTime + 30) / 60);
+    return;
+}
+
+int main()
+{
+    scanf("%d", &N);
+    for (int i = 0; i != N; ++i)
     {
-        char timeInfo[10];
-        int needTime, VIP;
-        scanf("%s %d %d", timeInfo, &needTime, &VIP);
-        if (needTime > 120)
+        char aT[20];
+        int pT, v;
+        scanf("%s %d %d", aT, &pT, &v);
+        if (pT > 120) pT = 120;
+        P[i].arriveTime = processTime(aT);
+        P[i].playTime = pT * 60;
+        if (v == 1)
         {
-            needTime = 120;
+            P[i].isVIP = true;
         }
-        P[i].arriveTime = time_to_int(timeInfo);
-        P[i].needTime = needTime * 60;
-        P[i].isVIP = (VIP == 1);
     }
-    scanf("%d %d", &K, &M);
-    Table T[K];
-    for (unsigned i = 0; i < M; ++i)
+    sort(P, P+N, [] (const Pair &p1, const Pair &p2) { return p1.arriveTime < p2.arriveTime; });
+    for (int i = 0; i != N; ++i)
     {
-        int vipTable;
-        scanf("%d", &vipTable);
-        T[vipTable-1].isVIP = true;
-        VIPT.push_back(vipTable-1);
-    }
-    sort(P, P+N, [] (const Pair &p1, const Pair &p2)
-        { return p1.arriveTime < p2.arriveTime; });
-    int d = 0;
-    nowTime = time_to_int("08:00:00");
-    int closeTime = time_to_int("21:00:00");
-    vector<int> servedSeq;
-    while (d < N && servedSeq.size() < N)
-    {
-        int availT = find_avail_table(T, P, d), nextP;
-        if ((T[availT].isVIP) && ((nextP = find_VIP_pair(P, d)) != -1))
+        Q.push_back(i);
+        if (P[i].isVIP)
         {
-            P[nextP].isDelete = true;
+            vipQ.push_back(i);
+        }
+    }
+
+    scanf("%d %d", &K, &M);
+    for (int i = 0; i != M; ++i)
+    {
+        int v;
+        scanf("%d", &v);
+        T[v-1].isVIPTable = true;
+    }
+
+    deque<int> serveSeq;
+    while (!Q.empty())
+    {
+        while (!vipQ.empty() && P[vipQ.front()].served)
+            vipQ.pop_front();
+        while (!Q.empty() && P[Q.front()].served)
+            Q.pop_front();
+        if (Q.empty()) break;
+
+        int w = find_avail_table();
+        int nextP = Q.front();
+        if (P[nextP].arriveTime > nowTime)
+        {
+            for (int i = 0; i != K; ++i)
+            {
+                if (T[i].resTime < P[nextP].arriveTime - nowTime)
+                    T[i].resTime = 0;
+                else
+                    T[i].resTime -= P[nextP].arriveTime - nowTime;
+            }
+            nowTime = P[nextP].arriveTime;
+            w = find_avail_table();
+        }
+        if (nowTime >= 13 * 3600) break;
+
+        if (T[w].isVIPTable && !vipQ.empty() && P[vipQ.front()].arriveTime <= nowTime)
+        {
+            nextP = vipQ.front();
+            vipQ.pop_front();
         }
         else
-        {
-            for (; d != N &&P[d].isDelete == true; ++d);
-            nextP = d;
-            if (nowTime < P[nextP].arriveTime)
-            {
-                for (unsigned t = 0; t < K; ++t)
-                {
-                    T[t].resTime -= P[nextP].arriveTime - nowTime;
-                    if (T[t].resTime < 0)
-                    {
-                        T[t].resTime = 0;
-                    }
-                }
-                nowTime = P[nextP].arriveTime;
-                availT = find_avail_table(T, P, d);
-                int tempP;
-                if ((T[availT].isVIP) && ((tempP = find_VIP_pair(P, d)) != -1))
-                {
-                    nextP = tempP;
-                    P[nextP].isDelete = true;
-                }
-                else
-                    ++d;
-            }
-            else
-                ++d;
-        }
-        T[availT].resTime += P[nextP].needTime;
+            Q.pop_front();
+        T[w].resTime = P[nextP].playTime;
+        ++T[w].servedNum;
         P[nextP].serveTime = nowTime;
-        servedSeq.push_back(nextP);
-        if (P[nextP].serveTime >= closeTime)
-        {
-            break;
-        }
-        ++T[availT].servedNum;
+        P[nextP].served = true;
+        serveSeq.push_back(nextP);
     }
-    for (auto &p : servedSeq)
+
+    for (auto i : serveSeq)
     {
-        if (P[p].serveTime >= closeTime)
-        {
-            break;
-        }
-        // printf("%d %d\n", p.arriveTime, p.serveTime);
-        char timeInfo[10];
-        int_to_time(timeInfo, P[p].arriveTime);
-        printf("%s ", timeInfo);
-        int_to_time(timeInfo, P[p].serveTime);
-        printf("%s ", timeInfo);
-        printf("%d\n", (P[p].serveTime - P[p].arriveTime + 30) / 60);
+        output_pair(P[i]);
     }
+
     int output = 0;
-    for (unsigned i = 0; i < K; ++i)
+    for (int i = 0; i != K; ++i)
     {
         if (output++)
-        {
             putchar(' ');
-        }
         printf("%d", T[i].servedNum);
     }
     putchar('\n');
+
     return 0;
 }
-
