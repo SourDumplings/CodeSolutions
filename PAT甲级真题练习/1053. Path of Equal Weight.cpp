@@ -1,5 +1,5 @@
 /*
- @Date    : 2018-01-28 14:36:41
+ @Date    : 2018-08-28 20:41:41
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
@@ -9,94 +9,80 @@
 https://www.patest.cn/contests/pat-a-practise/1053
  */
 
+#include <iostream>
 #include <cstdio>
 #include <vector>
-#include <array>
 #include <algorithm>
 
 using namespace std;
 
-struct treeNode
+const int MAXN = 101;
+int N, M, S;
+
+struct TreeNode
 {
-    int id, weight;
+    int weight;
     vector<int> children;
 };
 
-vector<int> tempPath;
+TreeNode T[MAXN];
 
-void recordPath(vector<vector<int>> &path)
+vector<int> thisPath;
+vector<vector<int>> resPaths;
+int thisW = 0;
+
+void dfs(int r)
 {
-    path.push_back(tempPath);
+    thisPath.push_back(T[r].weight);
+    thisW += T[r].weight;
+    if (thisW == S)
+    {
+        if (T[r].children.empty())
+        {
+            resPaths.push_back(thisPath);
+        }
+    }
+    else if (thisW < S)
+    {
+        for (int c : T[r].children)
+        {
+            dfs(c);
+        }
+    }
+
+    thisPath.pop_back();
+    thisW -= T[r].weight;
     return;
 }
 
-void DFS(const array<treeNode, 100> &T, vector<vector<int>> &path, int root,
-    int nowWeight, int S)
+int main()
 {
-    tempPath.push_back(T[root].weight);
-    if (T[root].weight + nowWeight >= S)
-    {
-        if (T[root].weight + nowWeight == S && T[root].children.size() == 0)
-            recordPath(path);
-        tempPath.pop_back();
-        return;
-    }
-    else
-    {
-        if (T[root].children.size())
-        {
-            for (auto c : T[root].children)
-                DFS(T, path, c, nowWeight+T[root].weight, S);
-        }
-        else
-        {
-            tempPath.pop_back();
-            return;
-        }
-    }
-    tempPath.pop_back();
-    return;
-}
-
-int main(int argc, char const *argv[])
-{
-    int N, M, S;
-    array<treeNode, 100> T;
     scanf("%d %d %d", &N, &M, &S);
-    int W;
     for (int i = 0; i != N; ++i)
-    {
-        scanf("%d", &W);
-        T[i].weight = W;
-        T[i].id = i;
-    }
-    int id, K;
-    int cid;
+        scanf("%d", &T[i].weight);
     for (int i = 0; i != M; ++i)
     {
-        scanf("%d %d", &id, &K);
-        for (int j = 0; j != K; ++j)
+        int id, k;
+        scanf("%d %d", &id, &k);
+        for (int j = 0; j != k; ++j)
         {
-            scanf("%d", &cid);
-            T[id].children.push_back(cid);
+            int c;
+            scanf("%d", &c);
+            T[id].children.push_back(c);
         }
     }
 
-    vector<vector<int>> path;
-    DFS(T, path, 0, 0, S);
+    dfs(0);
 
-    sort(path.rbegin(), path.rend());
-    int output;
-    for (const auto &eachPath : path)
+    sort(resPaths.rbegin(), resPaths.rend());
+    for (auto &path : resPaths)
     {
-        output = 0;
-        for (auto w : eachPath)
+        int output = 0;
+        for (int p : path)
         {
             if (output++)
-            {
                 putchar(' ');
-            }
-            printf("%d", w);
+            printf("%d", p);
         }
         putchar('\n');
     }
