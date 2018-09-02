@@ -1,157 +1,139 @@
 /*
- @Date    : 2018-02-16 20:12:09
+ @Date    : 2018-09-02 08:21:28
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-https://www.patest.cn/contests/pat-a-practise/1087
+https://pintia.cn/problem-sets/994805342720868352/problems/994805379664297984
  */
 
 #include <iostream>
 #include <cstdio>
-#include <string>
 #include <vector>
-#include <algorithm>
 #include <map>
-#include <memory>
-#include <cstring>
+#include <string>
 
 using namespace std;
 
+int N, K;
+const int INF = 999999;
+string s;
+
 struct City
 {
-    int id;
-    char name[4];
     int hap;
-    vector<int> lastCityId;
+    vector<pair<string, int>> adjs;
 };
 
-static const int MAXN = 201;
-static int N, K;
-static int G[MAXN][MAXN];
-static const int INF = 999999;
-static map<string, shared_ptr<City>> cityNameTable;
-static map<int, shared_ptr<City>> cityIdTable;
+map<string, City> cities;
+map<string, int> costs;
+map<string, bool> visited;
 
-static int dist[MAXN];
-static bool set[MAXN];
-
-int find_min_dist()
+string find_min_cost()
 {
-    int min_v = -1, min_dist = INF;
-    for (int i = 0; i != N; ++i)
+    string ret = "";
+    int minC = INF;
+    for (auto &cP : costs)
     {
-        if (!set[i] && dist[i] < min_dist)
+        if (!visited[cP.first] && cP.second < minC)
         {
-            min_dist = dist[i];
-            min_v = i;
+            minC = cP.second;
+            ret = cP.first;
         }
     }
-    return min_v;
+    return ret;
 }
 
-void Dijkstra(int s)
+void Dijkstra()
 {
-    for (int i = 0; i != N; ++i)
-        dist[i] = INF;
-    fill(set, set+N, false);
-    dist[s] = 0;
+    for (auto &cP : cities)
+    {
+        costs[cP.first] = INF;
+        visited[cP.first] = false;
+    }
+    costs[s] = 0;
+
     while (true)
     {
-        int v = find_min_dist();
-        if (v == -1)
+        const string &v = find_min_cost();
+        if (v == "")
             break;
-        set[v] = true;
-        for (int w = 0; w != N; ++w)
+        visited[v] = true;
+        const City &vC = cities[v];
+        for (auto &adjP : vC.adjs)
         {
-            if (!set[w] && G[v][w] != INF && dist[v] + G[v][w] < dist[w])
-                dist[w] = dist[v] + G[v][w];
+            if (!visited[adjP.first] && costs[v] + adjP.second < costs[adjP.first])
+                costs[adjP.first] = costs[v] + adjP.second;
         }
     }
     return;
 }
 
-static int pathNo = 0;
-static int thisHap = 0;
-static int maxHap = 0;
-static vector<int> path, finalPath;
-static int avgHap = 0;
+vector<string> thisPath, resPath;
+int thisHap = 0, maxHap = 0;
+int leastCNum = 0;
 
-void get_path(int d)
+void dfs(const string &w)
 {
-    thisHap += cityIdTable[d]->hap;
-    path.push_back(d);
-    if (d == 0)
+    thisPath.push_back(w);
+    thisHap += cities[w].hap;
+    if (w == s)
     {
-        ++pathNo;
-        if (thisHap > maxHap ||
-            ((thisHap == maxHap) && (thisHap / (path.size() - 1) > avgHap)))
+        if (thisHap > maxHap || (thisHap == maxHap && thisPath.size() < resPath.size()))
         {
+            resPath = thisPath;
             maxHap = thisHap;
-            avgHap = maxHap / (path.size() - 1);
-            finalPath = path;
         }
+        ++leastCNum;
     }
     else
     {
-        for (int s = 0; s != N; ++s)
+        for (auto &vP : cities[w].adjs)
         {
-            if (s != d && G[s][d] + dist[s] == dist[d])
+            const string &v = vP.first;
+            if (costs[v] + vP.second == costs[w])
             {
-                cityIdTable[d]->lastCityId.push_back(s);
-                get_path(s);
+                dfs(v);
             }
         }
     }
-    thisHap -= cityIdTable[d]->hap;
-    path.pop_back();
+    thisPath.pop_back();
+    thisHap -= cities[w].hap;
     return;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
-    char startName[4];
-    scanf("%d %d %s", &N, &K, startName);
-    for (int i = 0; i != N; ++i)
+    cin >> N >> K >> s;
+    for (int i = 0; i != N - 1; ++i)
     {
-        for (int j = 0; j != N; ++j)
-            G[i][j] = INF;
-    }
-    int id = 0;
-    shared_ptr<City> startCity(new City);
-    startCity->id = id;
-    strcpy(startCity->name, startName);
-    cityNameTable.insert(make_pair(startName, startCity));
-    cityIdTable.insert(make_pair(id++, startCity));
-    for (int i = 1; i != N; ++i)
-    {
-        shared_ptr<City> pc(new City);
-        scanf("%s %d", pc->name, &pc->hap);
-        pc->id = id;
-        cityNameTable.insert(make_pair(pc->name, pc));
-        cityIdTable.insert(make_pair(id++, pc));
+        string name;
+        int h;
+        cin >> name >> h;
+        cities[name].hap = h;
     }
     for (int i = 0; i != K; ++i)
     {
-        string name1, name2;
+        string c1, c2;
         int cost;
-        cin >> name1 >> name2 >> cost;
-        G[cityNameTable[name1]->id][cityNameTable[name2]->id] = cost;
-        G[cityNameTable[name2]->id][cityNameTable[name1]->id] = cost;
+        cin >> c1 >> c2 >> cost;
+        cities[c1].adjs.push_back(pair<string, int>(c2, cost));
+        cities[c2].adjs.push_back(pair<string, int>(c1, cost));
     }
-    Dijkstra(0);
-    int d = cityNameTable["ROM"]->id;
-    get_path(d);
-    printf("%d %d %d %d\n", pathNo, dist[d], maxHap, avgHap);
+    Dijkstra();
+    dfs("ROM");
+    printf("%d %d %d %d\n", leastCNum, costs["ROM"], maxHap, maxHap / (resPath.size() - 1));
     int output = 0;
-    for (auto it = finalPath.rbegin(); it != finalPath.rend(); ++it)
+    for (auto it = resPath.rbegin(); it != resPath.rend(); ++it)
     {
         if (output++)
             printf("->");
-        cout << cityIdTable[*it]->name;
+        printf("%s", it->c_str());
     }
     putchar('\n');
     return 0;
 }
+
+

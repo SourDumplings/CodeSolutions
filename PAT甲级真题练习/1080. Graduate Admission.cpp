@@ -1,118 +1,107 @@
 /*
- @Date    : 2018-02-15 17:01:52
+ @Date    : 2018-09-01 22:47:15
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-https://www.patest.cn/contests/pat-a-practise/1080
+https://pintia.cn/problem-sets/994805342720868352/problems/994805387268571136
  */
 
 #include <iostream>
 #include <cstdio>
-#include <string>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-struct Student
+const int MAXN = 40005, MAXM = 105;
+int N, M, K;
+
+struct School
 {
-    int id;
-    int GE, GI, total_score, rank;
-    vector<int> applied_schools;
+    int quota;
+    vector<int> ads;
 };
 
-static int N, M, K;
-
-bool cmp(const Student &s1, const Student &s2)
+struct Applicants
 {
-    if (s1.total_score == s2.total_score)
-        return s1.GE > s2.GE;
-    else
-        return s1.total_score > s2.total_score;
-}
+    int GE, GI, id;
+    vector<int> wants;
+};
 
-void give_rank(Student applicants[])
+School S[MAXM];
+Applicants A[MAXN];
+
+bool cmp(const Applicants &a1, const Applicants &a2)
 {
-    int rank = 1, lastTotalScore = applicants[0].total_score;
-    int lastGE = applicants[0].GE;
-    int sameRank = 0;
-    for (int i = 0; i != N; ++i)
+    if (a1.GE + a1.GI == a2.GE + a2.GI)
     {
-        if (applicants[i].total_score < lastTotalScore)
-        {
-            lastTotalScore = applicants[i].total_score;
-            rank += sameRank;
-            sameRank = 1;
-            lastGE = applicants[i].GE;
-        }
-        else if (applicants[i].total_score == lastTotalScore)
-        {
-            if (applicants[i].GE < lastGE)
-            {
-                lastGE = applicants[i].GE;
-                rank += sameRank;
-                sameRank = 1;
-            }
-            else if (applicants[i].GE == lastGE)
-                ++sameRank;
-        }
-        applicants[i].rank = rank;
+        return a1.GE > a2.GE;
     }
-    return;
+    return a1.GE + a1.GI > a2.GE + a2.GI;
 }
 
-int main(int argc, char const *argv[])
+int pick_school(int ai)
+{
+    if (ai == 0)
+        return A[ai].wants[0];
+
+    int ret = -1;
+    for (int w : A[ai].wants)
+    {
+        if (S[w].ads.size() < S[w].quota ||
+            (S[w].ads.size() >= S[w].quota &&
+                A[S[w].ads.back()].GE + A[S[w].ads.back()].GI == A[ai].GE + A[ai].GI &&
+                 A[S[w].ads.back()].GE == A[ai].GE))
+        {
+            ret = w;
+            break;
+        }
+    }
+    return ret;
+}
+
+int main()
 {
     scanf("%d %d %d", &N, &M, &K);
-    unsigned quota[M];
     for (int i = 0; i != M; ++i)
-        scanf("%d", &quota[i]);
-    vector<vector<int>> admit(M);
-    Student applicants[N];
-    int applied_school;
+        scanf("%d", &S[i].quota);
     for (int i = 0; i != N; ++i)
     {
-        applicants[i].id = i;
-        scanf("%d %d", &applicants[i].GE, &applicants[i].GI);
-        applicants[i].total_score = (applicants[i].GE + applicants[i].GI) / 2;
+        scanf("%d %d", &A[i].GE, &A[i].GI);
+        A[i].id = i;
+        A[i].wants.resize(K);
         for (int j = 0; j != K; ++j)
         {
-            scanf("%d", &applied_school);
-            applicants[i].applied_schools.push_back(applied_school);
+            scanf("%d", &A[i].wants[j]);
         }
     }
-    sort(applicants, applicants + N, cmp);
-    give_rank(applicants);
+    sort(A, A+N, cmp);
     for (int i = 0; i != N; ++i)
     {
-        for (auto school_it = applicants[i].applied_schools.begin();
-            school_it != applicants[i].applied_schools.end(); ++school_it)
+        int s = pick_school(i);
+        if (s != -1)
         {
-            int school = *school_it;
-            if ((admit[school].size() < quota[school]) ||
-                (applicants[i].rank == applicants[admit[school].back()].rank))
-            {
-                admit[school].push_back(i);
-                break;
-            }
+            S[s].ads.push_back(i);
         }
     }
     for (int i = 0; i != M; ++i)
     {
         int output = 0;
-        sort(admit[i].begin(), admit[i].end(),
-            [&applicants] (const int &s1, const int &s2)
-            { return applicants[s1].id < applicants[s2].id; } );
-        for (int j : admit[i])
+        sort(S[i].ads.begin(), S[i].ads.end(), [] (const int i1, const int i2)
+             {
+                 return A[i1].id < A[i2].id;
+             });
+        for (int ai : S[i].ads)
         {
             if (output++)
                 putchar(' ');
-            printf("%d", applicants[j].id);
+            printf("%d", A[ai].id);
         }
         putchar('\n');
     }
     return 0;
 }
+
