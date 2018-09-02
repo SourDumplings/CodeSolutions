@@ -1,12 +1,12 @@
 /*
- @Date    : 2018-02-18 10:53:15
+ @Date    : 2018-09-02 20:19:03
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-https://www.patest.cn/contests/pat-a-practise/1091
+https://pintia.cn/problem-sets/994805342720868352/problems/994805375457411072
  */
 
 #include <iostream>
@@ -15,73 +15,80 @@ https://www.patest.cn/contests/pat-a-practise/1091
 
 using namespace std;
 
-static const int MAXM = 1300, MAXN = 131, MAXL = 61;
-static const int X[6] = {1, 0, 0, -1, 0, 0};
-static const int Y[6] = {0, 1, 0, 0, -1, 0};
-static const int Z[6] = {0, 0, 1, 0, 0, -1};
-static int G[MAXL][MAXM][MAXN];
-static bool visited[MAXL][MAXM][MAXN];
-static int M, N, L, T;
+int N, M, L, T;
+const int MAXM = 1287, MAXN = 129, MAXL = 61;
+bool G[MAXM][MAXN][MAXL], checked[MAXM][MAXN][MAXL];
+const int DX[6] = {1, 0, 0, -1, 0, 0}, DY[6] = {0, 1, 0, 0, -1, 0}, DZ[6] = {0, 0, 1, 0, 0, -1};
+int res = 0;
 
-struct Pixel { int z, x, y; Pixel(int z_, int x_, int y_): z(z_), x(x_), y(y_) {} };
-
-bool is_center(int z, int x, int y)
+struct Pixel
 {
-    return !visited[z][x][y] && G[z][x][y] == 1;
+    int x, y, z;
+    Pixel(int i, int j, int k): x(i), y(j), z(k) {}
+};
+
+Pixel get_adj(const Pixel &c, int n)
+{
+    int x = c.x + DX[n], y = c.y + DY[n], z = c.z + DZ[n];
+    if (x < 0 || y < 0 || z < 0 || x > M - 1 || y > N - 1 || z > L - 1)
+        return Pixel(-1, -1, -1);
+    else
+        return Pixel(x, y, z);
 }
 
-bool judge(int z, int x, int y)
+int bfs(int i, int j, int k)
 {
-    return (z < L && z > -1) && (x < M && x > -1) && (y < N && y > -1) &&
-    is_center(z, x, y);
-}
-
-int bfs(int z, int x, int y)
-{
-    queue<Pixel> q;
-    Pixel center(z, x, y);
-    q.push(center);
-    visited[z][x][y] = true;
-    int v = 0;
-    while (!q.empty())
+    queue<Pixel> Q;
+    Q.push(Pixel(i, j, k));
+    checked[i][j][k] = true;
+    int ret = 0;
+    while (!Q.empty())
     {
-        Pixel c = q.front();
-        q.pop();
-        ++v;
-        for (int i = 0; i != 6; ++i)
+        Pixel c = Q.front(); Q.pop();
+        ++ret;
+        for (int n = 0; n != 6; ++n)
         {
-            int next_z = c.z + Z[i];
-            int next_x = c.x + X[i];
-            int next_y = c.y + Y[i];
-            if (judge(next_z, next_x, next_y))
+            Pixel p = get_adj(c, n);
+            if (p.x >= 0 && !checked[p.x][p.y][p.z] && G[p.x][p.y][p.z])
             {
-                visited[next_z][next_x][next_y] = true;
-                q.push(Pixel(next_z, next_x, next_y));
+                Q.push(p);
+                checked[p.x][p.y][p.z] = true;
             }
         }
     }
-    if (v >= T)
-        return v;
-    else
-        return 0;
+    return ret;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     scanf("%d %d %d %d", &M, &N, &L, &T);
-    int res = 0;
-    for (int i = 0; i != L; ++i)
-        for (int j = 0; j != M; ++j)
-            for (int k = 0; k != N; ++k)
+    for (int k = 0; k != L; ++k)
+    {
+        for (int i = 0; i != M; ++i)
+        {
+            for (int j = 0; j != N; ++j)
             {
-                visited[i][j][k] = false;
-                scanf("%d", &G[i][j][k]);
+                int f;
+                scanf("%d", &f);
+                G[i][j][k] = (f == 1);
+                checked[i][j][k] = false;
             }
-    for (int i = 0; i != L; ++i)
-        for (int j = 0; j != M; ++j)
-            for (int k = 0; k != N; ++k)
-                if (is_center(i, j, k))
-                    res += bfs(i, j, k);
+        }
+    }
+    for (int k = 0; k != L; ++k)
+    {
+        for (int i = 0; i != M; ++i)
+        {
+            for (int j = 0; j != N; ++j)
+            {
+                if (!checked[i][j][k] && G[i][j][k])
+                {
+                    int dv = bfs(i, j, k);
+                    res += (dv >= T ? dv : 0);
+                }
+            }
+        }
+    }
     printf("%d\n", res);
     return 0;
 }

@@ -72,7 +72,7 @@ string proess_time_back(int t)
     char res[10];
     int h = t / 3600;
     int s = t % 60;
-    int m = (t - h * 3600) / 60;
+    int m = (t - h * 3600 - s) / 60;
     sprintf(res, "%02d:%02d:%02d", h, m, s);
     return string(res);
 }
