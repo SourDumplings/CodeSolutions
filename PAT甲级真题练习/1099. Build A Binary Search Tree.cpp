@@ -1,95 +1,78 @@
 /*
- @Date    : 2018-02-21 11:58:11
+ @Date    : 2018-09-03 22:54:19
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-https://www.patest.cn/contests/pat-a-practise/1099
+https://pintia.cn/problem-sets/994805342720868352/problems/994805367987355648
  */
 
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
-#include <deque>
-#include <stack>
-#include <array>
+#include <queue>
 
 using namespace std;
 
-#define EMPTY -1
+int N;
+const int MAXN = 101;
 
-struct TNode
+struct TreeNode
 {
-    int num;
-    int left, right;
+    int key;
+    int left = -1, right = -1;
 };
 
-static const int MAXN = 101;
-static array<TNode, MAXN> T;
-static int N;
+TreeNode T[MAXN];
+int keys[MAXN];
+int n = 0;
 
-void left_go(int root, stack<int> &S)
+void in_order_traversal(int f)
 {
-    while (root != EMPTY)
+    if (f != -1)
     {
-        S.push(root);
-        root = T[root].left;
+        in_order_traversal(T[f].left);
+        T[f].key = keys[n++];
+        in_order_traversal(T[f].right);
     }
     return;
 }
 
-void solve(int root, deque<int> &seq)
-{
-    int leftMost;
-    stack<int> S;
-    left_go(root, S);
-    while (!S.empty())
-    {
-        leftMost = S.top();
-        S.pop();
-        T[leftMost].num = seq.front();
-        seq.pop_front();
-        if (T[leftMost].right != EMPTY)
-            solve(T[leftMost].right, seq);
-    }
-    return;
-}
+int output = 0;
 
-void level_order_traversal()
+void level_order_traversal(int r)
 {
-    deque<int> Q;
-    Q.push_back(0);
-    int r;
-    int output = 0;
-    while (!Q.empty())
+    queue<int> q;
+    q.push(r);
+    while (!q.empty())
     {
-        r = Q.front();
-        Q.pop_front();
+        int f = q.front(); q.pop();
         if (output++)
             putchar(' ');
-        printf("%d", T[r].num);
-        if (T[r].left != EMPTY) Q.push_back(T[r].left);
-        if (T[r].right != EMPTY) Q.push_back(T[r].right);
+        printf("%d", T[f].key);
+        if (T[f].left != -1)
+            q.push(T[f].left);
+        if (T[f].right != -1)
+            q.push(T[f].right);
     }
     putchar('\n');
     return;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     scanf("%d", &N);
     for (int i = 0; i != N; ++i)
     {
         scanf("%d %d", &T[i].left, &T[i].right);
-        T[i].num = EMPTY;
     }
-    deque<int> seq(N);
     for (int i = 0; i != N; ++i)
-        scanf("%d", &seq[i]);
-    sort(seq.begin(), seq.end());
-    solve(0, seq);
-    level_order_traversal();
+        scanf("%d", &keys[i]);
+    sort(keys, keys+N);
+    in_order_traversal(0);
+    level_order_traversal(0);
     return 0;
 }
+
