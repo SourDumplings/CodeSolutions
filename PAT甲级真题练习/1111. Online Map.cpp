@@ -1,12 +1,12 @@
 /*
- @Date    : 2018-02-27 13:37:57
+ @Date    : 2018-09-04 23:41:58
  @Author  : 酸饺子 (changzheng300@foxmail.com)
  @Link    : https://github.com/SourDumplings
  @Version : $Id$
 */
 
 /*
-https://www.patest.cn/contests/pat-a-practise/1111
+https://pintia.cn/problem-sets/994805342720868352/problems/994805358663417856
 注意在计算距离最短路径中时间最短路径时，时间需要重新设变量存储
 因为时间最短的路径并非与距离最短路径重合
  */
@@ -18,143 +18,149 @@ https://www.patest.cn/contests/pat-a-practise/1111
 
 using namespace std;
 
-static const int MAXN = 501;
-static int Gd[MAXN][MAXN];
-static int Gt[MAXN][MAXN];
-static int N, M;
-static int dist[MAXN];
-static int time_data[MAXN];
-static const int INF = 999999;
-static bool checked[MAXN];
-static vector<int> thisPath, resDPath, resTPath;
-static int minRecord, thisRecord;
+int N, M;
+const int MAXN = 510, INF = 999999;
+int D[MAXN][MAXN], T[MAXN][MAXN];
+int dists[MAXN], times[MAXN];
+int s, d;
+bool checked[MAXN];
 
-int get_min(int record[])
+int find_min(int data[])
 {
-    int minR = INF, minRV = -1;
+    int minV = -1, minD = INF;
     for (int i = 0; i != N; ++i)
     {
-        if (!checked[i] && record[i] < minR)
+        if (!checked[i] && data[i] < minD)
         {
-            minR = record[i];
-            minRV = i;
+            minD = data[i];
+            minV = i;
         }
     }
-    return minRV;
+    return minV;
 }
 
-void Dijkstra(int so, int de, int G[][MAXN], int record[])
+void Dijkstra(int G[][MAXN], int data[])
 {
+    data[s] = 0;
     fill(checked, checked+N, false);
-    record[so] = 0;
     while (true)
     {
-        int v = get_min(record);
-        checked[v] = true;
+        int v = find_min(data);
         if (v == -1)
             break;
+        checked[v] = true;
         for (int w = 0; w != N; ++w)
         {
-            if (!checked[w] && record[v] + G[v][w] < record[w] )
-                record[w] = record[v] + G[v][w];
+            if (!checked[w] && G[v][w] != INF && data[v] + G[v][w] < data[w])
+                data[w] = data[v] + G[v][w];
         }
     }
     return;
 }
 
-void DFS(int so, int de, int G[][MAXN], int record[MAXN], vector<int> &resPath, char c)
+vector<int> thisDPath, resDPath, thisTPath, resTPath;
+int thisTime = 0, minTime = INF;
+
+void dfs_D(int w)
 {
-    thisPath.push_back(de);
-    if (de == so)
+    thisDPath.push_back(w);
+    if (w == s)
     {
-        if (thisRecord < minRecord)
+        if (thisTime < minTime)
         {
-            minRecord = thisRecord;
-            resPath = thisPath;
+            minTime = thisTime;
+            resDPath = thisDPath;
         }
     }
     else
     {
-        for (int s = 0; s != N; ++s)
+        for (int v = 0; v != N; ++v)
         {
-            if (record[s] + G[s][de] == record[de])
+            if (D[v][w] != INF && dists[w] == D[v][w] + dists[v])
             {
-                if (c == 'd') thisRecord += Gt[s][de];
-                else ++thisRecord;
-                if (thisRecord <= minRecord)
-                    DFS(so, s, G, record, resPath, c);
-                if (c == 'd') thisRecord -= Gt[s][de];
-                else --thisRecord;
+                thisTime += T[v][w];
+                dfs_D(v);
+                thisTime -= T[v][w];
             }
         }
     }
-    thisPath.pop_back();
+    thisDPath.pop_back();
     return;
 }
 
-void get_path(int so, int de, int G[][MAXN], vector<int> &resPath,
-    char c)
+void dfs_T(int w)
 {
-    minRecord = INF;
-    thisRecord = 0;
-    int *record = nullptr;
-    if (c == 'd') record = dist;
-    else record = time_data;
-    DFS(so, de, G, record, resPath, c);
+    thisTPath.push_back(w);
+    if (w == s)
+    {
+        if (resTPath.empty() || thisTPath.size() < resTPath.size())
+            resTPath = thisTPath;
+    }
+    else
+    {
+        for (int v = 0; v != N; ++v)
+        {
+            if (T[v][w] != INF && T[v][w] + times[v] == times[w])
+                dfs_T(v);
+        }
+    }
+    thisTPath.pop_back();
     return;
 }
 
-void output_path(const vector<int> &resPath)
+void output_path(vector<int> &path)
 {
     int output = 0;
-    for (auto it = resPath.rbegin(); it != resPath.rend(); ++it)
+    for (auto it = path.rbegin(); it != path.rend(); ++it)
     {
-        if (output++) printf(" -> ");
+        if (output++)
+            printf(" -> ");
         printf("%d", *it);
     }
-    putchar('\n');
     return;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     scanf("%d %d", &N, &M);
-    int oneWay, d, t;
-    int v1, v2;
     for (int i = 0; i != N; ++i)
     {
+        times[i] = dists[i] = INF;
         for (int j = 0; j != N; ++j)
-            Gd[i][j] = Gt[i][j] = INF;
-        dist[i] = time_data[i] = INF;
+            D[i][j] = T[i][j] = INF;
     }
     for (int i = 0; i != M; ++i)
     {
-        scanf("%d %d %d %d %d", &v1, &v2, &oneWay, &d, &t);
-        Gd[v1][v2] = d;
-        Gt[v1][v2] = t;
-        if (oneWay == 0)
+        int v1, v2, o, l, t;
+        scanf("%d %d %d %d %d", &v1, &v2, &o, &l, &t);
+        D[v1][v2] = l;
+        T[v1][v2] = t;
+        if (o == 0)
         {
-            Gd[v2][v1] = d;
-            Gt[v2][v1] = t;
+            D[v2][v1] = l;
+            T[v2][v1] = t;
         }
     }
-    int so, de;
-    scanf("%d %d", &so, &de);
-    Dijkstra(so, de, Gd, dist);
-    Dijkstra(so, de, Gt, time_data);
-    get_path(so, de, Gd, resDPath, 'd');
-    get_path(so, de, Gt, resTPath, 't');
+    scanf("%d %d", &s, &d);
+    Dijkstra(D, dists);
+    Dijkstra(T, times);
+    dfs_D(d);
+    dfs_T(d);
     if (resDPath == resTPath)
     {
-        printf("Distance = %d; Time = %d: ", dist[de], time_data[de]);
+        printf("Distance = %d; Time = %d: ", dists[d], times[d]);
         output_path(resDPath);
     }
     else
     {
-        printf("Distance = %d: ", dist[de]);
+        printf("Distance = %d: ", dists[d]);
         output_path(resDPath);
-        printf("Time = %d: ", time_data[de]);
+        putchar('\n');
+        printf("Time = %d: ", times[d]);
         output_path(resTPath);
     }
+    putchar('\n');
+
     return 0;
 }
+
