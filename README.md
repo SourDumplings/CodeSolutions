@@ -25,15 +25,19 @@ PTA习题：浙大版《数据结构（第2版）》题目集；
 
 5.PTA习题：
 PTA习题：基础编程题目集；
+PTA习题：数据结构与算法题目集；
+PTA习题：Data Structures and Algorithms (English)
 
-6.Coursera课程：
+6.LeetCode习题
+
+7.Coursera课程：
 《用Python玩转数据》-张莉-南京大学；
 《C++程序设计》-北京大学-郭炜、刘家瑛；
 
-7.学堂在线课程：
+8.学堂在线课程：
 TOJ习题：《数据结构》-邓俊辉-清华大学
 
-8.其他教程：
+9.其他教程：
 《C++多线程编程（入门实例）》-CSDN博客
 《C++并发编程指南》-CSDN博客
 《1天玩转socket通信技术》-C语言中文网
