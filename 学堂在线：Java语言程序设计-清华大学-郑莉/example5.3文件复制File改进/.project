@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>example5.3文件复制File改进</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>123.jpg</name>
+			<type>1</type>
+			<location>E:/temporary/example5.3文件复制File改进/123.jpg</location>
+		</link>
+		<link>
+			<name>456.jpg</name>
+			<type>1</type>
+			<location>E:/temporary/example5.3文件复制File改进/456.jpg</location>
+		</link>
+	</linkedResources>
+</projectDescription>

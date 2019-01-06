@@ -1,0 +1,4 @@
+Hello?
+Hello!
+Hello...输入中文也可以
+Hello.

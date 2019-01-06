@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>example5.3文件复制（二进制方式）</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>dest.png</name>
+			<type>1</type>
+			<location>E:/temporary/example5.3文件复制（二进制方式）/dest.png</location>
+		</link>
+		<link>
+			<name>source.png</name>
+			<type>1</type>
+			<location>E:/temporary/example5.3文件复制（二进制方式）/source.png</location>
+		</link>
+	</linkedResources>
+</projectDescription>
