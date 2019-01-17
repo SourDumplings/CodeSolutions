@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <!--
+            表单标签
+            action 提交的地址（即提交后跳转到哪）
+            method
+                get 方式（默认）将参数拼接在链接后面 有大小限制
+                post 方式 将参数封装在请求体中
+         -->
+        <form action="../11.网站首页/网站首页.html" method="post">
+            <!-- 隐藏域：主要是用来存放页面上一些id信息等 -->
+            <input type="hidden" value="dnajsndakdn12312" name="uid">
+            <!--
+                文本输入框
+                input
+                    type
+                        text
+                        password
+                        radio
+                        checkbox
+                        file
+                        submit
+                        button
+                        reset
+                        hidden
+                        date
+                        tel
+                        number
+                    name 在表单提交时当作参数的名称
+                    id 给输入项取一个名字，以便于后期去找到它并且操作它
+                    placeholder 指定默认提示信息
+
+                textarea 文本域
+                    cols
+                    rows
+
+                select
+                    option
+             -->
+            用户名：<input type="text" name="username" placeholder="请输入用户名"><br>
+            <!-- 密码框 -->
+            密码：<input type="password" placeholder="请输入密码"><br>
+            确认密码：<input type="password"><br>
+            邮箱：<input type="text"><br>
+            手机号码：<input type="number"><br>
+            靓照：<input type="file"><br>
+            性别：<input type="radio" name="sex">男<input type="radio" name="sex">女<br>
+            爱好：<input type="checkbox">抽烟<input type="checkbox">喝酒<input type="checkbox">撸代码<br>
+            籍贯：<select name="" id="">
+                <option value="">请选择</option>
+                <option value="">湖北</option>
+                <option value="">陕西</option>
+                <option value="">火星</option>
+            </select><br>
+            出生日期：<input type="date"><br>
+            择偶要求：<textarea name="" id="" cols="40" rows="4"></textarea><br>
+            验证码：<input type="text"><br>
+
+            <input type="submit" value="注册">
+            <input type="button" value="普通按钮">
+            <input type="reset" value="重置按钮">
+        </form>
+    </body>
+</html>
