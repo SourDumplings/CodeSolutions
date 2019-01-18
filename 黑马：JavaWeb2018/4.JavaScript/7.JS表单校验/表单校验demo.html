@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    <!--
+        确认事件
+        事件出发函数
+        函数中操作元素
+
+        检查用户名：
+        1.当用户鼠标移入输入框时，给用户一个提示
+            事件：焦点事件onfocus
+            触发函数
+            函数里面要做一些事情
+                span 给用户提示信息
+        2.当用户鼠标移开时，校验用户输入
+            事件：失去焦点 onblur
+            触发函数
+            函数中要做一些事情
+                校验用户输入
+                得到用户输入的值
+
+        3.当用户输入抬起时，检查一下用户输入
+     -->
+     <script>
+         function showTips(spanID, msg)
+         {
+             var span = document.getElementById(spanID);
+             span.innerHTML = msg;
+         }
+
+         function checkUsername()
+         {
+             var uValue = document.getElementById('username').value;
+             var span = document.getElementById('span_username');
+             if (uValue.length < 6)
+             {
+                span.innerHTML = "对不起，太短了";
+                return false;
+             }
+             else
+             {
+                span.innerHTML = "恭喜您，够用！"
+                return true;
+             }
+         }
+
+         function checkForm()
+         {
+             return checkUsername();
+         }
+     </script>
+    </head>
+    <body>
+        <form action="../2.自动轮播图片/图片自动轮播.html" onsubmit="return checkForm()">
+            用户名：<input type="text" id="username" onfocus="showTips('span_username', '用户名长度不能小于6位')" onblur="checkUsername()" onkeyup="checkUsername()"><span id="span_username"></span><br>
+            <input type="submit" value="注册">
+        </form>
+    </body>
+</html>

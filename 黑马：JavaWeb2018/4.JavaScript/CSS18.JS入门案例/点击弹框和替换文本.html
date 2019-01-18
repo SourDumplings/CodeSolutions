@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <!--
+            1. 确定事件
+            2. 通常事件都会出发一个函数
+            3. 函数里面通常都会去操作页面元素,做一些交互动作
+         -->
+
+         <script>
+             function dianwo()
+             {
+                // alert("我被点击了");
+                //
+                // 1.首先要获得div
+                var div = document.getElementById("div1");
+                div.innerHTML = "<font color=\"red\">内容被替换了</font>";
+                // div.innerText = "<font color=\"red\">内容被替换了</font>";
+             }
+         </script>
+    </head>
+    <body>
+        <input type="button" value="点我，修改div中的内容" onclick="dianwo()">
+
+        <div id="div1">
+            这里的内容一会儿要被替换掉
+        </div>
+    </body>
+</html>

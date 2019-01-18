@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <script>
+            // 动态添加 <p>文本</p>
+            function dianwo()
+            {
+                // 创建元素结点
+                var div = document.getElementById('div1');
+                var p = document.createElement("p"); // 在内存中创建了个<p></p>
+                // 创建文本结点
+                var textNode = document.createTextNode("文本内容"); // 相当于在内存中创建了文本内容
+
+                // 将p和文本内容关联起来
+                p.appendChild(textNode);
+                // 将p添加到目标div中
+                div.appendChild(p);
+            }
+        </script>
+    </head>
+    <body>
+        <input type="button" value="点我添加p" onclick="dianwo()">
+        <div id="div1">
+            <!-- 一会儿动态地往这个div中添加结点 -->
+        </div>
+    </body>
+</html>
