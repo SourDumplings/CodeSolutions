@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 导包，引入JQ的文件 -->
+		<script type="text/javascript" src="../../js/jquery-1.11.0.js"></script>
+		<script>
+			// js中也有加载完成事件
+			window.onload = function()
+			{
+				alert("window.onload = 111");
+			}
+			// 只会弹出222的,111的不会弹出,由此可以看出jQ的优势所在
+			window.onload = function()
+			{
+				alert("window.onload = 222");
+			}
+			
+			// 文档加载完成的事件
+			// 三个都会弹出
+			jQuery(document).ready(function()
+			{
+				alert("jQuery(document).ready(function()");
+			});
+			
+			// jQuery简写成$
+			$(document).ready(function()
+			{
+				alert("$(document).ready(function()");
+			});
+			
+			// 最简单的写法
+			$(function()
+			{
+				alert("$(function()");
+			});
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

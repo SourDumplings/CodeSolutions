@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/jquery-1.11.0.js">
+		</script>
+		<script type="text/javascript">
+			// 通过属性选择器找到a_href
+			$(function()
+			{
+				// $("a[href]").css("color", "red"); // 只有一个属性
+				// 找出包含href,title
+				// $("a[href][title]").css("color", "red"); // 多个属性
+				// 找出href,title并且title=testTitle的
+				$("a[href][title='testTitle']").css("color", "deeppink"); // 多个属性并且指定了属性值的
+			})
+		</script>
+	</head>
+	<body>
+		<a href="#">href111</a><br>
+		<a href="#" title="testTitle">href222</a>
+	</body>
+</html>

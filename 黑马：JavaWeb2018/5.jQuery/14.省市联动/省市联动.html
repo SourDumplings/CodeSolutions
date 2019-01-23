@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js" ></script>
+		<script>
+			/*
+				准备工作 : 准备数据
+			*/
+			var provinces =
+			[
+				["深圳市","东莞市","惠州市","广州市"],
+				["长沙市","岳阳市","株洲市","湘潭市"],
+				["厦门市","福州市","漳州市","泉州市"]
+			];
+			
+			/*
+			1. 导入JQ的文件
+			2. 文档加载事件:页面初始化
+			3. 进一步确定事件:  change事件
+			4. 函数: 得到当前选中省份
+			5. 得到城市, 遍历城市数据
+			6. 将遍历出来的城市添加到城市的select中
+			*/
+			
+			$(function()
+			{
+				$("#province").change(function()
+				{
+//					alert(this.value);
+					//得到城市信息
+					var cities = provinces[this.value];
+					//清空城市select中的option
+					/*var $city = $("#city");
+					//将JQ对象转成JS对象
+					var citySelect = $city.get(0);
+					citySelect.options.length = 0;*/
+					
+					$("#city").empty();  //采用JQ的方式清空
+					//遍历城市数据
+					$(cities).each(function(i,n)
+					{
+						$("#city").append("<option>"+n+"</option>");
+					});
+				});
+			});
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<!--选择省份-->
+		<select id="province">
+			<option value="-1">--请选择--</option>
+			<option value="0">广东省</option>
+			<option value="1">湖南省</option>
+			<option value="2">福建省</option>
+		</select>
+		<!--选择城市-->
+		<select id="city">
+			
+		</select>
+	</body>
+</html>

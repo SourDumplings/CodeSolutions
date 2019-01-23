@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 导入JQ的文件
+	编写JQ的文档加载事件
+	启动定时器 setTimeout("",3000);
+	编写显示广告的函数
+	在显示广告里面再启动一个定时器
+	编写隐藏广告的函数 -->
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+			function showAd()
+			{
+				// 显示广告
+				$("#img1").slideDown();
+				setTimeout("hideAd()", 3000);
+			}
+			
+			function hideAd()
+			{
+				$("#img1").slideUp();
+			}
+			
+			$(function()
+			{
+				setTimeout("showAd()", 3000);
+				
+			});
+		</script>
+	</head>
+	<body>
+		<img src="../img/f001a62f-a49d-4a4d-b56f-2b6908a0002c_g.jpg" alt="" id="img1" style="display: none;" width="800px">
+	</body>
+</html>
