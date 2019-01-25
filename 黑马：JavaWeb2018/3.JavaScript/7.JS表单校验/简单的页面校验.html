@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <!-- 引入外部的js文件 -->
+    <script type="text/javascript" src="../regutils.js"></script>
+    <script>
+        // 1.确定事件：提交事件 onfocus
+        // 2.事件触发函数
+        // 3.函数中干一些事情：修改span内容
+        function showTips(spanId, msg)
+        {
+            // 首先要获得要操作的元素
+            var span = document.getElementById(spanId);
+            span.innerHTML = msg;
+        }
+
+        // 校验用户名
+        // 1.事件：失去焦点onblur
+        // 2.函数：checkUsername()
+        // 3.函数显示校验结果
+        function checkUsername()
+        {
+            // 首先要获取用户输入的内容
+            var uValue = document.getElementById('username').value;
+            // 对输入的内容进行校验
+            // 获得要显示结果的span
+            // 显示校验结果
+            var span = document.getElementById('span_username');
+            if (uValue.length < 6)
+            {
+                span.innerHTML = "<font color='red' size='2'>对不起，用户名太短</font>";
+                return false;
+            }
+            else
+            {
+                span.innerHTML = "<font color='green' size='2'>恭喜，用户名可用</font>";
+                return true;
+            }
+        }
+
+        // 密码校验
+        function checkPassword()
+        {
+            var uValue = document.getElementById('password').value;
+            var span = document.getElementById('span_password');
+            if (uValue.length < 6)
+            {
+                span.innerHTML = "<font color='red' size='2'>对不起，密码太短</font>";
+                return false;
+            }
+            else
+            {
+                span.innerHTML = "<font color='green' size='2'>恭喜，密码可用</font>";
+                return true;
+            }
+        }
+
+        function checkRepassword()
+        {
+            var uRepassword = document.getElementById('repassword').value;
+            var uPassword = document.getElementById('password').value;
+            var span = document.getElementById('span_repassword');
+            if (uRepassword != uPassword)
+            {
+                span.innerHTML = "<font color='red' size='2'>对不起，两次密码不一致</font>";
+                return false;
+            }
+            else
+            {
+                span.innerHTML = "";
+                return true;
+            }
+        }
+
+        // 校验邮箱
+        function checkMail()
+        {
+            var uMail = document.getElementById('email').value;
+            var flag = checkEmail(uMail);
+            var span = document.getElementById('span_email');
+            if (flag)
+            {
+                span.innerHTML = "<font color='green' size='2'>恭喜，邮箱可用</font>";
+                return true;
+            }
+            else
+            {
+                span.innerHTML = "<font color='red' size='2'>对不起，邮箱格式有问题</font>";
+                return false;
+            }
+        }
+
+        function checkForm()
+        {
+            var flag = checkUsername() && checkPassword() && checkRepassword() && checkMail();
+            return flag;
+        }
+    </script>
+    </head>
+    <body>
+        <form action="../2.自动轮播图片/图片自动轮播.html" onsubmit="return checkForm()">
+            用户名：<input type="text" id="username" onfocus="showTips('span_username', '用户名不得短于6位')" onblur="checkUsername()" onkeyup="checkUsername()"><span id="span_username"></span><br>
+            密 码：<input type="password" id="password" onfocus="showTips('span_password', '密码长度不能小于6位')" onblur="checkPassword()" onkeyup="checkPassword()"><span id="span_password"></span><br>
+            确认密码：<input type="password" id="repassword" onfocus="showTips('span_repassword', '两次密码必须一致')" onblur="checkRepassword()" onkeyup="checkRepassword()"><span id="span_repassword"></span><br>
+            邮 箱：<input type="text" id="email" onfocus="showTips('span_email', '邮箱格式必须正确')" onblur="checkMail()" onkeyup="checkMail()"><span id="span_email"></span><br>
+            <!-- 邮 箱：<input type="email" id="email"><br> -->
+            手机号：<input type="text" id="telphone"><br>
+
+            <input type="submit" value="提交">
+        </form>
+    </body>
+</html>

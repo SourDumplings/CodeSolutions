@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/jquery-1.11.0.js"></script>
+		<script type="text/javascript">
+			// JS方式
+			function changeJS()
+			{
+				var div = document.getElementById("div1");
+				// div.innerHTML = "JS成功修改了内容";
+				
+				// 将JS对象转成JQ对象
+				$(div).html("转成JQ对象来修改内容");
+			};
+			// JQ方式
+			$(function()
+			{
+				// 动态绑定事件
+				$("#btn2").click(function()
+				{
+					// $("#div1").html("JQ方式成功修改了内容");
+					
+					// 将JQ对象转换成JS对象
+					var $div = $("#div1"); // ID必须是唯一的
+					// var jsDiv = $div.get(0);
+					var jsDiv = $div[1]; 
+					jsDiv.innerHTML = "JQ转成JS对象成功";
+					
+					
+				});
+			});
+			
+		</script>
+	</head>
+	<body>
+		<input type="button" name="" value="JS修改div内容" onclick="changeJS()"/>
+		<input type="button" name="" value="JQ修改div内容" id="btn2"/>
+		<div id="div1">
+			这里的内容一会要被JS代码修改
+		</div>
+		<div id="div111">
+			这里的内容一会要被JS代码修改111
+		</div>
+	</body>
+</html>

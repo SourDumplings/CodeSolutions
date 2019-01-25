@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!--
+		1.首先给必填项,添加尾部添加一个小红点
+		2.获取用户输入的信息,做相应的校验
+		3.事件: 获得焦点, 失去焦点, 按键抬起
+		4.表单提交的事件
+		
+		JQ的方式来实现
+			1.导入JQ文件
+			2.文档加载事件：必填项后面加一个小红点
+			3.相关事件处理：表单校验确定事件：blur focus keyup
+			4.提交表单 submit
+		-->
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/jquery-1.11.0.js" type="text/javascript">
+		</script>
+		<script type="text/javascript">
+			$(function()
+			{
+				// 在所有必填项后面加一个小红点
+				$(".necessary").after("<font class='high'>*</font>");
+				
+				// 事件绑定,链式调用(事件必须返回JQ对象才能使用链式调用)
+				$(".necessary").blur(function()
+				{
+					// 获得当前事件是谁的
+					// var value = this.value;
+					var value = $(this).val();
+					var p = $(this).parent();
+					
+					// 清空当前必填项后面的的<span></span>
+					p.find(".formtips").remove();
+					
+					if ($(this).is("#username"))
+					{
+						// 校验用户名
+						if (value.length < 6)
+						{
+							p.append("<span class='formtips onError'>用户名太短了</span>");
+						}
+						else
+						{
+							p.append("<span class='formtips onSuccess'>用户名可用</span>");
+						}
+					}
+					else if ($(this).is("#password"))
+					{
+						// 校验密码
+						if (value.length < 3)
+						{
+							p.append("<span class='formtips onError'>密码太短了</span>");
+						}
+						else
+						{
+							p.append("<span class='formtips onSuccess'>密码可用</span>");
+						}
+					}
+				}).focus(function()
+				{
+					$(this).triggerHandler("blur");
+				}).keyup(function()
+				{
+					$(this).triggerHandler("blur");				
+				});
+				
+				// 给表单绑定提交事件
+				$("form").submit(function()
+				{
+					// 触发必填项的校验,即blur事件即可
+					$(".necessary").trigger("blur");
+					if ($(".onError").length == 0)
+						return true;
+					else
+						return false;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form action="../index.html">
+			<div>
+				用户名：<input type="text" class="necessary" id="username">
+			</div>
+			<div>
+				密 码：<input type="password" class="necessary" id="password">
+			</div>
+			<div>
+				手机号：<input type="text">
+			</div>
+			<div>
+				<input type="submit" name="" id="" value="提交" />
+			</div>
+		</form>
+
+	</body>
+</html>

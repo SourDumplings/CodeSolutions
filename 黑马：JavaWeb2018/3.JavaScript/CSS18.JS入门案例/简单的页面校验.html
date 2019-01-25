@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    <!--
+        1.确定事件：提交事件 onsubmit
+        2.事件触发函数：checkForm()
+        3.函数中做校验
+     -->
+
+     <script>
+         function checkForm()
+         {
+            // 获取用户输入的内容
+            var input1 = document.getElementById("username");
+
+            // alert(input1.value);
+            var uValue = input1.value;
+            if (uValue.length < 6)
+            {
+                alert("对不起，用户名太短啦！");
+                return false;
+            }
+
+            // 邮箱的校验
+            // 获取用户输入的邮箱的值
+            var email = document.getElementById("email");
+            var uEmail = email.value;
+            if (/^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g.test(uEmail))
+                alert("校验成功");
+            else
+            {
+                alert("校验失败");
+                return false;
+            }
+
+            return true;
+         }
+     </script>
+    </head>
+    <body>
+        <form action="../../3.CSS/3.网站首页的优化/网站首页.html" onsubmit="return checkForm()">
+            用户名：<input type="text" id="username"><br>
+            密 码：<input type="password" id="password"><br>
+            邮 箱：<input type="text" id="email"><br>
+            <!-- 邮 箱：<input type="email" id="email"><br> -->
+
+            <input type="submit" value="提交">
+        </form>
+    </body>
+</html>

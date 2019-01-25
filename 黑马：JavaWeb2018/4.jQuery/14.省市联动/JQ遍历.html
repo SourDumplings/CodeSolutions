@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script type="text/javascript" src="../js/jquery-1.11.0.js">
+		</script>
+		
+		<script type="text/javascript">
+			var cities = ["深圳市", "东莞市", "广州市", "惠州市"];
+			
+// 			// 如何遍历
+// 			// JQ对象调用遍历
+// 			$(cities).each(function(i, n)
+// 			{
+// 				console.log(i + "===" + n);
+// 			});
+// 			// JQ函数调用
+// 			$.each(cities, function(i, n)
+// 			{
+// 				console.log(i + ">>>" + n);
+// 			});
+			
+			function callback1(i, n)
+			{
+				console.log("123: " + i + n);
+			}
+			
+			// 遍历数据
+			function traverse(arr, callback)
+			{
+				for (var i = 0; i < arr.length; ++i)
+				{
+					var item = arr[i];
+					callback(i, item);					
+				}
+			}
+			
+			traverse(cities, callback1);
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
