@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">day07</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="user" view="colnames">
+<left>16</left>
+<top>37</top>
+<width>103</width>
+<height>143</height>
+<sql_create_table>CREATE TABLE `user` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(31) DEFAULT NULL,
+  `password` varchar(31) DEFAULT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="product" view="colnames">
+<left>657</left>
+<top>65</top>
+<width>85</width>
+<height>143</height>
+<sql_create_table>CREATE TABLE `product` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `pname` varchar(10) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `cno` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pid`),
+  KEY `cno` (`cno`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cno`) REFERENCES `category` (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="orders" view="colnames">
+<left>183</left>
+<top>51</top>
+<width>91</width>
+<height>160</height>
+<sql_create_table>CREATE TABLE `orders` (
+  `oid` int(11) NOT NULL AUTO_INCREMENT,
+  `sum` int(11) NOT NULL,
+  `otime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `address` varchar(100) DEFAULT NULL,
+  `uno` int(11) DEFAULT NULL,
+  PRIMARY KEY (`oid`),
+  KEY `uno` (`uno`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`uno`) REFERENCES `user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="orderitem" view="colnames">
+<left>344</left>
+<top>333</top>
+<width>90</width>
+<height>143</height>
+<sql_create_table>CREATE TABLE `orderitem` (
+  `ono` int(11) DEFAULT NULL,
+  `pno` int(11) DEFAULT NULL,
+  `ocount` int(11) DEFAULT NULL,
+  `subsum` double DEFAULT NULL,
+  KEY `ono` (`ono`),
+  KEY `pno` (`pno`),
+  CONSTRAINT `orderitem_ibfk_1` FOREIGN KEY (`ono`) REFERENCES `orders` (`oid`),
+  CONSTRAINT `orderitem_ibfk_2` FOREIGN KEY (`pno`) REFERENCES `product` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="category" view="colnames">
+<left>869</left>
+<top>48</top>
+<width>84</width>
+<height>126</height>
+<sql_create_table>CREATE TABLE `category` (
+  `cid` int(11) NOT NULL AUTO_INCREMENT,
+  `cname` varchar(15) DEFAULT NULL,
+  `cdesc` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
