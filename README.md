@@ -71,7 +71,9 @@ Java程序设计进阶-清华大学-陈斌
 
 6&7.MySQL
 
-8.XML&Tomcat
+8.JDBC
+
+9.XML&Tomcat
 
 ## 9.其他教程
 
