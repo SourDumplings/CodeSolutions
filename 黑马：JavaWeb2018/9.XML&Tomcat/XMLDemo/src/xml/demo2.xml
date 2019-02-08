@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这里有两个学生
+一个学生，名字叫张三， 年龄18岁， 学号：10086
+另外一个学生叫李四  。。。 -->
+<stus>
+	<stu id = "10086">
+		<name>张三&lt;</name>
+		<age>18</age>
+		<des><![CDATA[<a href = "https://www.baidu.com"></a>我爱黑马训练营]]></des>
+	</stu>
+	<stu id="10087">
+		<name>李四</name>
+		<age>28</age>
+	</stu>
+</stus>

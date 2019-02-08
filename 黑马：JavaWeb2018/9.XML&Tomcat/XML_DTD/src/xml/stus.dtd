@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT stus (stu)+>
+<!ELEMENT stu (name, age)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ATTLIST stu id CDATA #IMPLIED>

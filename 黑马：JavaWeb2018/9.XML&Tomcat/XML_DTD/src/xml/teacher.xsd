@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xmlns: xml namespace: 名称空间/命名空间
+targetNamespace: 目标名称空间，下面定义的那些元素都与这个名称空间绑定上。
+elementFormDefault: 元素的格式化情况。 -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.itheima.com/teacher"
+	elementFormDefault="qualified">
+	
+	<element name="teachers">
+		<complexType>
+			<sequence maxOccurs="unbounded">
+				<!-- 这是一个复杂元素 -->
+				<element name="teacher">
+					<!-- 用于声明tearcher是复杂元素 -->
+					<complexType>
+						<sequence>
+							<!-- 以下两个是简单元素 -->
+							<element name="name" type="string"></element>
+							<element name="age" type="int"></element>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+	
+</schema>

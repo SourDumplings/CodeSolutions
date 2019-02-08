@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xmlns：xsi:这里必须是这样的写法，也就是这个已经固定了
+xmlns:这里是名称空间，也固定了，写的是Schema中顶部目标名称空间
+xsi:schemaLocation：有两段，前半段是名称空间，也是目标空间的值，后面是约束文档的路径-->
+<teachers
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.itheima.com/teacher"
+	xsi:schemaLocation="http://www.itheima.com/teacher teacher.xsd"
+>
+	<teacher>
+		<name>zhangsan</name>
+		<age>19</age>
+	</teacher>
+	<teacher>
+		<name>zhangsan</name>
+		<age>19</age>
+	</teacher>
+</teachers>
