@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>FilterDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Demo01</display-name>
+    <servlet-name>Demo01</servlet-name>
+    <servlet-class>com.itheima.servlet.Demo01</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Demo01</servlet-name>
+    <url-pattern>/Demo01</url-pattern>
+  </servlet-mapping>
+<!--   <filter>
+    <display-name>FilterDemo</display-name>
+    <filter-name>FilterDemo</filter-name>
+    <filter-class>com.itheima.filter.FilterDemo</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FilterDemo</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping> -->
+  
+<!--   <filter>
+    <display-name>FilterDemo02</display-name>
+    <filter-name>FilterDemo02</filter-name>
+    <filter-class>com.itheima.filter.FilterDemo02</filter-class>
+  </filter>
+  <filter>
+    <display-name>FilterDemo03</display-name>
+    <filter-name>FilterDemo03</filter-name>
+    <filter-class>com.itheima.filter.FilterDemo03</filter-class>
+  </filter>
+  <filter>
+    <display-name>FilterDemo04</display-name>
+    <filter-name>FilterDemo04</filter-name>
+    <filter-class>com.itheima.filter.FilterDemo04</filter-class>
+  </filter>
+  
+  
+  <filter-mapping>
+    <filter-name>FilterDemo04</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>FilterDemo03</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>FilterDemo02</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping> -->
+  
+  <filter>
+    <display-name>FilterDemo05</display-name>
+    <filter-name>FilterDemo05</filter-name>
+    <filter-class>com.itheima.filter.FilterDemo05</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FilterDemo05</filter-name>
+    <url-pattern>/demo01/*</url-pattern>
+    <!-- <dispatcher></dispatcher> -->
+  </filter-mapping>
+</web-app>
