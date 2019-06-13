@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/BaseServlet/js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<form action="/BaseServlet/ServletDemo03?method=addStu" method="post">
+		用户<input type="text" name="username"><br>
+		<button>提交</button>
+	</form>
+	<br>
+	<a href="/BaseServlet/ServletDemo03?method=delStu">删除学生</a>
+	<br>
+	<button onclick="fn()">按钮</button>
+	<script type="text/javascript">
+		function fn()
+		{
+			$.post("/BaseServlet/ServletDemo03",
+			{
+				"method" : "checkStu",
+				"user" : "tom"
+			}, function(data)
+			{
+				alert(data);
+			});
+		}
+	</script>
+</body>
+</html>

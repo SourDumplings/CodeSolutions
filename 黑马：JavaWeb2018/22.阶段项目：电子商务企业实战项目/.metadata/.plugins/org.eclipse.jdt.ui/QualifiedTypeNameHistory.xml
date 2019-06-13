@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+<fullyQualifiedTypeName name="cn.itcast.store.web.base.BaseServlet"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.CategoryService"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.CategoryServiceImpl"/>
+<fullyQualifiedTypeName name="cn.itcast.store.dao.daoImpl.CategoryDaoImpl"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.apache.commons.dbutils.QueryRunner"/>
+<fullyQualifiedTypeName name="cn.itcast.store.utils.JDBCUtils"/>
+<fullyQualifiedTypeName name="cn.itcast.store.utils.MyBeanUtils"/>
+<fullyQualifiedTypeName name="org.apache.commons.dbutils.handlers.BeanHandler"/>
+<fullyQualifiedTypeName name="org.apache.commons.dbutils.handlers.BeanListHandler"/>
+<fullyQualifiedTypeName name="cn.itcast.store.domain.Category"/>
+</qualifiedTypeNameHistroy>

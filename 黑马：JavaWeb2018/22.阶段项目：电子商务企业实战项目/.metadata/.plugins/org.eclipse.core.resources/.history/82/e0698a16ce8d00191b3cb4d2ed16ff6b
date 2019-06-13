@@ -1,0 +1,6 @@
+package cn.itcast.store.service;
+
+public interface CategoryService
+{
+
+}

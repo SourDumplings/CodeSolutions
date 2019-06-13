@@ -1,0 +1,8 @@
+package cn.itcast.store.dao.daoImpl;
+
+import cn.itcast.store.service.CategoryService;
+
+public class CategoryDaoImpl implements CategoryService
+{
+
+}
