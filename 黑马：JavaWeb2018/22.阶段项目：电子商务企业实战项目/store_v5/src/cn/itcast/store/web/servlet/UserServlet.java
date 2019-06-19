@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import cn.itcast.store.domain.Category;
 import cn.itcast.store.domain.User;
+import cn.itcast.store.service.CategoryService;
 import cn.itcast.store.service.UserService;
+import cn.itcast.store.service.serviceImpl.CategoryServiceImpl;
 import cn.itcast.store.service.serviceImpl.UserServiceImpl;
 import cn.itcast.store.utils.MailUtils;
 import cn.itcast.store.utils.MyBeanUtils;
@@ -26,20 +30,17 @@ import cn.itcast.store.web.base.BaseServlet;
  */
 public class UserServlet extends BaseServlet
 {
-	public String registUI(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public String registUI(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		return "/jsp/register.jsp";
 	}
-	
-	public String loginUI(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+
+	public String loginUI(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		return "/jsp/login.jsp";
 	}
-	
-	public String logOut(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+
+	public String logOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// 清除session
 		request.getSession().invalidate();
@@ -113,33 +114,36 @@ public class UserServlet extends BaseServlet
 			return "/jsp/info.jsp";
 		}
 	}
-	
+
 	// userLogin
-		public String userLogin(HttpServletRequest request, HttpServletResponse response)
-				throws ServletException, IOException
+	public String userLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		// 获取用户数据（账户/密码）
+		User user = new User();
+		MyBeanUtils.populate(user, request.getParameterMap());
+		// 调用业务层登录功能
+		UserService userService = new UserServiceImpl();
+		User user02 = null;
+		try
 		{
-			// 获取用户数据（账户/密码）
-			User user = new User();
-			MyBeanUtils.populate(user, request.getParameterMap());
-			// 调用业务层登录功能
-			UserService userService = new UserServiceImpl();
-			User user02  = null;
-			try {
-				// select * from user where username=? and  password=?
-				user02 = userService.userLogin(user);
-				request.getSession().setAttribute("loginUser", user02);
-				response.sendRedirect("/store_v5/index.jsp");
-				return null;
-			} catch (Exception e) {
-				// 用户登录失败
-				String msg = e.getMessage();
-				System.out.println(msg);
-				// 向request放入登录失败的信息
-				request.setAttribute("msg", msg);
-				return "/jsp/login.jsp";
-				
-			}
+			// select * from user where username=? and password=?
+			user02 = userService.userLogin(user);
+			request.getSession().setAttribute("loginUser", user02);
+			response.sendRedirect("/store_v5/index.jsp");
+			return null;
 		}
+		catch (Exception e)
+		{
+			// 用户登录失败
+			String msg = e.getMessage();
+			System.out.println(msg);
+			// 向request放入登录失败的信息
+			request.setAttribute("msg", msg);
+			return "/jsp/login.jsp";
+
+		}
+	}
 
 	public String active(HttpServletRequest request, HttpServletResponse response)
 	{

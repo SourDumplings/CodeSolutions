@@ -1,0 +1,35 @@
+package cn.itcast.store.web.servlet;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import cn.itcast.store.domain.Category;
+import cn.itcast.store.service.CategoryService;
+import cn.itcast.store.service.serviceImpl.CategoryServiceImpl;
+import cn.itcast.store.web.base.BaseServlet;
+import net.sf.json.JSONArray;
+
+
+/**
+ * Servlet implementation class CategoryServlet
+ */
+public class CategoryServlet extends BaseServlet {
+	public String findAllCats(HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
+		// 调用业务层获取全部分类
+		CategoryService categoryService = new CategoryServiceImpl();
+		List<Category> list = categoryService.getAllCats();
+//		System.out.println(list);
+		// 将全部分类转换为JSON格式的数据
+		String jsonStr = JSONArray.fromObject(list).toString();
+		
+		// 将全部分类的信息响应到客户端
+		// 告诉浏览器本次相应的数据是JSON格式的字符串
+		response.setContentType("application/json;charset=utf-8");
+		response.getWriter().print(jsonStr);
+		return null;
+	}
+
+}
