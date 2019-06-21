@@ -1,0 +1,14 @@
+package cn.itcast.service;
+
+import cn.itcast.utils.PageModel;
+
+public class ProductService
+{
+
+	public PageModel findProduct(int curNum)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

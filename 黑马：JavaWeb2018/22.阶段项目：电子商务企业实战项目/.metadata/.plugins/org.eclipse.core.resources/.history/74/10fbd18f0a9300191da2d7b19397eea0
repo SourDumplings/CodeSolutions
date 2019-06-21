@@ -1,0 +1,8 @@
+package cn.itcast.store.service.serviceImpl;
+
+import cn.itcast.store.service.ProductService;
+
+public class ProductServiceImpl implements ProductService
+{
+
+}

@@ -1,0 +1,8 @@
+package cn.itcast.store.dao.daoImpl;
+
+import cn.itcast.store.dao.ProductDao;
+
+public class ProductDaoImpl implements ProductDao
+{
+
+}

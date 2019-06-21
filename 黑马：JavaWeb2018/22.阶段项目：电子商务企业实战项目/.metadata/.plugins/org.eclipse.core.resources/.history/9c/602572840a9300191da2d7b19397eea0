@@ -1,0 +1,13 @@
+package cn.itcast.store.service;
+
+import cn.itcast.store.web.servlet.List;
+import cn.itcast.store.web.servlet.Product;
+
+public interface ProductService
+{
+
+	List<Product> findHots() throws Exception;
+
+	List<Product> findHots() throws Exception;
+
+}

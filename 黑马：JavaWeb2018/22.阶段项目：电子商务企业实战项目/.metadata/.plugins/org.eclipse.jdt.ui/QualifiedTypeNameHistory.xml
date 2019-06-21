@@ -2,15 +2,29 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
 <fullyQualifiedTypeName name="cn.itcast.store.dao.daoImpl.CategoryDaoImpl"/>
+<fullyQualifiedTypeName name="cn.itcast.store.utils.MyBeanUtils"/>
+<fullyQualifiedTypeName name="cn.itcast.store.domain.Category"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.CategoryServiceImpl"/>
+<fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
+<fullyQualifiedTypeName name="redis.clients.jedis.Jedis"/>
+<fullyQualifiedTypeName name="cn.itcast.store.utils.JedisUtils"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.CategoryService"/>
+<fullyQualifiedTypeName name="cn.itcast.store.web.base.BaseServlet"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="cn.itcast.store.dao.daoImpl.ProductDaoImpl"/>
+<fullyQualifiedTypeName name="cn.itcast.store.dao.ProductDao"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.ProductServiceImpl"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.ProductService"/>
 <fullyQualifiedTypeName name="org.apache.commons.dbutils.QueryRunner"/>
 <fullyQualifiedTypeName name="cn.itcast.store.utils.JDBCUtils"/>
-<fullyQualifiedTypeName name="cn.itcast.store.utils.MyBeanUtils"/>
+<fullyQualifiedTypeName name="cn.itcast.store.domain.Product"/>
 <fullyQualifiedTypeName name="org.apache.commons.dbutils.handlers.BeanHandler"/>
 <fullyQualifiedTypeName name="org.apache.commons.dbutils.handlers.BeanListHandler"/>
-<fullyQualifiedTypeName name="cn.itcast.store.service.CategoryService"/>
-<fullyQualifiedTypeName name="cn.itcast.store.domain.Category"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="cn.itcast.service.ProductService"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.CategoryServiceImpl"/>
-<fullyQualifiedTypeName name="cn.itcast.store.web.base.BaseServlet"/>
-<fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="cn.itcast.domain.Product"/>
+<fullyQualifiedTypeName name="cn.itcast.utils.PageModel"/>
 </qualifiedTypeNameHistroy>

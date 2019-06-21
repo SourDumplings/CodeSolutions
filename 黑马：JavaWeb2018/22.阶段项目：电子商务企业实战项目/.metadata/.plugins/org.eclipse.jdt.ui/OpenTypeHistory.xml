@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=store_v5/src&lt;cn.itcast.store.service{CategoryService.java[CategoryService" modifiers="513" timestamp="1560425389847"/>
+<typeInfo handle="=store_v5/src&lt;cn.itcast.store.dao{ProductDao.java[ProductDao" modifiers="513" timestamp="1561080560937"/>
+<typeInfo handle="=store_v5/src&lt;cn.itcast.store.service{ProductService.java[ProductService" modifiers="513" timestamp="1561023918640"/>
 </typeInfoHistroy>

@@ -1,0 +1,14 @@
+package cn.itcast.service;
+
+import cn.itcast.utils.PageModel;
+
+public class ProductService
+{
+
+	public PageModel findProduct(int curNum)
+	{
+		// TODO 查询当前数据
+		return null;
+	}
+
+}
