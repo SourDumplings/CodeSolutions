@@ -1,3 +1,0 @@
-browsers=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<web-browsers current\="0">\r\n<system/>\r\n<external location\="C\:\\Program Files\\Internet Explorer\\iexplore.exe" name\="Internet Explorer"/>\r\n</web-browsers>
-eclipse.preferences.version=1
-internalWebBrowserHistory=http\://localhost\:8080/store_v5/index.jsp|*|http\://localhost\:8080/store_v5/CategoryServlet|*|http\://localhost\:8080/store_v5/servlet/cn.itcast.store.web.base.BaseServlet|*|http\://localhost\:8080/store_v5/CategroyServlet|*|http\://localhost\:8080/store_v5/jsp/header.jsp|*|http\://localhost\:8080/store_v5/jsp/index.jsp|*|http\://localhost\:8080/store_v5/UserServlet?method\=loginUI|*|http\://localhost\:8080/BaseServlet/index.html|*|

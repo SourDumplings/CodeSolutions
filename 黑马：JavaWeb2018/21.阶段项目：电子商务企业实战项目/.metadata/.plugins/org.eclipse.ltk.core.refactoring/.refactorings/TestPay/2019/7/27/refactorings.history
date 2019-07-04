@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;PaymentUtil.java&apos; to &apos;store_v5/src/cn.itcast.store.utils&apos;&#x0D;&#x0A;- Original project: &apos;TestPay&apos;&#x0D;&#x0A;- Destination element: &apos;store_v5/src/cn.itcast.store.utils&apos;&#x0D;&#x0A;- Original element: &apos;cn.itcast.utils.PaymentUtil.java&apos;" description="Copy compilation unit" destination="=store_v5/src&lt;cn.itcast.store.utils" element1="/src&lt;cn.itcast.utils{PaymentUtil.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1562147014087" units="1" version="1.0"/>
+</session>

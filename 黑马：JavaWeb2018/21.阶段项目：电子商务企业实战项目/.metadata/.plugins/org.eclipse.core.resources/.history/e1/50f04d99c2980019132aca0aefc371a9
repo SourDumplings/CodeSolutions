@@ -1,0 +1,10 @@
+package cn.itcast.store.service;
+
+import cn.itcast.store.domain.Order;
+
+public interface OrderService
+{
+
+	void setOrder(Order order);
+
+}

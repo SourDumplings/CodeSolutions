@@ -1,0 +1,23 @@
+package cn.itcast.store.domain;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Order
+{
+	private String oid;
+	private Date ordertime;
+	private double total;
+	private int state;
+	private String address;
+	private String name;
+	private String telephone;
+	
+//	private String uid;
+	// 1.程序对象和对象发生关系，而不是对象和对象的属性发生关系
+	// 2.设计Order目的是携带订单上的数据向service和dao传递，user对象可以携带更多的数据
+	private User user;
+	
+	private List<OrderItem> list = new ArrayList<>();
+}

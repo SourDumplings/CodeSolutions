@@ -1,0 +1,24 @@
+package cn.itcast.store.dao.daoImpl;
+
+import com.mysql.jdbc.Connection;
+
+import cn.itcast.store.dao.OrderDao;
+import cn.itcast.store.domain.Order;
+import cn.itcast.store.domain.OrderItem;
+
+public class OrderDaoImpl implements OrderDao
+{
+
+	public void saveOrder(Connection conn, Order order)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void saveOrderItem(Connection conn, OrderItem orderItem)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+}

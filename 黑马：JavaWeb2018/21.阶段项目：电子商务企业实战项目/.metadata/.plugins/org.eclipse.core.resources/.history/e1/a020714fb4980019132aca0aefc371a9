@@ -1,0 +1,10 @@
+package cn.itcast.store.domain;
+
+public class OrderItem
+{
+	private String itemId;
+	private String quantity;
+	private Double total;
+	private Product product;
+	private String oid;
+}

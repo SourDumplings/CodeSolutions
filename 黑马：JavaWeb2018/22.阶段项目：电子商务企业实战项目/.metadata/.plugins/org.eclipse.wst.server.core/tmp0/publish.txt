@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Fri Jun 21 09:29:48 CST 2019
-org.eclipse.jst.jee.server\:store_v5=C\:\\apache-tomcat-7.0.94\\wtpwebapps\\store_v5

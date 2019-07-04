@@ -1,0 +1,13 @@
+package cn.itcast.store.dao;
+
+import cn.itcast.store.domain.Order;
+import cn.itcast.store.domain.OrderItem;
+
+public interface OrderDao
+{
+
+	void saveOrder(Order order);
+
+	void saveOrderItem(OrderItem orderItem);
+
+}
