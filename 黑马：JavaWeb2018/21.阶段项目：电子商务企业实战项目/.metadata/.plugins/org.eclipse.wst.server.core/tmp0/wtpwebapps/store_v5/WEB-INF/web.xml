@@ -77,4 +77,31 @@
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/OrderServlet</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>PriviledgeFilter</display-name>
+    <filter-name>PriviledgeFilter</filter-name>
+    <filter-class>cn.itcast.store.web.filter.PriviledgeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PriviledgeFilter</filter-name>
+    <url-pattern>/jsp/cart.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PriviledgeFilter</filter-name>
+    <url-pattern>/jsp/order_info.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PriviledgeFilter</filter-name>
+    <url-pattern>/jsp/order_list.jsp</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminCategoryServlet</display-name>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <servlet-class>cn.itcast.store.web.servlet.AdminCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <url-pattern>/AdminCategoryServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

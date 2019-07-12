@@ -2,12 +2,9 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
 <fullyQualifiedTypeName name="cn.itcast.store.dao.daoImpl.CategoryDaoImpl"/>
-<fullyQualifiedTypeName name="cn.itcast.store.domain.Category"/>
-<fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.CategoryServiceImpl"/>
 <fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
 <fullyQualifiedTypeName name="redis.clients.jedis.Jedis"/>
 <fullyQualifiedTypeName name="cn.itcast.store.utils.JedisUtils"/>
-<fullyQualifiedTypeName name="cn.itcast.store.service.CategoryService"/>
 <fullyQualifiedTypeName name="cn.itcast.store.dao.daoImpl.ProductDaoImpl"/>
 <fullyQualifiedTypeName name="cn.itcast.store.dao.ProductDao"/>
 <fullyQualifiedTypeName name="cn.itcast.service.ProductService"/>
@@ -22,8 +19,6 @@
 <fullyQualifiedTypeName name="cn.itcast.store.service.ProductService"/>
 <fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.ProductServiceImpl"/>
 <fullyQualifiedTypeName name="cn.itcast.store.web.servlet.CartServlet"/>
-<fullyQualifiedTypeName name="cn.itcast.store.web.base.BaseServlet"/>
-<fullyQualifiedTypeName name="cn.itcast.store.domain.User"/>
 <fullyQualifiedTypeName name="cn.itcast.store.domain.Cart"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="cn.itcast.store.domain.CartItem"/>
@@ -36,7 +31,6 @@
 <fullyQualifiedTypeName name="org.apache.commons.dbutils.handlers.ScalarHandler"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="org.junit.Test"/>
 <fullyQualifiedTypeName name="org.apache.commons.beanutils.BeanUtils"/>
@@ -53,4 +47,11 @@
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="org.apache.commons.dbutils.QueryRunner"/>
 <fullyQualifiedTypeName name="cn.itcast.store.utils.JDBCUtils"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="cn.itcast.store.domain.User"/>
+<fullyQualifiedTypeName name="cn.itcast.store.web.base.BaseServlet"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.CategoryService"/>
+<fullyQualifiedTypeName name="cn.itcast.store.service.serviceImpl.CategoryServiceImpl"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="cn.itcast.store.domain.Category"/>
 </qualifiedTypeNameHistroy>

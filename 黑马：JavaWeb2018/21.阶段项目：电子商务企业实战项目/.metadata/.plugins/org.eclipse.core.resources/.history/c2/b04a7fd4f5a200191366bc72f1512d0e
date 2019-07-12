@@ -1,0 +1,21 @@
+package cn.itcast.store.web.servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import cn.itcast.store.web.base.BaseServlet;
+
+/**
+ * Servlet implementation class AdminCategoryServlet
+ */
+public class AdminCategoryServlet extends BaseServlet {
+	private static final long serialVersionUID = 1L;
+	// 默认方法
+	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception
+	{
+		return null;
+	}
+}

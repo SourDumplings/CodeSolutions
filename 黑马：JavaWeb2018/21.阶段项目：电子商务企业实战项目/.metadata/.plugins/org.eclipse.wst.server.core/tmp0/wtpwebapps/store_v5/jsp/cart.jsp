@@ -53,7 +53,7 @@ font {
 	<div class="container">
 		<c:if test="${empty cart.cartItems }">
 			<div class="row">
-				<div class="col-md-2">开启剁手模式</div>
+				<div class="col-md-2"><h1>开启剁手模式</h1></div>
 			</div>
 		</c:if>
 		<c:if test="${not empty cart.cartItems }">
