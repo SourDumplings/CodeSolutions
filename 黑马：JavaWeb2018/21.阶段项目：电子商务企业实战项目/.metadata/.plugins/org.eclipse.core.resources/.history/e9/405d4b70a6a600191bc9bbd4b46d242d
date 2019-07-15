@@ -1,0 +1,11 @@
+package com.itmayiedu.app;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+
+@ComponentScan(basePackages)
+@EnableAutoConfiguration
+public class App
+{
+	
+}

@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itmayiedu.entity.UserEntity;
 import com.itmayiedu.mapper.UserMapper;
+import com.itmayiedu.service.UserService;
 
 @Controller
 public class IndexController
 {
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/index")
 	public String index()
@@ -25,5 +28,13 @@ public class IndexController
 	public UserEntity getUser(String name)
 	{
 		return userMapper.findName(name);
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertUser")
+	public String insertUser(String name, Integer age)
+	{
+		userService.addUser(name, age);
+		return "success";
 	}
 }
