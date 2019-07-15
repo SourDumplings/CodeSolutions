@@ -1,9 +1,0 @@
-package com.itmayiedu.entity;
-
-import javax.persistence.Entity;
-
-@Entity(name = "users")
-public class UserEntity
-{
-	
-}
