@@ -1,3 +1,10 @@
+<!--
+ * @Author: SourDumplings
+ * @Date: 2019-07-21 09:45:07
+ * @Link: https://github.com/SourDumplings/
+ * @Email: changzheng300@foxmail.com
+ * @Description: 该库是我刷题的代码，包括各种书籍、课程或者是在线刷题网站等等。
+ -->
 # CodeSolutions
 该库是我刷题的代码，包括各种书籍、课程或者是在线刷题网站等等。
 
@@ -92,6 +99,8 @@ Java程序设计进阶-清华大学-陈斌
 20.Redis缓存入门
 
 21.阶段项目：电子商务企业实战项目
+
+24.Spring v4.2框架
 
 ## 9.LeetCode题目集
 
