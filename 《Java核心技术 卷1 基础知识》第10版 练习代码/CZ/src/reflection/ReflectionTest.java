@@ -1,9 +1,11 @@
+package reflection;
+
 import java.lang.reflect.*;
 import java.util.*;
 
 /**
  * @author Chang Zheng
- * @title: ReflectionTest
+ * @title: reflection.ReflectionTest
  * @projectName 《Java核心技术 卷1 基础知识》第10版 练习代码
  * @description: TODO
  * @date 2019/9/2418:01
