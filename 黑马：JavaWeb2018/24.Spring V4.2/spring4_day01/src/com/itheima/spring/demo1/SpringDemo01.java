@@ -27,6 +27,9 @@ public class SpringDemo01
 		// UserDao userDao = new UserDaoImpl();
 		UserDao userDao = new UserDaoHibernateImpl();
 		userDao.save();
+		
+		UserDaoImpl userDaoImpl = new UserDaoImpl();
+		userDaoImpl.setName("zhangsan");
 	}
 
 	/**
