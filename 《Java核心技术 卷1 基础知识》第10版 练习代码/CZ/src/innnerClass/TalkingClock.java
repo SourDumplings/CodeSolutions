@@ -7,6 +7,18 @@ import javax.swing.Timer;
 
 /**
  * A clock that prints the time in regular intervals.
+ * 包含公有内部类TimePrinter
+ * 使用reflection.ReflectionTest测试，输入：
+ * innnerClass.TalkingClock$TimePrinter
+ * 输出：
+ * public class innnerClass.TalkingClock$TimePrinter
+ * {
+ * public innnerClass.TalkingClock$TimePrinter(innnerClass.TalkingClock);
+ * <p>
+ * public void actionPerformed(java.awt.event.ActionEvent);
+ * <p>
+ * final innnerClass.TalkingClock this$0;
+ * }
  *
  * @author Chang Zheng
  * @title: TalkingClock
@@ -42,7 +54,7 @@ public class TalkingClock
         t.start();
     }
 
-    private class TimePrinter implements ActionListener
+    public class TimePrinter implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
         {
