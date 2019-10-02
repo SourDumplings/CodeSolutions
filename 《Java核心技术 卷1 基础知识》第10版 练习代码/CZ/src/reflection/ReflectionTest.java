@@ -77,7 +77,7 @@ public class ReflectionTest
         else
         {
             Scanner in = new Scanner(System.in);
-            System.out.println("Enter class name (eg.) java.util.Date:");
+            System.out.println("Enter class name (eg. java.util.Date):");
             name = in.next();
         }
 
