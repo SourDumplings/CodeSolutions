@@ -7,6 +7,21 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
   </component>
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/WebContent/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/WebContent" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/build/classes" />
     <exclude-output />
@@ -16,8 +31,6 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.web.container" level="application" />
-    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.module.container" level="application" />
     <orderEntry type="module-library">
       <library name="junit4">
         <CLASSES>
@@ -35,6 +48,19 @@
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/WebContent/WEB-INF/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/spring-framework-4.2.4.RELEASE/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/spring-framework-4.2.4.RELEASE/libs" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/spring-framework-4.2.4.RELEASE/libs" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/spring-framework-4.2.4.RELEASE/libs" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
   </component>
