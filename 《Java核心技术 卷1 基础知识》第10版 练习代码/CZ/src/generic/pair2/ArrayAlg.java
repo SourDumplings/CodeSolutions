@@ -1,4 +1,4 @@
-package generic;
+package generic.pair2;
 
 import javafx.util.Pair;
 

@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * @author Chang Zheng
@@ -71,5 +72,36 @@ public class Employee extends Person implements Cloneable
     {
         return "Employee[name = " + getName() + ", salary = " +
                 getSalary() + ", hireDay = " + getHireDay() + "]";
+    }
+
+    @Override
+    public boolean equals(Object otherObject)
+    {
+        if (this == otherObject)
+        {
+            return true;
+        }
+
+        if (otherObject == null)
+        {
+            return false;
+        }
+
+        if (getClass() != otherObject.getClass())
+        {
+            return false;
+        }
+
+        Employee other = (Employee) otherObject;
+
+        return Objects.equals(getName(), other.getName()) && salary == other.salary
+                && Objects.equals(hireDay, other.hireDay);
+
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getName(), salary, hireDay);
     }
 }
