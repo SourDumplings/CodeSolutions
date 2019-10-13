@@ -1,12 +1,10 @@
-package concurrency.synch;
+package concurrency.synch3;
 
 import java.util.Arrays;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.Objects;
 
 /**
- * A bank with a number of bank accounts that uses locks for serializing access.
+ * A bank with a number of bank accounts that uses synchronization methods.
  *
  * @author CHANG Zheng
  * @title: Bank
@@ -17,8 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Bank
 {
     private final double[] accounts;
-    private Lock bankLock;
-    private Condition sufficientFunds;
+    private final Object lock;
 
     /**
      * Constructs the bank.
@@ -33,9 +30,8 @@ public class Bank
     public Bank(int n, double initialBalance)
     {
         accounts = new double[n];
+        lock = new Object();
         Arrays.fill(accounts, initialBalance);
-        bankLock = new ReentrantLock();
-        sufficientFunds = bankLock.newCondition();
     }
 
     /**
@@ -55,23 +51,18 @@ public class Bank
         {
             return;
         }
-        bankLock.lock();
-        try
+        synchronized (lock)
         {
             while (accounts[from] < ammount)
             {
-                sufficientFunds.await();
+                lock.wait();
             }
             System.out.print(Thread.currentThread());
             accounts[from] -= ammount;
             System.out.printf(" %10.2f from %d to %d", ammount, from, to);
             accounts[to] += ammount;
             System.out.printf(" Total Balance: %10.2f%n", getTotalBalance());
-            sufficientFunds.signalAll();
-        }
-        finally
-        {
-            bankLock.unlock();
+            lock.notifyAll();
         }
     }
 
@@ -87,21 +78,16 @@ public class Bank
      */
     public double getTotalBalance()
     {
-        bankLock.lock();
-        try
-        {
-            double sum = 0;
+        double sum = 0;
 
+        synchronized (lock)
+        {
             for (double account : accounts)
             {
                 sum += account;
             }
-            return sum;
         }
-        finally
-        {
-            bankLock.unlock();
-        }
+        return sum;
     }
 
     /**

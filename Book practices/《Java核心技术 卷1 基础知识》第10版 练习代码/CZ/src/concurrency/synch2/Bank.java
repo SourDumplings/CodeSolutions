@@ -1,4 +1,4 @@
-package concurrency.synch;
+package concurrency.synch2;
 
 import java.util.Arrays;
 import java.util.concurrent.locks.Condition;
@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * A bank with a number of bank accounts that uses locks for serializing access.
+ * A bank with a number of bank accounts that uses synchronization primitives.
  *
  * @author CHANG Zheng
  * @title: Bank
@@ -17,8 +17,6 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Bank
 {
     private final double[] accounts;
-    private Lock bankLock;
-    private Condition sufficientFunds;
 
     /**
      * Constructs the bank.
@@ -34,8 +32,6 @@ public class Bank
     {
         accounts = new double[n];
         Arrays.fill(accounts, initialBalance);
-        bankLock = new ReentrantLock();
-        sufficientFunds = bankLock.newCondition();
     }
 
     /**
@@ -49,30 +45,24 @@ public class Bank
      * @author CHANG Zheng
      * @date 2019/10/12 19:16
      */
-    public void transfer(int from, int to, double ammount) throws InterruptedException
+    public synchronized void transfer(int from, int to, double ammount) throws InterruptedException
     {
         if (accounts[from] < ammount)
         {
             return;
         }
-        bankLock.lock();
-        try
+
+        while (accounts[from] < ammount)
         {
-            while (accounts[from] < ammount)
-            {
-                sufficientFunds.await();
-            }
-            System.out.print(Thread.currentThread());
-            accounts[from] -= ammount;
-            System.out.printf(" %10.2f from %d to %d", ammount, from, to);
-            accounts[to] += ammount;
-            System.out.printf(" Total Balance: %10.2f%n", getTotalBalance());
-            sufficientFunds.signalAll();
+            wait();
         }
-        finally
-        {
-            bankLock.unlock();
-        }
+        System.out.print(Thread.currentThread());
+        accounts[from] -= ammount;
+        System.out.printf(" %10.2f from %d to %d", ammount, from, to);
+        accounts[to] += ammount;
+        System.out.printf(" Total Balance: %10.2f%n", getTotalBalance());
+        notifyAll();
+
     }
 
     /**
@@ -85,23 +75,15 @@ public class Bank
      * @author CHANG Zheng
      * @date 2019/10/12 19:20
      */
-    public double getTotalBalance()
+    public synchronized double getTotalBalance()
     {
-        bankLock.lock();
-        try
-        {
-            double sum = 0;
+        double sum = 0;
 
-            for (double account : accounts)
-            {
-                sum += account;
-            }
-            return sum;
-        }
-        finally
+        for (double account : accounts)
         {
-            bankLock.unlock();
+            sum += account;
         }
+        return sum;
     }
 
     /**
