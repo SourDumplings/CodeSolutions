@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hello-idea/hello-idea.iml" filepath="$PROJECT_DIR$/hello-idea/hello-idea.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hello-maven/hello-maven.iml" filepath="$PROJECT_DIR$/hello-maven/hello-maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/千峰教育：走向单体地狱.iml" filepath="$PROJECT_DIR$/.idea/千峰教育：走向单体地狱.iml" />
     </modules>
   </component>

@@ -1,4 +1,4 @@
-package com.funtl.hello.idea;
+package com.CZ.hello.idea;
 
 /**
  * @author CHANG Zheng
