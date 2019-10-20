@@ -83,7 +83,7 @@ Java程序设计进阶-清华大学-陈斌
 
 14.事务&数据库连接池
 
-15.DBUtils&MVC设计模式
+15.DBUtils&MVC模式
 
 16.Ajax&jQuery
 
