@@ -60,7 +60,13 @@ public class RandomAccessTest
         }
     }
 
-
+    /**
+     * Reads employee data from a data input
+     *
+     * @param in
+     * @return the employee
+     * @throws IOException
+     */
     private static Employee readData(RandomAccessFile in) throws IOException
     {
         String name = DataIO.readFixedString(Employee.NAME_SIZE, in);
