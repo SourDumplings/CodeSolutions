@@ -1,5 +1,7 @@
 package domain;
 
+import java.io.Serializable;
+
 /**
  * @author Chang Zheng
  * @title: Person
@@ -7,7 +9,7 @@ package domain;
  * @description: TODO
  * @date 2019/9/2615:05
  */
-public class Person
+public class Person implements Serializable
 {
     private String name;
     public static final int NAME_SIZE = 40; // Employee的名字最多是40个字符，即80字节

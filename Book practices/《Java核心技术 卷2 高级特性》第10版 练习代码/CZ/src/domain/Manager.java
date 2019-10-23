@@ -12,12 +12,31 @@ import java.time.LocalDate;
 public class Manager extends Employee
 {
     private double bonus;
+    private Employee secretary;
 
 
     public Manager(String name, double salary, LocalDate hireDay)
     {
         super(name, salary, hireDay);
         bonus = 0;
+        secretary = null;
+    }
+
+    public Manager(String name, double salary, int year, int month, int day)
+    {
+        super(name, salary, year, month, day);
+        bonus = 0;
+        secretary = null;
+    }
+
+    public Employee getSecretary()
+    {
+        return secretary;
+    }
+
+    public void setSecretary(Employee secretary)
+    {
+        this.secretary = secretary;
     }
 
     @Override
@@ -53,7 +72,12 @@ public class Manager extends Employee
     @Override
     public String toString()
     {
-        return super.toString() + "[bonus=" + bonus + "]";
+        return "Manager{" +
+            "name=" + getName() +
+            "salary=" + getSalary() +
+            "bonus=" + bonus +
+            ", secretary=" + secretary +
+            '}';
     }
 
     public double getBonus()
