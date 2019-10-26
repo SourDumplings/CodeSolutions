@@ -12,6 +12,7 @@
       <list>
         <option value="$PROJECT_DIR$/hello-maven/pom.xml" />
         <option value="$PROJECT_DIR$/login-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/hello-bootstrap/pom.xml" />
       </list>
     </option>
   </component>

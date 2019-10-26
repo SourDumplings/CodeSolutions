@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/hello-bootstrap/hello-bootstrap.iml" filepath="$PROJECT_DIR$/hello-bootstrap/hello-bootstrap.iml" />
       <module fileurl="file://$PROJECT_DIR$/hello-idea/hello-idea.iml" filepath="$PROJECT_DIR$/hello-idea/hello-idea.iml" />
       <module fileurl="file://$PROJECT_DIR$/hello-maven/hello-maven.iml" filepath="$PROJECT_DIR$/hello-maven/hello-maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/login-demo/login-demo.iml" filepath="$PROJECT_DIR$/login-demo/login-demo.iml" />
