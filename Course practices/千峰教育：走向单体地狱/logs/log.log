@@ -1,0 +1,12 @@
+2019-10-30 21:56:39,227 INFO [org.springframework.context.support.ClassPathXmlApplicationContext] - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@41975e01: startup date [Wed Oct 30 21:56:39 CST 2019]; root of context hierarchy
+2019-10-30 21:56:39,335 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-context.xml]
+2019-10-30 21:56:39,613 INFO [com.cz.hello.spring.MyTest] - info log
+2019-10-30 21:56:39,614 WARN [com.cz.hello.spring.MyTest] - warn log
+2019-10-30 21:56:39,614 ERROR [com.cz.hello.spring.MyTest] - error log
+2019-10-30 21:56:39,616 INFO [com.cz.hello.spring.MyTest] - message is 测试 测试2
+2019-10-30 22:01:28,650 INFO [org.springframework.context.support.ClassPathXmlApplicationContext] - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@6996db8: startup date [Wed Oct 30 22:01:28 CST 2019]; root of context hierarchy
+2019-10-30 22:01:29,462 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-context.xml]
+2019-10-30 22:01:30,962 INFO [com.cz.hello.spring.MyTest] - info log
+2019-10-30 22:01:30,963 WARN [com.cz.hello.spring.MyTest] - warn log
+2019-10-30 22:01:30,965 ERROR [com.cz.hello.spring.MyTest] - error log
+2019-10-30 22:01:30,971 INFO [com.cz.hello.spring.MyTest] - message is 测试 测试2
