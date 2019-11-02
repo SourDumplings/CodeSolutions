@@ -32,7 +32,7 @@ public class UserServiceTest
         System.out.println("初始化数据库连接");
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
             "spring-context.xml");
-        userService = (UserService) applicationContext.getBean("UserServiceImpl");
+        userService = (UserService) applicationContext.getBean("userServiceImpl");
     }
 
     @Test

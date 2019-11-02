@@ -23,7 +23,7 @@ public class MyTest
     {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
             "spring-context.xml");
-        UserService userServiceImpl = (UserService) applicationContext.getBean("UserServiceImpl");
+        UserService userServiceImpl = (UserService) applicationContext.getBean("userServiceImpl");
         userServiceImpl.sayHi();
 
         logger.info("info log");
