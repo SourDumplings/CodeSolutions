@@ -18,7 +18,7 @@ WHERE
             borrower
     );
 
-# m2
+# m2 MySQL 不支持 EXCEPT 子句
 (
     SELECT
         customer_name

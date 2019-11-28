@@ -119,7 +119,7 @@ WHERE
             c3.company_name = 'Small Bank Corporation'
     );
 
-# m3
+# m3 MySQL 不支持 EXCEPT
 SELECT
     c1.company_name
 FROM
