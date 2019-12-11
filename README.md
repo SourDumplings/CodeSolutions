@@ -23,6 +23,8 @@
 
 《Database System Concepts》6th 练习代码
 
+《简单粗暴 TensorFlow 2.0》练习代码 读到 2.1 读不懂了，学了人工智能的原理再读
+
 ## Course practice
 
 ### 中国大学MOOC
