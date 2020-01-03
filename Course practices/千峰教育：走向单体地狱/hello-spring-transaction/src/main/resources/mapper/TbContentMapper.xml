@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cz.hello.spring.transaction.dao.TbContentDao">
+  <insert id="insert">
+        INSERT INTO tb_content (
+          `category_id`,
+          `title`,
+          `sub_title`,
+          `title_desc`,
+          `url`,
+          `pic`,
+          `pic2`,
+          `content`,
+          `created`,
+          `updated`
+        )
+        VALUES
+          (
+            #{tbContentCategory.id},
+            #{title},
+            #{subTitle},
+            #{titleDesc},
+            #{url},
+            #{pic},
+            #{pic2},
+            #{content},
+            #{created},
+            #{updated}
+          )
+    </insert>
+</mapper>

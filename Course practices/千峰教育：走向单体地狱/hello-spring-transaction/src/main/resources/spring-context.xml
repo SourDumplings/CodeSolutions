@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+  <context:annotation-config/>
+  <context:component-scan base-package="com.cz.hello.spring.transaction">
+    <context:exclude-filter type="annotation"
+      expression="org.springframework.stereotype.Controller"/>
+  </context:component-scan>
+
+  <!-- 配置事务管理器 -->
+  <bean id="transactionManager"
+    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <!--  &lt;!&ndash; 配置事务通知 &ndash;&gt;-->
+  <!--  <tx:advice id="myAdvice" transaction-manager="transactionManager">-->
+  <!--    <tx:attributes>-->
+  <!--      <tx:method name="save*" propagation="REQUIRED"/>-->
+  <!--      <tx:method name="select*" propagation="NEVER"/>-->
+  <!--      <tx:method name="get*" propagation="NEVER"/>-->
+  <!--    </tx:attributes>-->
+  <!--  </tx:advice>-->
+
+  <!--  &lt;!&ndash; 配置顾问和切入点 &ndash;&gt;-->
+  <!--  <aop:config>-->
+  <!--    <aop:pointcut id="myPointcut"-->
+  <!--      expression="execution(* com.cz.hello.spring.transaction.service.*.*(..))"/>-->
+  <!--    <aop:advisor advice-ref="myAdvice" pointcut-ref="myPointcut"/>-->
+  <!--  </aop:config>-->
+
+  <!-- 开启事务注解驱动 -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

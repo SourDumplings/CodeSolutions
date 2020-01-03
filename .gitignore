@@ -90,4 +90,9 @@ buildNumber.properties
 .classpath
 .settings
 .metadata
+
+# 日志文件
+*.log
+
+# 其他文件
 Book practices/《Java核心技术 卷2 高级特性》第10版 练习代码/CZ/bin/production/《Java核心技术 卷2 高级特性》第10版 练习代码/META-INF/《Java核心技术 卷2 高级特性》第10版 练习代码.kotlin_module
