@@ -1,5 +1,5 @@
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-11 15:26:57
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

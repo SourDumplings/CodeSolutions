@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-11-03 16:20:13
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

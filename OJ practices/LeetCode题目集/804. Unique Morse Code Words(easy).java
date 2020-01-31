@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-11-19 19:03:16
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

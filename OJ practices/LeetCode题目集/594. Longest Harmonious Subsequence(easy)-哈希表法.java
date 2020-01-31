@@ -2,7 +2,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-07 22:51:59
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

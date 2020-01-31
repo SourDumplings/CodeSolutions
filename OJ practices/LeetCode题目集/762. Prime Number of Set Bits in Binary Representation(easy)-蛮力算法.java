@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-11-06 19:52:48
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

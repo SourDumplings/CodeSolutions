@@ -1,7 +1,7 @@
 import java.util.BitSet;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-11 20:14:59
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

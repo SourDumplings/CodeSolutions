@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Stack;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-06 15:37:32
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

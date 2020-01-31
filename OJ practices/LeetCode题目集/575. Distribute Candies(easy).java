@@ -1,7 +1,7 @@
 import java.util.HashSet;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-05 20:53:52
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

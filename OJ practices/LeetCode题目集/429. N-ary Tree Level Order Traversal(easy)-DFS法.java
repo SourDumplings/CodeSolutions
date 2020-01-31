@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-09-25 11:27:52
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

@@ -1,7 +1,7 @@
 import java.util.Stack;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-02 11:48:56
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

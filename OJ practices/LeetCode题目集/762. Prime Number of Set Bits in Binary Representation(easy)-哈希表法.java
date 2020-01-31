@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-11-06 20:11:03
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

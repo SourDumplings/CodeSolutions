@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Vector;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-09-14 10:23:05
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

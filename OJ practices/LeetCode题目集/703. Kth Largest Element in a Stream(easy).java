@@ -3,7 +3,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-23 08:34:10
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

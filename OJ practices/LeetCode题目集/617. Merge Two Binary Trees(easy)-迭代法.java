@@ -3,7 +3,7 @@ import java.util.Stack;
 import javafx.util.Pair;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-10-10 08:10:23
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

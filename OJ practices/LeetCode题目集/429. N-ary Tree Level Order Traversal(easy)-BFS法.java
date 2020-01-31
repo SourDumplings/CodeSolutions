@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Queue;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-09-25 11:10:59
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

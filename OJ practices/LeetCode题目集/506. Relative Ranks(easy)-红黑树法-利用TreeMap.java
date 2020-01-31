@@ -2,7 +2,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-09-28 16:16:28
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

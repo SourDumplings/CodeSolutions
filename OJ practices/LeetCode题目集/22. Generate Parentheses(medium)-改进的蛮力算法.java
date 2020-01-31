@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2020-01-23 14:31:46
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com

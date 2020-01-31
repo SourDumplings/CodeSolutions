@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 
 /*
- * @Autor: SourDumplings
+ * @Author: SourDumplings
  * @Date: 2019-11-08 18:37:30
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
