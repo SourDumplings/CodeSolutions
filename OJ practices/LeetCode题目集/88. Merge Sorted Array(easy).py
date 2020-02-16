@@ -27,11 +27,11 @@ class Solution:
                 p1 -= 1
             p -= 1
 
-        while 0 <= p and p1 == -1:
+        while 0 <= p2:
             nums1[p] = nums2[p2]
             p -= 1
             p2 -= 1
-        while 0 <= p and p2 == -1:
+        while 0 <= p1:
             nums1[p] = nums1[p1]
             p -= 1
             p1 -= 1
