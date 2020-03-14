@@ -5,7 +5,7 @@
  * @Description: https://leetcode.com/problems/single-number/
  * @Date: 2019-03-31 19:11:50
  * 
- * a ^ a = 0, a ^ 0 = a, (a ^ a) ^ b = b
+ * a ^ a = 0, a ^ 0 = a, (a ^ a) ^ b = b，并且异或运算满足交换律和结合律
  * 故我们将所有的数异或起来即可
  */
 
