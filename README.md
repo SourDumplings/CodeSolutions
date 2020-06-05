@@ -25,6 +25,8 @@
 
 《简单粗暴 TensorFlow 2.0》练习代码 读到 2.1 读不懂了，学了人工智能的原理再读
 
+《Programming in Lua》第4版练习代码
+
 ## Course practice
 
 ### 中国大学MOOC
