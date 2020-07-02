@@ -1,0 +1,1 @@
+print(math.cos(5.2), c(5.2))
