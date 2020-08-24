@@ -18,8 +18,8 @@ public class HelloJOL
         System.out.println(ClassLayout.parseInstance(o).toPrintable());
         synchronized (o)
         {
-            // synchronized 修改了 markward
-            // markward 里面装了锁信息
+            // hotspot 的 JVM 实现中 synchronized 修改了 mark word
+            // mark word 里面装了锁信息，到底是什么样的锁，加没加锁，只与其中两位有关
             System.out.println(ClassLayout.parseInstance(o).toPrintable());
             // Java 1.6 之前 synchronized 是重量级锁，之后是轻量级锁
             // （用户态管理，内部存在锁升级过程，引入偏向锁，实在不行才会升级成重量级锁由 OS 管理）

@@ -1,56 +1,75 @@
 /**
- * �����⣺ģ�������˻�
- * ��ҵ��д��������
- * ��ҵ�������������
- * �����в��У�
- *
- * ���ײ���������⣨dirtyRead��
+ * 面试题：模拟银行账户 对业务写方法加锁 对业务读方法不加锁 这样行不行？
+ * <p>
+ * 容易产生脏读问题（dirtyRead）
+ * 具体加不加锁要看业务需求，如果允许脏读则不要加锁，因为加锁会大大影响性能
  */
 
 package com.cz.mashibing.juc.c_008;
 
 import java.util.concurrent.TimeUnit;
 
-public class Account {
-	String name;
-	double balance;
-	
-	public synchronized void set(String name, double balance) {
-		this.name = name;
+public class Account
+{
+    String name;
+    double balance;
 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+    public synchronized void set(String name, double balance)
+    {
+        this.name = name;
 
-		
-		this.balance = balance;
-	}
-	
-	public /*synchronized*/ double getBalance(String name) {
-		return this.balance;
-	}
-	
-	
-	public static void main(String[] args) {
-		Account a = new Account();
-		new Thread(()->a.set("zhangsan", 100.0)).start();
-		
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println(a.getBalance("zhangsan"));
-		
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println(a.getBalance("zhangsan"));
-	}
+        try
+        {
+            Thread.sleep(2000);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        this.balance = balance;
+    }
+
+    public /*synchronized*/ double getBalance(String name)
+    {
+        return this.balance;
+    }
+
+
+    public static void main(String[] args)
+    {
+        Account a = new Account();
+        new Thread(() -> a.set("zhangsan", 100.0)).start();
+
+        try
+        {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        System.out.println(a.getBalance("zhangsan"));
+
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        System.out.println(a.getBalance("zhangsan"));
+
+        /* getBalance 不加 synchronized 输出：
+        0.0
+		100.0
+		产生了脏读问题
+        加上之后的输出：
+        100.0
+        100.0
+        * */
+    }
 }
