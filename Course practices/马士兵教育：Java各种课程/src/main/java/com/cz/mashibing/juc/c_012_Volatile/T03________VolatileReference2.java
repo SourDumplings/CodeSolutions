@@ -3,12 +3,15 @@
  */
 package com.cz.mashibing.juc.c_012_Volatile;
 
-public class T03________VolatileReference2 {
+public class T03________VolatileReference2
+{
 
-    private static class Data {
+    private static class Data
+    {
         int a, b;
 
-        public Data(int a, int b) {
+        public Data(int a, int b)
+        {
             this.a = a;
             this.b = b;
         }
@@ -16,18 +19,25 @@ public class T03________VolatileReference2 {
 
     volatile static Data data;
 
-    public static void main(String[] args) {
-        Thread writer = new Thread(()->{
-            for (int i = 0; i < 10000; i++) {
+    public static void main(String[] args)
+    {
+        Thread writer = new Thread(() ->
+        {
+            for (int i = 0; i < 10000; i++)
+            {
                 data = new Data(i, i);
             }
         });
 
-        Thread reader = new Thread(()->{
-            while (data == null) {}
+        Thread reader = new Thread(() ->
+        {
+            while (data == null)
+            {
+            }
             int x = data.a;
             int y = data.b;
-            if(x != y) {
+            if (x != y)
+            {
                 System.out.printf("a = %s, b=%s%n", x, y);
             }
         });
@@ -35,10 +45,13 @@ public class T03________VolatileReference2 {
         reader.start();
         writer.start();
 
-        try {
+        try
+        {
             reader.join();
             writer.join();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
 
