@@ -1,7 +1,6 @@
 /**
- * synchronized优化
- * 同步代码块中的语句越少越好
- * 比较m1和m2
+ * synchronized优化 同步代码块中的语句越少越好 比较m1和m2
+ *
  * @author mashibing
  */
 package com.cz.mashibing.juc.c_016_LockOptimization;
@@ -9,48 +8,64 @@ package com.cz.mashibing.juc.c_016_LockOptimization;
 import java.util.concurrent.TimeUnit;
 
 
-public class FineCoarseLock {
-	
-	int count = 0;
+public class FineCoarseLock
+{
 
-	synchronized void m1() {
-		//do sth need not sync
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		//业务逻辑中只有下面这句需要sync，这时不应该给整个方法上锁
-		count ++;
-		
-		//do sth need not sync
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	void m2() {
-		//do sth need not sync
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		//业务逻辑中只有下面这句需要sync，这时不应该给整个方法上锁
-		//采用细粒度的锁，可以使线程争用时间变短，从而提高效率
-		synchronized(this) {
-			count ++;
-		}
-		//do sth need not sync
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+    int count = 0;
 
-	
+    synchronized void m1()
+    {
+        //do sth need not sync
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        //业务逻辑中只有下面这句需要sync，这时不应该给整个方法上锁
+        count++;
 
+        //do sth need not sync
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    void m2()
+    {
+        //do sth need not sync
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        //业务逻辑中只有下面这句需要sync，这时不应该给整个方法上锁
+        //采用细粒度的锁，可以使线程争用时间变短，从而提高效率
+        synchronized (this)
+        {
+            count++;
+        }
+        //do sth need not sync
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /*正常情况下应该使用细粒度的锁
+     * 但是如果锁征用太频繁，应该考虑锁的粗化（比如每一行都加个锁，不如整个一起加个锁）*/
 }
