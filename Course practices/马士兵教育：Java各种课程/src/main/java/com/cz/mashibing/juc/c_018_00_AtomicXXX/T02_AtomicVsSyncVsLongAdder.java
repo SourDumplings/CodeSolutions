@@ -8,6 +8,11 @@ import java.util.concurrent.atomic.LongAdder;
 Atomic: 100000000 time 2189
 Sync: 100000000 time 3830
 LongAdder: 100000000 time 317
+
+Atomic 比 Sync 效率高是因为 Atomic 不加锁，采用 CAS，这种情形下效率高
+而 Sync 使用重量级锁
+LongAddr 效率高是因为其内部使用了分段锁（这里是分成多个 CAS），比如分出四个数 0，使用 4 把锁分别加这四个数，
+然后将结果加在一起即可，LongAddr 适用于超高并发情况
 *
 * */
 

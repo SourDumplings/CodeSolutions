@@ -1,17 +1,17 @@
 /**
- * reentrantlock�������synchronized
- * ����m1����this,ֻ��m1ִ����ϵ�ʱ��,m2����ִ��
- * �����Ǹ�ϰsynchronized��ԭʼ������
- * 
- * ʹ��reentrantlock�������ͬ���Ĺ���
- * ��Ҫע����ǣ�����Ҫ����Ҫ����Ҫ�ֶ��ͷ�������Ҫ������˵���飩
- * ʹ��syn�����Ļ���������쳣��jvm���Զ��ͷ���������lock�����ֶ��ͷ�������˾�����finally�н��������ͷ�
- * 
- * ʹ��reentrantlock���Խ��С�����������tryLock�������޷�������������ָ��ʱ�����޷��������߳̿��Ծ����Ƿ�����ȴ�
- * 
- * ʹ��ReentrantLock�����Ե���lockInterruptibly���������Զ��߳�interrupt����������Ӧ��
- * ��һ���̵߳ȴ����Ĺ����У����Ա����
- * 
+ * reentrantlock用于替代synchronized
+ * 由于m1锁定this,只有m1执行完毕的时候,m2才能执行
+ * 这里是复习synchronized最原始的语义
+ * <p>
+ * 使用reentrantlock可以完成同样的功能
+ * 需要注意的是，必须要必须要必须要手动释放锁（重要的事情说三遍）
+ * 使用syn锁定的话如果遇到异常，jvm会自动释放锁，但是lock必须手动释放锁，因此经常在finally中进行锁的释放
+ * <p>
+ * 使用reentrantlock可以进行“尝试锁定”tryLock，这样无法锁定，或者在指定时间内无法锁定，线程可以决定是否继续等待
+ * <p>
+ * 使用ReentrantLock还可以调用lockInterruptibly方法，可以对线程interrupt方法做出响应，
+ * 在一个线程等待锁的过程中，可以被打断
+ *
  * @author mashibing
  */
 package com.cz.mashibing.juc.c_020;
@@ -21,47 +21,72 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 
-public class T04_ReentrantLock4 {
-		
-	public static void main(String[] args) {
-		Lock lock = new ReentrantLock();
-		
-		
-		Thread t1 = new Thread(()->{
-			try {
-				lock.lock();
-				System.out.println("t1 start");
-				TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
-				System.out.println("t1 end");
-			} catch (InterruptedException e) {
-				System.out.println("interrupted!");
-			} finally {
-				lock.unlock();
-			}
-		});
-		t1.start();
-		
-		Thread t2 = new Thread(()->{
-			try {
-				//lock.lock();
-				lock.lockInterruptibly(); //���Զ�interrupt()����������Ӧ
-				System.out.println("t2 start");
-				TimeUnit.SECONDS.sleep(5);
-				System.out.println("t2 end");
-			} catch (InterruptedException e) {
-				System.out.println("interrupted!");
-			} finally {
-				lock.unlock();
-			}
-		});
-		t2.start();
-		
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		t2.interrupt(); //����߳�2�ĵȴ�
-		
-	}
+public class T04_ReentrantLock4
+{
+
+    public static void main(String[] args)
+    {
+        Lock lock = new ReentrantLock();
+
+        Thread t1 = new Thread(() ->
+        {
+            try
+            {
+                lock.lock();
+                System.out.println("t1 start");
+                TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+                System.out.println("t1 end");
+            }
+            catch (InterruptedException e)
+            {
+                System.out.println("interrupted!");
+            }
+            finally
+            {
+                lock.unlock();
+            }
+        });
+        t1.start();
+
+        Thread t2 = new Thread(() ->
+        {
+            try
+            {
+                //lock.lock(); // 用这个的话 t2 就获得不到锁了，因为 t1 睡得太久了
+                lock.lockInterruptibly(); //可以对interrupt()方法做出响应
+                System.out.println("t2 start");
+                TimeUnit.SECONDS.sleep(5);
+                System.out.println("t2 end");
+            }
+            catch (InterruptedException e)
+            {
+                System.out.println("interrupted!");
+            }
+            finally
+            {
+                lock.unlock();
+            }
+        });
+        t2.start();
+
+        try
+        {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        t2.interrupt(); //打断线程2的等待
+
+		/*输出：
+		t1 start
+		interrupted!
+		Exception in thread "Thread-1" java.lang.IllegalMonitorStateException
+			at java.base/java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:149)
+			at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1302)
+			at java.base/java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:439)
+			at com.cz.mashibing.juc.c_020.T04_ReentrantLock4.lambda$main$1(T04_ReentrantLock4.java:67)
+			at java.base/java.lang.Thread.run(Thread.java:834)*/
+    }
 }
