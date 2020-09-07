@@ -113,7 +113,7 @@ public class T09_TestPhaser2
             else
             {
                 /* 只有新娘新郎才能洞房 */
-                phaser.arriveAndDeregister();
+                phaser.arriveAndDeregister(); // 这个相当于把当前线程去掉
             }
         }
 
