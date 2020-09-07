@@ -4,25 +4,38 @@ import java.util.Random;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
-public class T08_TestPhaser {
+/* ¶à¸öÏß³Ì·Ö½×¶ÎÔËĞĞ£¬ÏÈÒì²½ÔÙÍ¬²½
+ *Ïàµ±ÓÚÒ»¸öÒ»¸öÕ¤À¸£¬¿ÉÒÔÓÃÓÚÒÅ´«Ëã·¨µÄÊµÏÖ
+ * Ïàµ±ÓÚ CyclicBarrier µÄÉı¼¶°æ
+ * */
+
+public class T08_TestPhaser
+{
     static Random r = new Random();
     static MarriagePhaser phaser = new MarriagePhaser();
 
-    static void milliSleep(int milli) {
-        try {
+    static void milliSleep(int milli)
+    {
+        try
+        {
             TimeUnit.MILLISECONDS.sleep(milli);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         phaser.bulkRegister(5);
 
-        for(int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             final int nameIndex = i;
-            new Thread(()->{
+            new Thread(() ->
+            {
 
                 Person p = new Person("person " + nameIndex);
                 p.arrive();
@@ -39,20 +52,23 @@ public class T08_TestPhaser {
     }
 
 
-    static class MarriagePhaser extends Phaser {
+    static class MarriagePhaser extends Phaser
+    {
         @Override
-        protected boolean onAdvance(int phase, int registeredParties) {
+        protected boolean onAdvance(int phase, int registeredParties)
+        {
 
-            switch (phase) {
+            switch (phase)
+            {
                 case 0:
-                    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½Ë£ï¿½");
+                    System.out.println("ËùÓĞÈËµ½ÆëÁË£¡");
                     return false;
                 case 1:
-                    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½Ë£ï¿½");
+                    System.out.println("ËùÓĞÈË³ÔÍêÁË£¡");
                     return false;
                 case 2:
-                    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¿ªï¿½Ë£ï¿½");
-                    System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+                    System.out.println("ËùÓĞÈËÀë¿ªÁË£¡");
+                    System.out.println("»éÀñ½áÊø£¡");
                     return true;
                 default:
                     return true;
@@ -61,29 +77,32 @@ public class T08_TestPhaser {
     }
 
 
-    static class Person {
+    static class Person
+    {
         String name;
 
-        public Person(String name) {
+        public Person(String name)
+        {
             this.name = name;
         }
 
-        public void arrive() {
+        public void arrive()
+        {
             milliSleep(r.nextInt(1000));
-            System.out.printf("%s ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½ï¿½ï¿½\n", name);
+            System.out.printf("%s µ½´ïÏÖ³¡£¡\n", name);
         }
 
-        public void eat() {
+        public void eat()
+        {
             milliSleep(r.nextInt(1000));
-            System.out.printf("%s ï¿½ï¿½ï¿½ï¿½!\n", name);
+            System.out.printf("%s ³ÔÍê!\n", name);
         }
 
-        public void leave() {
+        public void leave()
+        {
             milliSleep(r.nextInt(1000));
-            System.out.printf("%s ï¿½ë¿ªï¿½ï¿½\n", name);
+            System.out.printf("%s Àë¿ª£¡\n", name);
         }
 
     }
 }
-
-
