@@ -5,63 +5,85 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.LockSupport;
 
-public class T08_Semaphore {
-    // 锟斤拷锟絭olatile锟斤拷使t2锟杰癸拷锟矫碉拷通知
-    volatile List lists = new ArrayList();
+public class T08_Semaphore
+{
+    // 添加volatile，使t2能够得到通知，个人感觉没必要加 volatile
+    // volatile List lists = new ArrayList();
 
-    public void add(Object o) {
+    List lists = new ArrayList();
+
+    public void add(Object o)
+    {
         lists.add(o);
     }
 
-    public int size() {
+    public int size()
+    {
         return lists.size();
     }
 
     static Thread t1 = null, t2 = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         T08_Semaphore c = new T08_Semaphore();
         Semaphore s = new Semaphore(1);
 
-        t1 = new Thread(() -> {
-            try {
+        t1 = new Thread(() ->
+        {
+            try
+            {
                 s.acquire();
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 5; i++)
+                {
                     c.add(new Object());
                     System.out.println("add " + i);
 
 
                 }
                 s.release();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
 
-            try {
+            try
+            {
                 t2.start();
                 t2.join();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
 
-            try {
+            try
+            {
                 s.acquire();
-                for (int i = 5; i < 10; i++) {
+                for (int i = 5; i < 10; i++)
+                {
                     System.out.println(i);
                 }
                 s.release();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
 
         }, "t1");
 
-        t2 = new Thread(() -> {
-            try {
+        t2 = new Thread(() ->
+        {
+            try
+            {
                 s.acquire();
-                System.out.println("t2 锟斤拷锟斤拷");
+                System.out.println("t2 结束");
                 s.release();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
         }, "t2");

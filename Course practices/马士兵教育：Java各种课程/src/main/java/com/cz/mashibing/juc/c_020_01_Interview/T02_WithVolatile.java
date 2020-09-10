@@ -1,11 +1,12 @@
 /**
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£ºï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½
- * Êµï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½addï¿½ï¿½size
- * Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì£ï¿½ï¿½ß³ï¿½1ï¿½ï¿½ï¿½10ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ß³ï¿½2Êµï¿½Ö¼ï¿½ï¿½Ôªï¿½ØµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ß³ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
- * 
- * ï¿½ï¿½listsï¿½ï¿½ï¿½volatileÖ®ï¿½ï¿½t2ï¿½Ü¹ï¿½ï¿½Óµï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½t2ï¿½ß³Ìµï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½Ë·ï¿½cpuï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½
- * ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½if ï¿½ï¿½ breakÖ®ï¿½ä±»ï¿½ï¿½ï¿½ï¿½ß³Ì´ï¿½Ï£ï¿½ï¿½Ãµï¿½ï¿½Ä½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½
- * ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½Ø£ï¿½
+ * Ôø¾­µÄÃæÊÔÌâ£º£¨ÌÔ±¦£¿£©
+ * ÊµÏÖÒ»¸öÈİÆ÷£¬Ìá¹©Á½¸ö·½·¨£¬add£¬size
+ * Ğ´Á½¸öÏß³Ì£¬Ïß³Ì1Ìí¼Ó10¸öÔªËØµ½ÈİÆ÷ÖĞ£¬Ïß³Ì2ÊµÏÖ¼à¿ØÔªËØµÄ¸öÊı£¬µ±¸öÊıµ½5¸öÊ±£¬Ïß³Ì2¸ø³öÌáÊ¾²¢½áÊø
+ * <p>
+ * ¸ølistsÌí¼ÓvolatileÖ®ºó£¬t2ÄÜ¹»½Óµ½Í¨Öª£¬µ«ÊÇ£¬t2Ïß³ÌµÄËÀÑ­»·ºÜÀË·Ñcpu£¬Èç¹û²»ÓÃËÀÑ­»·£¬
+ * ¶øÇÒ£¬Èç¹ûÔÚif ºÍ breakÖ®¼ä±»±ğµÄÏß³Ì´ò¶Ï£¬µÃµ½µÄ½á¹ûÒ²²»¾«È·£¬
+ * ¸ÃÔõÃ´×öÄØ£¿
+ *
  * @author mashibing
  */
 package com.cz.mashibing.juc.c_020_01_Interview;
@@ -16,43 +17,77 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class T02_WithVolatile {
+public class T02_WithVolatile
+{
 
-	//ï¿½ï¿½ï¿½volatileï¿½ï¿½Ê¹t2ï¿½Ü¹ï¿½ï¿½Ãµï¿½Í¨Öª
-	//volatile List lists = new LinkedList();
-	volatile List lists = Collections.synchronizedList(new LinkedList<>());
+    //Ìí¼Ó volatile£¬Ê¹t2ÄÜ¹»µÃµ½Í¨Öª
+	/* Êä³ö£º
+	add 0
+	add 1
+	add 2
+	add 3
+	add 4
+	t2 ½áÊø
+	add 5
+	add 6
+	add 7
+	add 8
+	add 9
+	µÃµ½ÁËÕıÈ·µÄÊä³ö£¬°´ÀíËµ volatile ĞŞÊÎµÄÊÇÒıÓÃ£¬
+	ÒıÓÃÀïÃæµÄ¶ÔÏó±äÁËÓÃ volatile ÊÇÃ»ÓĞÓÃµÄ£¬Êä³öÕıÈ·ÊÇÒ»ÖÖÅ¼È»ĞÔ£¬
+	Èç¹û°ÑË¯Ãß 1s È¥µô±ãºÜ´ó¿ÉÄÜ²»ÄÜµÃµ½ÕıÈ·µÄÊä³öÁË
+	*/
+    // volatile List lists = new LinkedList();
 
-	public void add(Object o) {
-		lists.add(o);
-	}
+	/* ÓÃÕâ¸ö·½·¨Ò²Ã»ÓĞÓÃ£¬±È½Ï¹îÒì
+	* Èç¹û²»Ë¯ 1s »¹ÊÇ²»ÄÜ±£Ö¤µÃµ½ÕıÈ·½á¹û£¬
+	* Ö»ÄÜ½âÊÍÎª¿ÉÄÜÊÇ hotspot ÊµÏÖÊ±»áÔÚÁíÒ»¸öÏß³ÌË¯¾õÊ±¸üĞÂ
+	* Òò´Ë volatile É÷ÓÃ£¬²»ÒªÓÃÓÚĞŞÊÎÒıÓÃ */
+    volatile List lists = Collections.synchronizedList(new LinkedList<>());
 
-	public int size() {
-		return lists.size();
-	}
 
-	public static void main(String[] args) {
+    public void add(Object o)
+    {
+        lists.add(o);
+    }
 
-		T02_WithVolatile c = new T02_WithVolatile();
-		new Thread(() -> {
-			for(int i=0; i<10; i++) {
-				c.add(new Object());
-				System.out.println("add " + i);
-				
-				/*try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}*/
-			}
-		}, "t1").start();
-		
-		new Thread(() -> {
-			while(true) {
-				if(c.size() == 5) {
-					break;
-				}
-			}
-			System.out.println("t2 ï¿½ï¿½ï¿½ï¿½");
-		}, "t2").start();
-	}
+    public int size()
+    {
+        return lists.size();
+    }
+
+    public static void main(String[] args)
+    {
+
+        T02_WithVolatile c = new T02_WithVolatile();
+        new Thread(() ->
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                c.add(new Object());
+                System.out.println("add " + i);
+
+                /*try
+                {
+                    TimeUnit.SECONDS.sleep(1);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }*/
+            }
+        }, "t1").start();
+
+        new Thread(() ->
+        {
+            while (true)
+            {
+                if (c.size() == 5)
+                {
+                    break;
+                }
+            }
+            System.out.println("t2 ½áÊø");
+        }, "t2").start();
+    }
 }
