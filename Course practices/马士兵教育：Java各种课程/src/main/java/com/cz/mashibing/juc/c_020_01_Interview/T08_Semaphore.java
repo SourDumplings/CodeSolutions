@@ -50,6 +50,9 @@ public class T08_Semaphore
 
             try
             {
+                /* 个人觉得实际这样了就不用锁或者 Semaphore 了
+                见 T08 UsingJoinOnly
+                * */
                 t2.start();
                 t2.join();
             }
