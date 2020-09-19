@@ -2,15 +2,22 @@ package com.cz.mashibing.juc.c_021_02_AQS;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class TestReentrantLock {
+/*
+* 用于追踪动态阅读 AQS 源码，
+* 使用 JDK 11
+* */
+
+public class TestReentrantLock
+{
 
     private static volatile int i = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ReentrantLock lock = new ReentrantLock();
         lock.lock();
         //synchronized (TestReentrantLock.class) {
-            i++;
+        i++;
         //}
 
         lock.unlock();

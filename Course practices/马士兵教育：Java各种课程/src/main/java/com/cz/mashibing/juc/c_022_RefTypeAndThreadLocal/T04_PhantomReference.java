@@ -1,23 +1,41 @@
 /**
- *
- *
- *     ä¸€ä¸ªå¯¹è±¡æ˜¯å¦æœ‰è™šå¼•ç”¨çš„å­˜åœ¨ï¼Œå®Œå…¨ä¸ä¼šå¯¹å…¶ç”Ÿå­˜æ—¶é—´æ„æˆå½±å“ï¼Œ
- *     ä¹Ÿæ— æ³•é€šè¿‡è™šå¼•ç”¨æ¥è·å–ä¸€ä¸ªå¯¹è±¡çš„å®ä¾‹ã€‚
- *     ä¸ºä¸€ä¸ªå¯¹è±¡è®¾ç½®è™šå¼•ç”¨å…³è”çš„å”¯ä¸€ç›®çš„å°±æ˜¯èƒ½åœ¨è¿™ä¸ªå¯¹è±¡è¢«æ”¶é›†å™¨å›æ”¶æ—¶æ”¶åˆ°ä¸€ä¸ªç³»ç»Ÿé€šçŸ¥ã€‚
- *     è™šå¼•ç”¨å’Œå¼±å¼•ç”¨å¯¹å…³è”å¯¹è±¡çš„å›æ”¶éƒ½ä¸ä¼šäº§ç”Ÿå½±å“ï¼Œå¦‚æœåªæœ‰è™šå¼•ç”¨æ´»ç€å¼±å¼•ç”¨å…³è”ç€å¯¹è±¡ï¼Œ
- *     é‚£ä¹ˆè¿™ä¸ªå¯¹è±¡å°±ä¼šè¢«å›æ”¶ã€‚å®ƒä»¬çš„ä¸åŒä¹‹å¤„åœ¨äºå¼±å¼•ç”¨çš„getæ–¹æ³•ï¼Œè™šå¼•ç”¨çš„getæ–¹æ³•å§‹ç»ˆè¿”å›null,
- *     å¼±å¼•ç”¨å¯ä»¥ä½¿ç”¨ReferenceQueue,è™šå¼•ç”¨å¿…é¡»é…åˆReferenceQueueä½¿ç”¨ã€‚
- *
- *     jdkä¸­ç›´æ¥å†…å­˜çš„å›æ”¶å°±ç”¨åˆ°è™šå¼•ç”¨ï¼Œç”±äºjvmè‡ªåŠ¨å†…å­˜ç®¡ç†çš„èŒƒå›´æ˜¯å †å†…å­˜ï¼Œ
- *     è€Œç›´æ¥å†…å­˜æ˜¯åœ¨å †å†…å­˜ä¹‹å¤–ï¼ˆå…¶å®æ˜¯å†…å­˜æ˜ å°„æ–‡ä»¶ï¼Œè‡ªè¡Œå»ç†è§£è™šæ‹Ÿå†…å­˜ç©ºé—´çš„ç›¸å…³æ¦‚å¿µï¼‰ï¼Œ
- *     æ‰€ä»¥ç›´æ¥å†…å­˜çš„åˆ†é…å’Œå›æ”¶éƒ½æ˜¯æœ‰Unsafeç±»å»æ“ä½œï¼Œjavaåœ¨ç”³è¯·ä¸€å—ç›´æ¥å†…å­˜ä¹‹åï¼Œ
- *     ä¼šåœ¨å †å†…å­˜åˆ†é…ä¸€ä¸ªå¯¹è±¡ä¿å­˜è¿™ä¸ªå †å¤–å†…å­˜çš„å¼•ç”¨ï¼Œ
- *     è¿™ä¸ªå¯¹è±¡è¢«åƒåœ¾æ”¶é›†å™¨ç®¡ç†ï¼Œä¸€æ—¦è¿™ä¸ªå¯¹è±¡è¢«å›æ”¶ï¼Œ
- *     ç›¸åº”çš„ç”¨æˆ·çº¿ç¨‹ä¼šæ”¶åˆ°é€šçŸ¥å¹¶å¯¹ç›´æ¥å†…å­˜è¿›è¡Œæ¸…ç†å·¥ä½œã€‚
- *
- *     äº‹å®ä¸Šï¼Œè™šå¼•ç”¨æœ‰ä¸€ä¸ªå¾ˆé‡è¦çš„ç”¨é€”å°±æ˜¯ç”¨æ¥åšå †å¤–å†…å­˜çš„é‡Šæ”¾ï¼Œ
- *     DirectByteBufferå°±æ˜¯é€šè¿‡è™šå¼•ç”¨æ¥å®ç°å †å¤–å†…å­˜çš„é‡Šæ”¾çš„ã€‚
- *
+ * ²âÊÔĞèÒªÉèÖÃĞéÄâ»úÑ¡Ïî£º-Xms20M -Xmx20M
+ * Ö¸¶¨ 20M µÄ¶ÑÄÚ´æ
+ * Êä³ö£º
+null
+null
+null
+null
+finalize
+null
+--- ĞéÒıÓÃ¶ÔÏó±»jvm»ØÊÕÁË ---- java.lang.ref.PhantomReference@7c6b73ff
+null
+null
+null
+Exception in thread "Thread-0" java.lang.OutOfMemoryError: Java heap space
+	at java.base/java.util.LinkedList.linkLast(LinkedList.java:146)
+	at java.base/java.util.LinkedList.add(LinkedList.java:342)
+	at com.cz.mashibing.juc.c_022_RefTypeAndThreadLocal.T04_PhantomReference.lambda$main$0(T04_PhantomReference.java:47)
+	at com.cz.mashibing.juc.c_022_RefTypeAndThreadLocal.T04_PhantomReference$$Lambda$14/0x0000000100066840.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+
+ * Ò»¸ö¶ÔÏóÊÇ·ñÓĞĞéÒıÓÃµÄ´æÔÚ£¬ÍêÈ«²»»á¶ÔÆäÉú´æÊ±¼ä¹¹³ÉÓ°Ïì£¬
+ * Ò²ÎŞ·¨Í¨¹ıĞéÒıÓÃÀ´»ñÈ¡Ò»¸ö¶ÔÏóµÄÊµÀı¡£
+ * ÎªÒ»¸ö¶ÔÏóÉèÖÃĞéÒıÓÃ¹ØÁªµÄÎ¨Ò»Ä¿µÄ¾ÍÊÇÄÜÔÚÕâ¸ö¶ÔÏó±»ÊÕ¼¯Æ÷»ØÊÕÊ±ÊÕµ½Ò»¸öÏµÍ³Í¨Öª¡£
+ * ĞéÒıÓÃºÍÈõÒıÓÃ¶Ô¹ØÁª¶ÔÏóµÄ»ØÊÕ¶¼²»»á²úÉúÓ°Ïì£¬Èç¹ûÖ»ÓĞĞéÒıÓÃ»î×ÅÈõÒıÓÃ¹ØÁª×Å¶ÔÏó£¬
+ * ÄÇÃ´Õâ¸ö¶ÔÏó¾Í»á±»»ØÊÕ¡£ËüÃÇµÄ²»Í¬Ö®´¦ÔÚÓÚÈõÒıÓÃµÄget·½·¨£¬ĞéÒıÓÃµÄget·½·¨Ê¼ÖÕ·µ»Ønull,
+ * ÈõÒıÓÃ¿ÉÒÔÊ¹ÓÃReferenceQueue,ĞéÒıÓÃ±ØĞëÅäºÏReferenceQueueÊ¹ÓÃ¡£
+ * <p>
+ * jdkÖĞÖ±½ÓÄÚ´æµÄ»ØÊÕ¾ÍÓÃµ½ĞéÒıÓÃ£¬ÓÉÓÚjvm×Ô¶¯ÄÚ´æ¹ÜÀíµÄ·¶Î§ÊÇ¶ÑÄÚ´æ£¬
+ * ¶øÖ±½ÓÄÚ´æÊÇÔÚ¶ÑÄÚ´æÖ®Íâ£¨ÆäÊµÊÇÄÚ´æÓ³ÉäÎÄ¼ş£¬×ÔĞĞÈ¥Àí½âĞéÄâÄÚ´æ¿Õ¼äµÄÏà¹Ø¸ÅÄî£©£¬
+ * ËùÒÔÖ±½ÓÄÚ´æµÄ·ÖÅäºÍ»ØÊÕ¶¼ÊÇÓĞUnsafeÀàÈ¥²Ù×÷£¬javaÔÚÉêÇëÒ»¿éÖ±½ÓÄÚ´æÖ®ºó£¬
+ * »áÔÚ¶ÑÄÚ´æ·ÖÅäÒ»¸ö¶ÔÏó±£´æÕâ¸ö¶ÑÍâÄÚ´æµÄÒıÓÃ£¬
+ * Õâ¸ö¶ÔÏó±»À¬»øÊÕ¼¯Æ÷¹ÜÀí£¬Ò»µ©Õâ¸ö¶ÔÏó±»»ØÊÕ£¬
+ * ÏàÓ¦µÄÓÃ»§Ïß³Ì»áÊÕµ½Í¨Öª²¢¶ÔÖ±½ÓÄÚ´æ½øĞĞÇåÀí¹¤×÷¡£
+ * <p>
+ * ÊÂÊµÉÏ£¬ĞéÒıÓÃÓĞÒ»¸öºÜÖØÒªµÄÓÃÍ¾¾ÍÊÇÓÃÀ´×ö¶ÑÍâÄÚ´æµÄÊÍ·Å£¬
+ * DirectByteBuffer¾ÍÊÇÍ¨¹ıĞéÒıÓÃÀ´ÊµÏÖ¶ÑÍâÄÚ´æµÄÊÍ·ÅµÄ¡£
  */
 
 
@@ -29,43 +47,59 @@ import java.lang.ref.ReferenceQueue;
 import java.util.LinkedList;
 import java.util.List;
 
-public class T04_PhantomReference {
+public class T04_PhantomReference
+{
     private static final List<Object> LIST = new LinkedList<>();
     private static final ReferenceQueue<M> QUEUE = new ReferenceQueue<>();
 
 
-
-    public static void main(String[] args) {
-
+    public static void main(String[] args)
+    {
 
         PhantomReference<M> phantomReference = new PhantomReference<>(new M(), QUEUE);
 
-
-        new Thread(() -> {
-            while (true) {
+        new Thread(() ->
+        {
+            while (true)
+            {
                 LIST.add(new byte[1024 * 1024]);
-                try {
+                try
+                {
                     Thread.sleep(1000);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e)
+                {
                     e.printStackTrace();
                     Thread.currentThread().interrupt();
                 }
+                /* ĞéÒıÓÃ get ÊÇÄÃ²»µ½ÖµµÄ */
                 System.out.println(phantomReference.get());
             }
         }).start();
 
-        new Thread(() -> {
-            while (true) {
+        /*
+        * ĞéÒıÓÃÒıÓÃµÄ¶ÔÏó±»»ØÊÕ£¬»áÍ¨Öª
+        * Í¨ÖªµÄ·½Ê½ÊÇ°ÑÕâ¸öÒıÓÃ¼Óµ½¶ÓÁĞÀï
+        * Õâ¸öÏß³ÌÓÃÀ´¼ì²âĞéÒıÓÃÖ¸ÏòµÄ¶ÔÏóÊÇ·ñ±»»ØÊÕ
+        * */
+        new Thread(() ->
+        {
+            while (true)
+            {
                 Reference<? extends M> poll = QUEUE.poll();
-                if (poll != null) {
-                    System.out.println("--- è™šå¼•ç”¨å¯¹è±¡è¢«jvmå›æ”¶äº† ---- " + poll);
+                if (poll != null)
+                {
+                    System.out.println("--- ĞéÒıÓÃ¶ÔÏó±»jvm»ØÊÕÁË ---- " + poll);
                 }
             }
         }).start();
 
-        try {
+        try
+        {
             Thread.sleep(500);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
 

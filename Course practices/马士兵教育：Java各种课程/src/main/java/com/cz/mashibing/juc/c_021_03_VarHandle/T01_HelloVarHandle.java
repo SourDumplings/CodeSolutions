@@ -1,5 +1,7 @@
 package com.cz.mashibing.juc.c_021_03_VarHandle;
 
+/* 这个必须 JDK 1.9 才行 */
+
 // import java.lang.invoke.MethodHandles;
 // import java.lang.invoke.VarHandle;
 //
