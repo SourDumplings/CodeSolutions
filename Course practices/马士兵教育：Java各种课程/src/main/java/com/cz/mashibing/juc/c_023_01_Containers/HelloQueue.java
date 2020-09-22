@@ -6,8 +6,10 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class HelloQueue {
-    public static void main(String[] args) {
+public class HelloQueue
+{
+    public static void main(String[] args)
+    {
         Queue<Integer> q = new ArrayBlockingQueue<>(2);
         q.add(0);
         q.add(1);

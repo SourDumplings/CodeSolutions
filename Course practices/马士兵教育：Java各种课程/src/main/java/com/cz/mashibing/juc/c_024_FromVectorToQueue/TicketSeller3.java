@@ -1,18 +1,18 @@
 /**
- * О©╫О©╫NО©╫е╩О©╫ф╠О©╫О©╫ц©О©╫О©╫ф╠О©╫О©╫О©╫О©╫р╩О©╫О©╫О©╫О©╫О©╫
- * м╛й╠О©╫О©╫10О©╫О©╫О©╫О©╫О©╫з╤О©╫О©╫О©╫О©╫О©╫ф╠
- * О©╫О©╫п╢р╩О©╫О©╫дёО©╫О©╫О©╫О©╫О©╫
- * 
- * О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫дЁО©╫О©╫О©╫О©╫О©╫э╩О©╫О©╫О©╫О©╫О©╫О©╫п╘О©╫О©╫О©╫Бё©
- * О©╫ь╦О©╫О©╫О©╫О©╫шёО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫шёО©╫
- * 
- * й╧О©╫О©╫VectorО©╫О©╫О©╫О©╫Collections.synchronizedXXX
- * О©╫О©╫О©╫О©╫р╩О©╫бёО©╫О©╫О©╫О©╫О©╫О©╫э╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
- * 
- * О©╫О©╫О©╫О©╫О©╫О©╫О©╫AО©╫О©╫BО©╫О©╫О©╫О©╫м╛О©╫О©╫О©╫дёО©╫О©╫О©╫AО©╫О©╫BО©╫О©╫и╣д╦О©╫О©╫о╡О©╫О©╫О©╫р╡н╢О©╫О©╫О©╫О©╫м╛О©╫О©╫О©╫дёО©╫О©╫О©╫х╩О©╫О©╫р╙О©╫т╪О©╫О©╫О©╫О©╫О©╫м╛О©╫О©╫
- * О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫п╤О©╫sizeО©╫м╫О©╫О©╫О©╫removeО©╫О©╫О©╫О©╫О©╫О©╫р╩О©╫О©╫О©╫О©╫О©╫О©╫т╜О©╫с╡О©╫О©╫О©╫
- * 
- * @author О©╫О©╫й©О©╫О©╫
+ * спNуе╩ПЁ╣ф╠ё╛ц©уеф╠╤╪спр╩╦Ж╠Ю╨е
+ * м╛й╠сп10╦Ж╢╟©з╤тмБйшф╠
+ * гКп╢р╩╦ЖдёдБЁлпР
+ * <p>
+ * ╥жнЖобцФ╣дЁлпР©идэ╩А╡ЗиЗддп╘нйлБё©
+ * жь╦╢оЗйшё©Ё╛а©оЗйшё©
+ * <p>
+ * й╧сцVector╩РуъCollections.synchronizedXXX
+ * ╥жнЖр╩обё╛уБяЫдэ╫Б╬ЖнйлБбПё©
+ * <p>
+ * ╬мкЦ╡ывВA╨мB╤╪йгм╛╡╫╣дё╛╣╚A╨мBвИЁи╣д╦╢╨о╡ывВр╡н╢╠ьйгм╛╡╫╣дё╛хтх╩пХр╙вт╪╨╫Ьппм╛╡╫
+ * ╬моЯуБ╦ЖЁлпРё╛еп╤оsize╨м╫Ьппremove╠ьпКйгр╩уШ╦Ж╣дт╜вс╡ывВ
+ *
+ * @author бМй©╠Ь
  */
 package com.cz.mashibing.juc.c_024_FromVectorToQueue;
 
@@ -20,32 +20,49 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TicketSeller3 {
-	static List<String> tickets = new LinkedList<>();
-	
-	
-	static {
-		for(int i=0; i<1000; i++) tickets.add("ф╠ О©╫О©╫еёО©╫" + i);
-	}
-	
-	public static void main(String[] args) {
-		
-		for(int i=0; i<10; i++) {
-			new Thread(()->{
-				while(true) {
-					synchronized(tickets) {
-						if(tickets.size() <= 0) break;
-						
-						try {
-							TimeUnit.MILLISECONDS.sleep(10);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						
-						System.out.println("О©╫О©╫О©╫О©╫О©╫О©╫--" + tickets.remove(0));
-					}
-				}
-			}).start();
+public class TicketSeller3
+{
+    static List<String> tickets = new LinkedList<>();
+
+
+    static
+    {
+		for (int i = 0; i < 1000; i++)
+		{
+			tickets.add("ф╠ ╠Ю╨её╨" + i);
 		}
-	}
+    }
+
+    public static void main(String[] args)
+    {
+
+        for (int i = 0; i < 10; i++)
+        {
+            new Thread(() ->
+            {
+                while (true)
+                {
+                	/* ╡исц©м╩╖╤к╪скЬ╣д╥╫й╫╠ёж╓т╜вспт */
+                    synchronized (tickets)
+                    {
+						if (tickets.size() <= 0)
+						{
+							break;
+						}
+
+                        try
+                        {
+                            TimeUnit.MILLISECONDS.sleep(10);
+                        }
+                        catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        System.out.println("оЗйшак--" + tickets.remove(0));
+                    }
+                }
+            }).start();
+        }
+    }
 }

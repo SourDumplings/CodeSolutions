@@ -1,44 +1,62 @@
 /**
- * ï¿½ï¿½Nï¿½Å»ï¿½Æ±ï¿½ï¿½Ã¿ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½
- * Í¬Ê±ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ±
- * ï¿½ï¿½Ð´Ò»ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½
- * 
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½ï¿½â£¿
- * ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½
- * 
- * Ê¹ï¿½ï¿½Vectorï¿½ï¿½ï¿½ï¿½Collections.synchronizedXXX
- * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
- * 
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Aï¿½ï¿½Bï¿½ï¿½ÉµÄ¸ï¿½ï¿½Ï²ï¿½ï¿½ï¿½Ò²Î´ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½È»ï¿½ï¿½Òªï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½sizeï¿½Í½ï¿½ï¿½ï¿½removeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½Ó²ï¿½ï¿½ï¿½
- * 
- * Ê¹ï¿½ï¿½ConcurrentQueueï¿½ï¿½ß²ï¿½ï¿½ï¿½ï¿½ï¿½
- * 
- * @author ï¿½ï¿½Ê¿ï¿½ï¿½
+ * ÓÐNÕÅ»ð³µÆ±£¬Ã¿ÕÅÆ±¶¼ÓÐÒ»¸ö±àºÅ
+ * Í¬Ê±ÓÐ10¸ö´°¿Ú¶ÔÍâÊÛÆ±
+ * ÇëÐ´Ò»¸öÄ£Äâ³ÌÐò
+ * <p>
+ * ·ÖÎöÏÂÃæµÄ³ÌÐò¿ÉÄÜ»á²úÉúÄÄÐ©ÎÊÌâ£¿
+ * ÖØ¸´ÏúÊÛ£¿³¬Á¿ÏúÊÛ£¿
+ * <p>
+ * Ê¹ÓÃVector»òÕßCollections.synchronizedXXX
+ * ·ÖÎöÒ»ÏÂ£¬ÕâÑùÄÜ½â¾öÎÊÌâÂð£¿
+ * <p>
+ * ¾ÍËã²Ù×÷AºÍB¶¼ÊÇÍ¬²½µÄ£¬µ«AºÍB×é³ÉµÄ¸´ºÏ²Ù×÷Ò²Î´±ØÊÇÍ¬²½µÄ£¬ÈÔÈ»ÐèÒª×Ô¼º½øÐÐÍ¬²½
+ * ¾ÍÏñÕâ¸ö³ÌÐò£¬ÅÐ¶ÏsizeºÍ½øÐÐremove±ØÐëÊÇÒ»Õû¸öµÄÔ­×Ó²Ù×÷
+ * <p>
+ * Ê¹ÓÃConcurrentQueueÌá¸ß²¢·¢ÐÔ
+ *
+ * @author ÂíÊ¿±ø
  */
 package com.cz.mashibing.juc.c_024_FromVectorToQueue;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class TicketSeller4 {
-	static Queue<String> tickets = new ConcurrentLinkedQueue<>();
-	
-	
-	static {
-		for(int i=0; i<1000; i++) tickets.add("Æ± ï¿½ï¿½Å£ï¿½" + i);
-	}
-	
-	public static void main(String[] args) {
-		
-		for(int i=0; i<10; i++) {
-			new Thread(()->{
-				while(true) {
-					String s = tickets.poll();
-					if(s == null) break;
-					else System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--" + s);
-				}
-			}).start();
-		}
-	}
+public class TicketSeller4
+{
+    /* Queue Õâ¸ö½Ó¿ÚÉè¼ÆµÄ³õÖÔ¾ÍÊÇÎªÁËÓ¦ÓÃÓÚ¶àÏß³Ì»·¾³µÄ
+    ¶ÔÓÚ¶àÏß³ÌÈÝÆ÷ÍùÀïÃæÔöÉ¾ÔªËØ£¬¶à¿¼ÂÇ Queue Ð§ÂÊ»á±È½Ï¸ß£¬
+    ÉÙ¿¼ÂÇ List */
+    static Queue<String> tickets = new ConcurrentLinkedQueue<>();
+
+
+    static
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            tickets.add("Æ± ±àºÅ£º" + i);
+        }
+    }
+
+    public static void main(String[] args)
+    {
+
+        for (int i = 0; i < 10; i++)
+        {
+            new Thread(() ->
+            {
+                while (true)
+                {
+                    String s = tickets.poll();
+                    if (s == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("ÏúÊÛÁË--" + s);
+                    }
+                }
+            }).start();
+        }
+    }
 }

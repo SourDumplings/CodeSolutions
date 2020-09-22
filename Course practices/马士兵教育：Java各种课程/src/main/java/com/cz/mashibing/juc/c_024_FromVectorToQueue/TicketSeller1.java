@@ -1,35 +1,46 @@
 /**
- * ï¿½ï¿½Nï¿½Å»ï¿½Æ±ï¿½ï¿½Ã¿ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½
- * Í¬Ê±ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ±
- * ï¿½ï¿½Ğ´Ò»ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½
- * 
- * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©ï¿½ï¿½ï¿½â£¿
- * ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½
- * 
- * 
- * @author ï¿½ï¿½Ê¿ï¿½ï¿½
+ * ÓĞNÕÅ»ğ³µÆ±£¬Ã¿ÕÅÆ±¶¼ÓĞÒ»¸ö±àºÅ
+ * Í¬Ê±ÓĞ10¸ö´°¿Ú¶ÔÍâÊÛÆ±
+ * ÇëĞ´Ò»¸öÄ£Äâ³ÌĞò
+ * <p>
+ * ·ÖÎöÏÂÃæµÄ³ÌĞò¿ÉÄÜ»á²úÉúÄÄĞ©ÎÊÌâ£¿
+ * ÖØ¸´ÏúÊÛ£¿³¬Á¿ÏúÊÛ£¿
+ *
+ * @author ÂíÊ¿±ø
  */
 package com.cz.mashibing.juc.c_024_FromVectorToQueue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketSeller1 {
-	static List<String> tickets = new ArrayList<>();
-	
-	static {
-		for(int i=0; i<10000; i++) tickets.add("Æ±ï¿½ï¿½Å£ï¿½" + i);
-	}
-	
-	
-	
-	public static void main(String[] args) {
-		for(int i=0; i<10; i++) {
-			new Thread(()->{
-				while(tickets.size() > 0) {
-					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--" + tickets.remove(0));
-				}
-			}).start();
+public class TicketSeller1
+{
+    static List<String> tickets = new ArrayList<>();
+
+    static
+    {
+		for (int i = 0; i < 10000; i++)
+		{
+			tickets.add("Æ±±àºÅ£º" + i);
 		}
-	}
+    }
+
+
+    public static void main(String[] args)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            new Thread(() ->
+            {
+                while (tickets.size() > 0)
+                {
+                    System.out.println("ÏúÊÛÁË--" + tickets.remove(0));
+                }
+            }).start();
+
+            /* Êä³öÁËĞí¶à ÏúÊÛÁË--null
+            ¼´·¢ÉúÁË³¬ÂôµÄÏÖÏó£¬
+            ÒòÎª ArrayList ÊÇÏß³Ì²»°²È«µÄ */
+        }
+    }
 }
