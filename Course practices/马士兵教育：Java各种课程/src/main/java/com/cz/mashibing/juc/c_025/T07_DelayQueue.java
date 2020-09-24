@@ -7,62 +7,87 @@ import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-public class T07_DelayQueue {
+public class T07_DelayQueue
+{
 
-	static BlockingQueue<MyTask> tasks = new DelayQueue<>();
+    static BlockingQueue<MyTask> tasks = new DelayQueue<>();
 
-	static Random r = new Random();
-	
-	static class MyTask implements Delayed {
-		String name;
-		long runningTime;
-		
-		MyTask(String name, long rt) {
-			this.name = name;
-			this.runningTime = rt;
-		}
+    static Random r = new Random();
 
-		@Override
-		public int compareTo(Delayed o) {
-			if(this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS))
+    static class MyTask implements Delayed
+    {
+        String name;
+        long runningTime;
+
+        MyTask(String name, long rt)
+        {
+            this.name = name;
+            this.runningTime = rt;
+        }
+
+        @Override
+        public int compareTo(Delayed o)
+        {
+			if (this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS))
+			{
 				return -1;
-			else if(this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) 
+			}
+			else if (this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS))
+			{
 				return 1;
-			else 
+			}
+			else
+			{
 				return 0;
-		}
+			}
+        }
 
-		@Override
-		public long getDelay(TimeUnit unit) {
-			
-			return unit.convert(runningTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-		}
-		
-		
-		@Override
-		public String toString() {
-			return name + " " + runningTime;
-		}
-	}
+        @Override
+        public long getDelay(TimeUnit unit)
+        {
+            return unit.convert(runningTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+        }
 
-	public static void main(String[] args) throws InterruptedException {
-		long now = System.currentTimeMillis();
-		MyTask t1 = new MyTask("t1", now + 1000);
-		MyTask t2 = new MyTask("t2", now + 2000);
-		MyTask t3 = new MyTask("t3", now + 1500);
-		MyTask t4 = new MyTask("t4", now + 2500);
-		MyTask t5 = new MyTask("t5", now + 500);
-		
-		tasks.put(t1);
-		tasks.put(t2);
-		tasks.put(t3);
-		tasks.put(t4);
-		tasks.put(t5);
-		
-		System.out.println(tasks);
-		
-		for(int i=0; i<5; i++) {
-			System.out.println(tasks.take());
-		}
-	}
+
+        @Override
+        public String toString()
+        {
+            return name + " " + runningTime;
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException
+    {
+        long now = System.currentTimeMillis();
+        MyTask t1 = new MyTask("t1", now + 6000);
+        MyTask t2 = new MyTask("t2", now + 3000);
+        MyTask t3 = new MyTask("t3", now + 1500);
+        MyTask t4 = new MyTask("t4", now + 4500);
+        MyTask t5 = new MyTask("t5", now + 1000);
+
+        tasks.put(t1);
+        tasks.put(t2);
+        tasks.put(t3);
+        tasks.put(t4);
+        tasks.put(t5);
+
+        System.out.println(tasks);
+
+        for (int i = 0; i < 5; i++)
+        {
+            System.out.println(tasks.take());
+        }
+
+        /* 输出：
+		[t5 1600934317877, t3 1600934318377, t2 1600934319877, t1 1600934322877, t4 1600934321377]
+		t5 1600934317877
+		t3 1600934318377
+		t2 1600934319877
+		t4 1600934321377
+		t1 1600934322877
+		DelayQueue 本质是一个 PriorityQueue + 阻塞队列
+		用于实现按时间的任务调度，即延迟特定时间开始
+
+        * */
+    }
 }

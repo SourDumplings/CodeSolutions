@@ -2,8 +2,10 @@ package com.cz.mashibing.juc.c_025;
 
 import java.util.PriorityQueue;
 
-public class T07_01_PriorityQueque {
-    public static void main(String[] args) {
+public class T07_01_PriorityQueque
+{
+    public static void main(String[] args)
+    {
         PriorityQueue<String> q = new PriorityQueue<>();
 
         q.add("c");
@@ -12,7 +14,8 @@ public class T07_01_PriorityQueque {
         q.add("d");
         q.add("z");
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             System.out.println(q.poll());
         }
 
