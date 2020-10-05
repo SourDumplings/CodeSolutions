@@ -1,13 +1,16 @@
 package com.cz.mashibing.juc.c_026_00_interview.A1B2C3;
 
+/* 这种写法没有保证谁先输出 */
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class T08_00_lock_condition {
+public class T08_00_lock_condition
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         char[] aI = "1234567".toCharArray();
         char[] aC = "ABCDEFG".toCharArray();
@@ -15,11 +18,14 @@ public class T08_00_lock_condition {
         Lock lock = new ReentrantLock();
         Condition condition = lock.newCondition();
 
-        new Thread(()->{
-            try {
+        new Thread(() ->
+        {
+            try
+            {
                 lock.lock();
 
-                for(char c : aI) {
+                for (char c : aI)
+                {
                     System.out.print(c);
                     condition.signal();
                     condition.await();
@@ -27,19 +33,26 @@ public class T08_00_lock_condition {
 
                 condition.signal();
 
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
-            } finally {
+            }
+            finally
+            {
                 lock.unlock();
             }
 
         }, "t1").start();
 
-        new Thread(()->{
-            try {
+        new Thread(() ->
+        {
+            try
+            {
                 lock.lock();
 
-                for(char c : aC) {
+                for (char c : aC)
+                {
                     System.out.print(c);
                     condition.signal();
                     condition.await();
@@ -47,9 +60,13 @@ public class T08_00_lock_condition {
 
                 condition.signal();
 
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
-            } finally {
+            }
+            finally
+            {
                 lock.unlock();
             }
 

@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
-public class T10_00_PipedStream {
+public class T10_00_PipedStream
+{
 
 
-
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception
+    {
         char[] aI = "1234567".toCharArray();
         char[] aC = "ABCDEFG".toCharArray();
 
@@ -24,35 +24,42 @@ public class T10_00_PipedStream {
 
         String msg = "Your Turn";
 
-
-
-        new Thread(() -> {
+        new Thread(() ->
+        {
 
             byte[] buffer = new byte[9];
 
-            try {
-                for(char c : aI) {
+            try
+            {
+                for (char c : aI)
+                {
                     input1.read(buffer);
 
-                    if(new String(buffer).equals(msg)) {
+                    if (new String(buffer).equals(msg))
+                    {
                         System.out.print(c);
                     }
 
                     output1.write(msg.getBytes());
                 }
 
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
 
         }, "t1").start();
 
-        new Thread(() -> {
+        new Thread(() ->
+        {
 
             byte[] buffer = new byte[9];
 
-            try {
-                for(char c : aC) {
+            try
+            {
+                for (char c : aC)
+                {
 
                     System.out.print(c);
 
@@ -60,12 +67,15 @@ public class T10_00_PipedStream {
 
                     input2.read(buffer);
 
-                    if(new String(buffer).equals(msg)) {
+                    if (new String(buffer).equals(msg))
+                    {
                         continue;
                     }
                 }
 
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
 
