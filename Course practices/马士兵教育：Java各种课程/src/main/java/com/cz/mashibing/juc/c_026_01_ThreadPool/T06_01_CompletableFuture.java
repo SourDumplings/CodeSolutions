@@ -1,6 +1,7 @@
 /**
  * 假设你能够提供一个服务
  * 这个服务查询各大电商网站同一类产品的价格并汇总展示
+ *
  * @author 马士兵 http://mashibing.com
  */
 
@@ -12,8 +13,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class T06_01_CompletableFuture {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+public class T06_01_CompletableFuture
+{
+    public static void main(String[] args) throws ExecutionException, InterruptedException
+    {
         long start, end;
 
         /*start = System.currentTimeMillis();
@@ -27,39 +30,47 @@ public class T06_01_CompletableFuture {
 
         start = System.currentTimeMillis();
 
-        CompletableFuture<Double> futureTM = CompletableFuture.supplyAsync(()->priceOfTM());
-        CompletableFuture<Double> futureTB = CompletableFuture.supplyAsync(()->priceOfTB());
-        CompletableFuture<Double> futureJD = CompletableFuture.supplyAsync(()->priceOfJD());
+        CompletableFuture<Double> futureTM = CompletableFuture.supplyAsync(() -> priceOfTM());
+        CompletableFuture<Double> futureTB = CompletableFuture.supplyAsync(() -> priceOfTB());
+        CompletableFuture<Double> futureJD = CompletableFuture.supplyAsync(() -> priceOfJD());
 
+        /* allOf 是必须要全部任务执行完才行，
+        Completable 可以看成是多个 Future 任务的管理类 */
         CompletableFuture.allOf(futureTM, futureTB, futureJD).join();
 
-        CompletableFuture.supplyAsync(()->priceOfTM())
-                .thenApply(String::valueOf)
-                .thenApply(str-> "price " + str)
-                .thenAccept(System.out::println);
-
+        CompletableFuture.supplyAsync(() -> priceOfTM())
+            .thenApply(String::valueOf)
+            .thenApply(str -> "price of TM " + str)
+            .thenAccept(System.out::println);
 
         end = System.currentTimeMillis();
         System.out.println("use completable future! " + (end - start));
 
-        try {
+        // 由于异步，如果不阻塞主线程则看不到打印 TM 的价格
+/*        try
+        {
             System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }*/
     }
 
-    private static double priceOfTM() {
+    private static double priceOfTM()
+    {
         delay();
         return 1.00;
     }
 
-    private static double priceOfTB() {
+    private static double priceOfTB()
+    {
         delay();
         return 2.00;
     }
 
-    private static double priceOfJD() {
+    private static double priceOfJD()
+    {
         delay();
         return 3.00;
     }
@@ -69,11 +80,15 @@ public class T06_01_CompletableFuture {
         throw new RuntimeException("product not exist!");
     }*/
 
-    private static void delay() {
+    private static void delay()
+    {
         int time = new Random().nextInt(500);
-        try {
+        try
+        {
             TimeUnit.MILLISECONDS.sleep(time);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
         System.out.printf("After %s sleep!\n", time);
