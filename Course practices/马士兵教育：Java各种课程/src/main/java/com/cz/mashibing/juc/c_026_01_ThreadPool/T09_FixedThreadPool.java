@@ -1,6 +1,6 @@
 /**
  * 任务来的速率比较平稳，用 FixedThreadPool 比较好
- *
+ * <p>
  * 线程池中线程数过少，会导致 CPU 资源没有被有效利用，反之会导致 CPU 将资源都用在了线程切换上了
  * 线程池的较适大小一般用如下公式：
  * N = CPU 核心数 * 期望的 CPU 的利用率 * (1 + CPU 等待时间与计算时间比)
@@ -21,11 +21,13 @@ public class T09_FixedThreadPool
 {
     public static void main(String[] args) throws InterruptedException, ExecutionException
     {
+        // 单线程执行
         long start = System.currentTimeMillis();
         getPrime(1, 200000);
         long end = System.currentTimeMillis();
         System.out.println(end - start);
 
+        // 多线程并发执行
         final int cpuCoreNum = 4;
 
         ExecutorService service = Executors.newFixedThreadPool(cpuCoreNum);
@@ -47,6 +49,11 @@ public class T09_FixedThreadPool
         f4.get();
         end = System.currentTimeMillis();
         System.out.println(end - start);
+
+        /* 最终输出：
+          3419
+          1385
+          可见多线程确实提高了效率，更好地利用了 CPU */
     }
 
     static class MyTask implements Callable<List<Integer>>
@@ -72,10 +79,10 @@ public class T09_FixedThreadPool
     {
         for (int i = 2; i <= num / 2; i++)
         {
-			if (num % i == 0)
-			{
-				return false;
-			}
+            if (num % i == 0)
+            {
+                return false;
+            }
         }
         return true;
     }
@@ -85,10 +92,10 @@ public class T09_FixedThreadPool
         List<Integer> results = new ArrayList<>();
         for (int i = start; i <= end; i++)
         {
-			if (isPrime(i))
-			{
-				results.add(i);
-			}
+            if (isPrime(i))
+            {
+                results.add(i);
+            }
         }
 
         return results;
