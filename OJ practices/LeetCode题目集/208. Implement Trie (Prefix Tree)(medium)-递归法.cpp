@@ -9,23 +9,23 @@
 class Trie
 {
 private:
-    class TireNode
+    class TrieNode
     {
     public:
         char c;
-        TireNode *children[26];
+        TrieNode *children[26];
         bool canBeLeaf;
 
-        TireNode() : canBeLeaf(false)
+        TrieNode() : canBeLeaf(false)
         {
             fill(children, children + 26, nullptr);
         }
     };
 
 
-    TireNode *root;
+    TrieNode *root;
 
-    void do_insert(TireNode *f, const string &word, int idx)
+    void do_insert(TrieNode *f, const string &word, int idx)
     {
         if (idx == word.length())
         {
@@ -34,16 +34,16 @@ private:
         }
 
         char c = word[idx];
-        TireNode *&pChild = (f->children)[c - 'a'];
+        TrieNode *&pChild = (f->children)[c - 'a'];
         if (!pChild)
         {
-            pChild = new TireNode;
+            pChild = new TrieNode;
             pChild->c = c;
         }
         do_insert(pChild, word, idx + 1);
     }
 
-    bool do_search(TireNode *f, const string &word, int idx)
+    bool do_search(TrieNode *f, const string &word, int idx)
     {
         if (idx == word.length())
         {
@@ -51,7 +51,7 @@ private:
         }
 
         char c = word[idx];
-        TireNode *&pChild = (f->children)[c - 'a'];
+        TrieNode *&pChild = (f->children)[c - 'a'];
         if (!pChild)
         {
             return false;
@@ -59,7 +59,7 @@ private:
         return do_search(pChild, word, idx + 1);
     }
 
-    bool do_startsWith(TireNode *f, const string &word, int idx)
+    bool do_startsWith(TrieNode *f, const string &word, int idx)
     {
         if (idx == word.length())
         {
@@ -67,7 +67,7 @@ private:
         }
 
         char c = word[idx];
-        TireNode *&pChild = (f->children)[c - 'a'];
+        TrieNode *&pChild = (f->children)[c - 'a'];
         if (!pChild)
         {
             return false;
@@ -77,7 +77,7 @@ private:
 
 public:
     /** Initialize your data structure here. */
-    Trie() : root(new TireNode)
+    Trie() : root(new TrieNode)
     {}
 
     /** Inserts a word into the trie. */
