@@ -5,6 +5,9 @@
  * @Email: changzheng300@foxmail.com
  * @Description: https://leetcode-cn.com/problems/basic-calculator-ii/
  * 
+ * 
+ * 用一个栈记录数字，结果是这些数字相加
+ * 
  * 参考：https://leetcode-cn.com/problems/basic-calculator-ii/solution/chai-jie-fu-za-wen-ti-shi-xian-yi-ge-wan-zheng-ji-/
  */
 
@@ -21,9 +24,9 @@ public:
     }
     int calHelper(string s, int i) // i用于记录计算开始的索引
     {
-        char operation = '+';
+        char operation = '+'; // 上一个遇到的符号，默认为 +
         stack<int> nums;
-        int num = 0;
+        int num = 0; // 记录最新的数
         int res = 0;
         for (; i < l; i++)
         {
@@ -46,9 +49,10 @@ public:
                         nums.push(num);
                         break;
                     case '-':
+                    // 遇到 - 则将数字的相反数入栈
                         nums.push(-num);
                         break;
-                    case '*':
+                    case '*':   // 如果上一个操作符是乘或者除号则运算，将结果入栈
                         pre = nums.top();
                         nums.pop();
                         nums.push(pre * num);
