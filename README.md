@@ -35,6 +35,8 @@
 
 《剑指Offer》练习题
 
+《CSAPP》3rd 练习代码
+
 ## Course practice
 
 ### 中国大学MOOC
