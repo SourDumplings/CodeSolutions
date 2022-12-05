@@ -99,3 +99,7 @@ Book practices/《Java核心技术 卷2 高级特性》第10版 练习代码/CZ/
 
 # Pycharm 环境文件
 /venv/
+
+# vs 配置
+/.vs/
+/.vscode/
