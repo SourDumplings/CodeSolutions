@@ -33,7 +33,7 @@ void *malloc(size_t size)
         exit(1);
     }
     char *ptr = mallocp(size); /* Call libc malloc */
-    printf("malloc(%d) = %p\n", (int)size, ptr);
+    printf("runtime malloc(%d) = %p\n", (int)size, ptr);
     return ptr;
 }
 
@@ -52,7 +52,7 @@ void free(void *ptr)
         exit(1);
     }
     freep(ptr); /* Call libc free */
-    printf("free(%p)\n", ptr);
+    printf("runtime free(%p)\n", ptr);
 }
 #endif
 /* $end interposer */
@@ -77,7 +77,7 @@ void __real_free(void *ptr);
 void *__wrap_malloc(size_t size)
 {
     void *ptr = __real_malloc(size); /* Call libc malloc */
-    printf("malloc(%d) = %p\n", (int)size, ptr);
+    printf("linktime malloc(%d) = %p\n", (int)size, ptr);
     return ptr;
 }
 
@@ -85,7 +85,7 @@ void *__wrap_malloc(size_t size)
 void __wrap_free(void *ptr)
 {
     __real_free(ptr); /* Call libc free */
-    printf("free(%p)\n", ptr);
+    printf("linktime free(%p)\n", ptr);
 }
 #endif
 /* $end interposel */
@@ -104,7 +104,7 @@ void __wrap_free(void *ptr)
 void *mymalloc(size_t size)
 {
     void *ptr = malloc(size); 
-    printf("malloc(%d)=%p\n", 
+    printf("compiletime malloc(%d)=%p\n", 
            (int)size, ptr); 
     return ptr;
 } 
@@ -113,7 +113,7 @@ void *mymalloc(size_t size)
 void myfree(void *ptr)
 {
     free(ptr); 
-    printf("free(%p)\n", ptr); 
+    printf("compiletime free(%p)\n", ptr); 
 }
 #endif
 /* $end interposec */
