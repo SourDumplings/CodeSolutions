@@ -5,7 +5,7 @@
  * @Email: changzheng300@foxmail.com
  * @Description: https://leetcode.com/problems/largest-triangle-area/
  *
- * 易推出三角形面积 S=(1/2)*(x1y2+x2y3+x3y1-x1y3-x2y1-x3y2)
+ * 易推出三角形面积 S=(1/2)*abs(x1y2+x2y3+x3y1-x1y3-x2y1-x3y2)
  */
 
 class Solution
