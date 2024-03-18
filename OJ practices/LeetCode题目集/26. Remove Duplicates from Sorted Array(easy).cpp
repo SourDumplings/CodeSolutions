@@ -1,9 +1,7 @@
-/*
- @Date    : 2019-01-10 16:28:04
- @Author  : 酸饺子 (changzheng300@foxmail.com)
- @Link    : https://github.com/SourDumplings
- @Version : $Id$
-*/
+/**
+ * @brief 移除有序数组中的重复元素，双指针法
+ * 
+ */
 
 /*
 https://leetcode.com/problems/remove-duplicates-from-sorted-array/
@@ -12,23 +10,22 @@ https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 class Solution
 {
 public:
-    int removeDuplicates(vector<int>& nums)
+    int removeDuplicates(vector<int> &nums)
     {
-        if (nums.empty())
+        int n = nums.size();
+        if (n == 0)
         {
             return 0;
         }
-        int lastNum = nums[0];
-        int k = 1;
-        for (int i = 1; i < nums.size(); ++i)
+
+        int l = 1;
+        for (int r = 1; r < n; r++)
         {
-            if (nums[i] != lastNum)
+            if (nums[l - 1] != nums[r])
             {
-                nums[k++] = lastNum = nums[i];
+                nums[l++] = nums[r];
             }
         }
-        nums.erase(nums.begin() + k, nums.end());
-        return nums.size();
+        return l;
     }
 };
-

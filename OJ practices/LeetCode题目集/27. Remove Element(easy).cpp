@@ -1,33 +1,28 @@
-/*
- @Date    : 2019-01-15 19:59:41
- @Author  : 酸饺子 (changzheng300@foxmail.com)
- @Link    : https://github.com/SourDumplings
- @Version : $Id$
-*/
+/**
+ * @brief 移除元素，双指针法
+ * 
+ */
 
 /*
 https://leetcode.com/problems/remove-element/
+https://leetcode.cn/problems/remove-element/solutions/730203/yi-chu-yuan-su-by-leetcode-solution-svxi/?envType=study-plan-v2&envId=top-interview-150
  */
 
 class Solution
 {
 public:
-    int removeElement(vector<int>& nums, int val)
+    int removeElement(vector<int> &nums, int val)
     {
-        if (nums.empty())
+        int n = nums.size();
+        int l = 0;
+        for (int r = 0; r < n; ++r)
         {
-            return 0;
-        }
-        for (auto it = nums.begin(); it != nums.end();)
-        {
-            if (*it == val)
+            if (nums[r] != val)
             {
-                it = nums.erase(it);
+                nums[l++] = nums[r];
             }
-            else
-                ++it;
         }
-        return nums.size();
+        return l;
     }
 };
 
