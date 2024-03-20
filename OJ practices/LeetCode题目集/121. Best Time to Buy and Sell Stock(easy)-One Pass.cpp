@@ -5,7 +5,9 @@
  * @Description: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
  * @Date: 2019-03-17 21:09:26
  * 
- * 这个方法真心神奇，这么维护两个变量都可以，是不是启示买股票的方法嘞？
+ * 该方法即记住之前遇到的最低价和当前价比较即可
+ * 复杂度：时间 O(n) 空间 O(1)
+ * https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/solutions/136684/121-mai-mai-gu-piao-de-zui-jia-shi-ji-by-leetcode-/?envType=study-plan-v2&envId=top-interview-150
  */
 
 class Solution
