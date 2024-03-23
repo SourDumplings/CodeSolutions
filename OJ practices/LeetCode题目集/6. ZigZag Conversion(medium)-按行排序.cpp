@@ -6,6 +6,7 @@
  * @Description: https://leetcode.com/problems/zigzag-conversion/
  * 
  * 因为最终结果是按行输出，其实只需要知道下一个字符该放在第几行即可，即不用关心列
+ * 实际上就是矩阵模拟法
  */
 
 class Solution
