@@ -1,33 +1,39 @@
-/*
- * @Author: SourDumplings
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/valid-palindrome/
- * @Date: 2019-03-20 18:31:23
+/**
+ * @file 125. Valid Palindrome(easy).cpp
+ * @author chadchang (chadchang@tencent.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-03-28
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
+ * https://leetcode.cn/problems/valid-palindrome/description/?envType=study-plan-v2&envId=top-interview-150
  */
 
 class Solution
 {
-  public:
+public:
     bool isPalindrome(string s)
     {
-        int l = s.length();
-        string str;
-        str.resize(l);
-        int j = 0;
-        for (int i = 0; i < l; i++)
+        int n = s.length();
+        int l = 0, r = n - 1;
+        while (l < n)
         {
-            if (isalnum(s[i]))
+            while (l < n && !isalnum(s[l])) ++l;
+            while (l <= r && !isalnum(s[r])) --r;
+            if (r <= l)
             {
-                str[j++] = tolower(s[i]);
+                break;
             }
-        }
-        for (int i = 0; i < j / 2; i++)
-        {
-            if (str[i] != str[j - i - 1])
+            
+            char lc = tolower(s[l]);
+            char rc = tolower(s[r]);
+            if (lc != rc)
             {
                 return false;
             }
+            ++l;
+            --r;
         }
         return true;
     }
