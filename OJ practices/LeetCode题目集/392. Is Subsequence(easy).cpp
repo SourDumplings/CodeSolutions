@@ -1,9 +1,14 @@
-/*
- * @Author: SourDumplings
- * @Date: 2019-09-21 17:09:37
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/is-subsequence/
+/**
+ * @file 392. Is Subsequence(easy).cpp
+ * @author chadchang (chadchang@tencent.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-03-28
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
+ * https://leetcode.cn/problems/is-subsequence/description/?envType=study-plan-v2&envId=top-interview-150
+ * 
  */
 
 class Solution
@@ -11,23 +16,20 @@ class Solution
 public:
     bool isSubsequence(string s, string t)
     {
-        int ls = s.length();
-        int lt = t.length();
-        int j = 0;
-        for (int i = 0; i < ls; i++)
+        int i = 0, j = 0;
+        int ls = s.length(), lt = t.length();
+        while (i < ls)
         {
-            for (; j < lt; j++)
+            while (j < lt && s[i] != t[j])
             {
-                if (s[i] == t[j])
-                {
-                    j++;
-                    break;
-                }
+                ++j;
             }
-            if (j == lt && s[i] != t[j - 1])
+            if (j == lt)
             {
                 return false;
             }
+            ++i;
+            ++j;            
         }
         return true;
     }
