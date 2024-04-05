@@ -1,6 +1,6 @@
 /*
  * @Author: SourDumplings
- * @Date: 2020-12-26 11:17:21
+ * @Date: 2024-04-05
  * @Link: https://github.com/SourDumplings/
  * @Email: changzheng300@foxmail.com
  * @Description: https://leetcode-cn.com/problems/minimum-size-subarray-sum/
@@ -14,29 +14,42 @@
 class Solution
 {
 public:
-    int minSubArrayLen(int s, vector<int> &nums)
+    int minSubArrayLen(int target, vector<int> &nums)
     {
         int n = nums.size();
-        if (n == 0)
-        {
-            return 0;
-        }
-        int res = INT32_MAX;
-        int left = 0, right = 0;
+        int res = __INT32_MAX__;
+        int l = 0, r = 0;
         int sum = 0;
-        while (right < n)
+        while (r < n)
         {
-            sum += nums[right];
-            while (sum >= s)
+            sum += nums[r];
+            if (sum < target)
             {
-                if (right - left + 1 < res)
-                {
-                    res = right - left + 1;
-                }
-                sum -= nums[left++];
+                ++r;
+                continue;
             }
-            ++right;
+
+            while (target <= sum - nums[l])
+            {
+                sum -= nums[l];
+                ++l;
+            }
+            
+            if (r - l + 1 < res)
+            {
+                res = r - l + 1;
+                if (res == 1)
+                {
+                    break;
+                }
+            }
+            ++r;
         }
-        return res == INT32_MAX ? 0 : res;
+        if (res == __INT32_MAX__)
+        {
+            res = 0;
+        }
+        
+        return res;
     }
 };
