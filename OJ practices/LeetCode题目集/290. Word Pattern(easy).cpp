@@ -1,49 +1,57 @@
-/*
- * @Author: SourDumplings
- * @Date: 2019-09-06 10:34:12
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/word-pattern/
+/**
+ * @file 290. Word Pattern(easy).cpp
+ * @author SourDumplings (changzheng300@foxmail.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-04-13
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
+ * https://leetcode.cn/problems/word-pattern/description/?envType=study-plan-v2&envId=top-interview-150
+ * 
  */
 
 class Solution
 {
 public:
-    bool wordPattern(string pattern, string str)
+    bool wordPattern(string pattern, string s)
     {
-        istringstream is(str);
-        map<char, string> m1;
-        map<string, char> m2;
-        for (auto &&c : pattern)
+        unordered_map<char, string> m;
+        unordered_map<string, char> rm;
+        int l = pattern.length();
+        int b = 0;
+        for (int i = 0; i < l; i++)
         {
-            string s;
-            if (is.eof())
+            if (s.length() <= b)
             {
                 return false;
             }
 
-            is >> s;
-            if (m1.find(c) == m1.end())
+            int e = b + 1;
+            for (; e < s.length() && s[e] != ' '; ++e);
+            string word = s.substr(b, e - b);
+            b = e + 1;
+            if (m.find(pattern[i]) == m.end())
             {
-                if (m2.find(s) == m2.end())
-                {
-                    m1[c] = s;
-                    m2[s] = c;
-                }
-                else
+                if (rm.find(word) != rm.end())
                 {
                     return false;
                 }
+                
+                m[pattern[i]] = word;
+                rm[word] = pattern[i];
             }
-            else if (m1[c] != s)
+            else if (m.at(pattern[i]) != word)
             {
                 return false;
             }
+            
         }
-        if (is.eof())
+        if (b < s.length() + 1)
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 };
+
