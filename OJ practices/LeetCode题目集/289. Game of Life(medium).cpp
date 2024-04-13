@@ -1,80 +1,87 @@
-/*
- * @Author: SourDumplings
- * @Date: 2021-06-06 08:38:22
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode-cn.com/problems/game-of-life/
+/**
+ * @file 289. Game of Life(medium).cpp
+ * @author SourDumplings (changzheng300@foxmail.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-04-13
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
+ * 使用额外的状态记录原本是活着变成死了的，以及原本是死的变成活的
+ * 以此空间复杂度为 O(1)
+ * https://leetcode.cn/problems/game-of-life/solutions/179750/sheng-ming-you-xi-by-leetcode-solution/?envType=study-plan-v2&envId=top-interview-150
  */
 
 class Solution
 {
-private:
-    pair<int, int> cal_live_dead_neighbor(const vector<vector<int>> &board,
-                                          int m,
-                                          int n,
-                                          int i,
-                                          int j)
-    {
-        pair<int, int> res;
-        for (int k = i - 1; k < i + 2; ++k)
-        {
-            if (k >= 0 && k < m)
-            {
-                for (int l = j - 1; l < j + 2; ++l)
-                {
-                    if (!(k == i && l == j) && l >= 0 && l < n)
-                    {
-                        (board[k][l] == 0 || board[k][l] == -2) ? ++res.second : ++res.first;
-                    }
-                }
-            }
-        }
-        return res;
-    }
 public:
     void gameOfLife(vector<vector<int>> &board)
     {
         int m = board.size();
-        if (m == 0)
-        {
-            return;
-        }
         int n = board[0].size();
-        for (int i = 0; i < m; ++i)
+        for (int i = 0; i < m; i++)
         {
-            for (int j = 0; j < n; ++j)
+            for (int j = 0; j < n; j++)
             {
-                const pair<int, int>
-                    lDNum = cal_live_dead_neighbor(board, m, n, i, j);
-                if (board[i][j])
+                if (isLiveNext(board, i, j, m, n))
                 {
-                    if (lDNum.first < 2 || lDNum.first > 3)
-                    {
-                        board[i][j] = -1;
-                    }
+                    board[i][j] = (board[i][j] == 1 ? 1 : 2);
                 }
                 else
                 {
-                    if (lDNum.first == 3)
-                    {
-                        board[i][j] = -2;
-                    }
+                    board[i][j] = (board[i][j] == 0 ? 0 : 3);
                 }
             }
         }
-        for (int k = 0; k < m; ++k)
+        for (int i = 0; i < m; i++)
         {
-            for (int i = 0; i < n; ++i)
+            for (int j = 0; j < n; j++)
             {
-                if (board[k][i] == -1)
+                if (board[i][j] == 1 || board[i][j] == 2)
                 {
-                    board[k][i] = 0;
+                    board[i][j] = 1;
                 }
-                else if (board[k][i] == -2)
+                else
                 {
-                    board[k][i] = 1;
+                    board[i][j] = 0;
                 }
+
             }
+
         }
+
+    }
+
+private:
+    bool isLiveNext(const vector<vector<int>> &board, int r, int c, int m, int n) const
+    {
+        int liveNeighborNum = 0;
+        if (0 < r)
+        {
+            liveNeighborNum += getLiveNeighborNumForOneRow(board, r - 1, c, m, n);
+            liveNeighborNum += (board[r - 1][c] % 2 > 0 ? 1 : 0);
+        }
+        liveNeighborNum += getLiveNeighborNumForOneRow(board, r, c, m, n);
+        if (liveNeighborNum <= 3 && r < m - 1)
+        {
+            liveNeighborNum += getLiveNeighborNumForOneRow(board, r + 1, c, m, n);
+            liveNeighborNum += (board[r + 1][c] % 2 > 0 ? 1 : 0);
+        }
+        return (board[r][c] == 1 && (liveNeighborNum == 2 || liveNeighborNum == 3))
+            || (board[r][c] == 0 && liveNeighborNum == 3);
+    }
+
+    int getLiveNeighborNumForOneRow(const vector<vector<int>> &board, int r, int c, int m, int n) const
+    {
+        int liveNeighborNum = 0;
+        if (0 < c)
+        {
+            liveNeighborNum += (board[r][c - 1] % 2 > 0 ? 1 : 0);
+        }
+        if (c < n - 1)
+        {
+            liveNeighborNum += (board[r][c + 1] % 2 > 0 ? 1 : 0);
+        }
+        return liveNeighborNum;
     }
 };
