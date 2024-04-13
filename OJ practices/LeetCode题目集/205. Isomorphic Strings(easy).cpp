@@ -1,41 +1,46 @@
-/*
- * @Author: SourDumplings
- * @Date: 2019-08-18 09:40:41
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/isomorphic-strings/
+/**
+ * @file 205. Isomorphic Strings(easy).cpp
+ * @author SourDumplings (changzheng300@foxmail.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-04-13
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
+ * https://leetcode.cn/problems/isomorphic-strings/description/?envType=study-plan-v2&envId=top-interview-150
  */
+
 class Solution
 {
 public:
     bool isIsomorphic(string s, string t)
     {
         int l = s.length();
-        if (l != t.length())
+        char m[200];
+        char rm[200];
+        memset(m, -1, sizeof(m));
+        memset(rm, -1, sizeof(rm));
+        for (int i = 0; i < l; ++i)
         {
-            return false;
-        }
-
-        map<char, char> m1, m2;
-        for (int i = 0; i < l; i++)
-        {
-            if (m1.find(s[i]) == m1.end())
+            if (m[s[i]] == -1)
             {
-                if (m2.find(t[i]) != m2.end())
+                m[s[i]] = t[i];
+                if (rm[t[i]] != -1)
                 {
                     return false;
                 }
-
-                m1[s[i]] = t[i];
-                m2[t[i]] = s[i];
+                rm[t[i]] = s[i];
+                
             }
-            else
+            else if (m[s[i]] != t[i])
             {
-                if (m1[s[i]] != t[i])
-                {
-                    return false;
-                }
+                return false;
             }
+            else if (rm[t[i]] != s[i])
+            {
+                return false;
+            }
+            
         }
         return true;
     }
