@@ -1,9 +1,12 @@
-/*
- * @Author: SourDumplings
- * @Date: 2019-09-18 22:12:03
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/ransom-note/
+/**
+ * @file 383. Ransom Note(easy).cpp
+ * @author SourDumplings (changzheng300@foxmail.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-04-13
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
  */
 
 class Solution
@@ -11,28 +14,19 @@ class Solution
 public:
     bool canConstruct(string ransomNote, string magazine)
     {
-        unordered_map<char, int> m;
-        for (auto &&c : magazine)
+        int resNum[26];
+        memset(resNum, 0, sizeof(resNum));
+        for (char c : magazine)
         {
-            if (m.find(c) == m.end())
-            {
-                m[c] = 1;
-            }
-            else
-            {
-                ++m[c];
-            }
+            ++resNum[c - 'a'];
         }
-        for (auto &&c : ransomNote)
+        for (char c : ransomNote)
         {
-            if (m.find(c) == m.end() || m[c] == 0)
+            if (resNum[c - 'a'] == 0)
             {
                 return false;
             }
-            else
-            {
-                --m[c];
-            }
+            --resNum[c - 'a'];
         }
         return true;
     }
