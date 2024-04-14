@@ -7,6 +7,7 @@
  * 
  * @copyright Copyright (c) 2024 SourDumplings
  * 
+ * https://leetcode.cn/problems/climbing-stairs/?envType=study-plan-v2&envId=top-interview-150
  */
 
 class Solution
@@ -20,7 +21,6 @@ public:
         }
         
         int f[n + 1];
-        memset(f, -1, sizeof(f));
         f[0] = 0;
         f[1] = 1;
         f[2] = 2;
