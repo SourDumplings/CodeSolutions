@@ -1,9 +1,12 @@
-/*
- * @Author: SourDumplings
- * @Date: 2019-08-21 21:10:14
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/contains-duplicate-ii/
+/**
+ * @file 219. Contains Duplicate II(easy).cpp
+ * @author SourDumplings (changzheng300@foxmail.com)
+ * @brief 
+ * @version 1.0.0
+ * @date 2024-05-02
+ * 
+ * @copyright Copyright (c) 2024 SourDumplings
+ * 
  */
 
 class Solution
@@ -11,20 +14,17 @@ class Solution
 public:
     bool containsNearbyDuplicate(vector<int> &nums, int k)
     {
-        map<int, int> mI; // 记录每一个数的上一个数的位置
-        int n = nums.size();
-        const int MAXD = k + 1;
-        for (int i = 0; i < n; i++)
+        unordered_map<int, int> m;
+        for (size_t i = 0; i < nums.size(); i++)
         {
             int num = nums[i];
-            if (mI.find(num) != mI.end())
+            if (m.find(num) != m.end()
+                && i - m.at(num) <= k
+            )
             {
-                if (i - mI[num] <= k)
-                {
-                    return true;
-                }
+                return true;
             }
-            mI[num] = i;
+            m[num] = i;
         }
         return false;
     }
