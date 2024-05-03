@@ -37,6 +37,8 @@
 
 《CSAPP》3rd 练习代码
 
+《Lua程序设计（第4版）》练习题
+
 ## Course practice
 
 ### 中国大学MOOC
