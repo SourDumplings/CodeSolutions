@@ -23,6 +23,13 @@
         "tuple": "cpp",
         "valarray": "cpp",
         "deque": "cpp",
-        "csapp.h": "c"
+        "csapp.h": "c",
+        "cerrno": "c",
+        "stdarg.h": "c",
+        "unistd.h": "c",
+        "setjmp.h": "c",
+        "signal.h": "c",
+        "sbuf.h": "c",
+        "random": "c"
     }
 }
