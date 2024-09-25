@@ -1,7 +1,7 @@
 fn foo(_x: &'static str) -> &'static str
 {
-    // "World No Return"
-    return "FooWorld";
+    "World No Return"
+    // return "FooWorld";
 }
 
 fn main()
