@@ -37,6 +37,8 @@
 
 《Lua程序设计（第4版）》练习题
 
+[《r4cpp》](https://github.com/SourDumplings/r4cppp)
+
 ## Course practice
 
 ### 中国大学MOOC

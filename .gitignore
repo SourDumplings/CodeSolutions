@@ -106,3 +106,5 @@ Book practices/《Java核心技术 卷2 高级特性》第10版 练习代码/CZ/
 
 # 可执行文件
 *.exe
+
+Cargo.lock
