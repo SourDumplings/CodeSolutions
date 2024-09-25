@@ -3,7 +3,6 @@ fn foo(_x: &'static str) -> &'static str {
     return "FooWorld";
 }
 
-
 fn main() {
     // let world = "World";
     // let world: &'static str = "World";
