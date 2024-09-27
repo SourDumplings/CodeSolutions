@@ -25,6 +25,12 @@ fn test_gcd()
     assert_eq!(gcd(2 * 3 * 5 * 11 * 17, 3 * 7 * 11 * 13 * 19), 3 * 11);
 }
 
+/* 
+cargo run 799459 28823 27347
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target\debug\gcd.exe 799459 28823 27347`
+The greatest common divisor of [799459, 28823, 27347] is 41
+*/
 fn main()
 {
     let mut numbers = Vec::new();
