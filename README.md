@@ -37,6 +37,8 @@
 
 [《r4cpp》](https://github.com/SourDumplings/r4cppp)
 
+《Programming Rust》2nd 练习代码
+
 ## Course practice
 
 ### 中国大学MOOC
