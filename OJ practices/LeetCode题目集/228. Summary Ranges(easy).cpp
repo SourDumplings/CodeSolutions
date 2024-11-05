@@ -1,50 +1,30 @@
-/*
- * @Author: SourDumplings
- * @Date: 2021-01-09 10:06:53
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode-cn.com/problems/summary-ranges/
+/**
+ * @brief https://leetcode.cn/problems/summary-ranges/?envType=study-plan-v2&envId=top-interview-150
+ * 
  */
 
 class Solution
 {
 public:
-    vector<string> summaryRanges(vector<int> &nums)
-    {
-        vector<string> res;
-        int n = nums.size();
-        if (n > 0)
-        {
-            int i = 0;
-            int f, l;
-            if (n == 1)
-            {
-                res.push_back(to_string(nums[0]));
-            }
-            else
-            {
-                do
-                {
-                    f = nums[i];
-                    l = f;
-                    while (i < n - 1 && l + 1 == nums[i + 1])
-                    {
-                        ++i;
-                        ++l;
-                    }
-                    if (f == l)
-                    {
-                        res.push_back(to_string(f));
-                    }
-                    else
-                    {
-                        res.push_back(to_string(f) + "->" + to_string(l));
-                    }
-                    ++i;
-                }
-                while (i < n);
-            }
-        }
-        return res;
-    }
+	vector<string> summaryRanges(vector<int> &nums)
+	{
+		vector<string> res;
+		if (nums.empty()) { return res; }
+
+		size_t i = 0, j = 0;
+		size_t n = nums.size();
+		while (i < n)
+		{
+			string str = to_string(nums[i]);
+			while (j < n - 1 && nums[j + 1] == nums[j] + 1)
+			{
+				++j;
+			}
+			if (i < j) { str += "->" + to_string(nums[j]); }
+			++j;
+			i = j;
+			res.push_back(str);
+		}
+		return res;
+	}
 };

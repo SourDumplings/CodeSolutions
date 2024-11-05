@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.lua": "lua",
         "array": "cpp",
         "*.tcc": "cpp",
         "forward_list": "cpp",
@@ -30,6 +31,11 @@
         "setjmp.h": "c",
         "signal.h": "c",
         "sbuf.h": "c",
-        "random": "c"
+        "random": "c",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "stacktrace": "cpp"
     }
 }
