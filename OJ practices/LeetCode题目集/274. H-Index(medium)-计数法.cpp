@@ -7,7 +7,7 @@
  * 
  * @copyright Copyright (c) 2024 SourDumplings
  * 
- * 引用次数不会超过 n，即论文总数
+ * 引用次数可以认为不会超过 n，即论文总数，超过的就按 n 算
  * 用一个数组记录引用次数为 i 的论文总数
  * 再从后往前试 n 到 0 即可
  * 
@@ -23,11 +23,7 @@ public:
     {
         int n = citations.size();
         int count[n + 1];
-        for (int i = 0; i < n + 1; i++)
-        {
-            count[i] = 0;
-        }
-        
+        memset(count, 0, sizeof(count));
         for (int i = 0; i < n; i++)
         {
             if (n <= citations[i])
