@@ -36,6 +36,7 @@
         "initializer_list": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "stacktrace": "cpp"
+        "stacktrace": "cpp",
+        "compare": "cpp"
     }
 }
