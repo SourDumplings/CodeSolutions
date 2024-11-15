@@ -1,12 +1,13 @@
-/*
- @Date    : 2019-01-08 11:01:14
- @Author  : 酸饺子 (changzheng300@foxmail.com)
- @Link    : https://github.com/SourDumplings
- @Version : $Id$
-*/
-
-/*
-https://leetcode.com/problems/merge-two-sorted-lists/
+/**
+ * @file 21. Merge Two Sorted Lists(easy).cpp
+ * @author SourDumplings (sourdumplings@qq.com)
+ * @brief
+ * https://leetcode.cn/problems/merge-two-sorted-lists/description/?envType=study-plan-v2&envId=top-interview-150
+ * @version 1.0.0
+ * @date 2024-11-15
+ *
+ * @copyright Copyright (c) 2024 SourDumplings
+ *
  */
 
 /**
@@ -14,45 +15,52 @@ https://leetcode.com/problems/merge-two-sorted-lists/
  * struct ListNode {
  *     int val;
  *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
 class Solution
 {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
-    {
-        ListNode *l = new ListNode(0), *p = nullptr;
-        l->next = nullptr;
-        p = l;
-        while (l1 && l2)
-        {
-            if (l1->val <= l2->val)
-            {
-                p->next = new ListNode(l1->val);
-                l1 = l1->next;
-            }
-            else
-            {
-                p->next = new ListNode(l2->val);
-                l2 = l2->next;
-            }
-            p = p->next;
-        }
-        while (l1)
-        {
-            p->next = new ListNode(l1->val);
-            p = p->next;
-            l1 = l1->next;
-        }
-        while (l2)
-        {
-            p->next = new ListNode(l2->val);
-            p = p->next;
-            l2 = l2->next;
-        }
-        ListNode* ret = l->next;
-        delete l;
-        return ret;
-    }
+	ListNode* mergeTwoLists(ListNode* list1, ListNode* list2)
+	{
+		ListNode* h	 = new ListNode(0);
+		ListNode* p1 = list1;
+		ListNode* p2 = list2;
+		ListNode* p	 = h;
+		while (p1 && p2)
+		{
+			p->next = new ListNode(0);
+			p		= p->next;
+			if (p1->val < p2->val)
+			{
+				p->val = p1->val;
+				p1	   = p1->next;
+			}
+			else
+			{
+				p->val = p2->val;
+				p2	   = p2->next;
+			}
+		}
+		while (p1)
+		{
+			p->next = new ListNode(0);
+			p		= p->next;
+			p->val	= p1->val;
+			p1		= p1->next;
+		}
+		while (p2)
+		{
+			p->next = new ListNode(0);
+			p		= p->next;
+			p->val	= p2->val;
+			p2		= p2->next;
+		}
+		p = h;
+		h = h->next;
+		delete p;
+		return h;
+	}
 };
