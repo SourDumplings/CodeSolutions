@@ -1,9 +1,12 @@
-/*
- * @Author: SourDumplings
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/maximum-depth-of-binary-tree/
- * @Date: 2019-03-03 17:02:38
+/**
+ * @file 104. Maximum Depth of Binary Tree(easy).cpp
+ * @author SourDumplings (sourdumplings@qq.com)
+ * @brief https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/?envType=study-plan-v2&envId=top-interview-150
+ * @version 1.0.0
+ * @date 2024-12-03
+ *
+ * @copyright Copyright (c) 2024 SourDumplings
+ *
  */
 
 /**
@@ -12,25 +15,17 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution
 {
-  public:
-    int maxDepth(TreeNode *root)
-    {
-        return getHeight(root);
-    }
-    int getHeight(TreeNode *node)
-    {
-        if (!node)
-        {
-            return 0;
-        }
-        else
-        {
-            return max(getHeight(node->left), getHeight(node->right)) + 1;
-        }
-    }
+public:
+	int maxDepth(TreeNode* root)
+	{
+		if (root == nullptr) { return 0; }
+		return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+	}
 };
