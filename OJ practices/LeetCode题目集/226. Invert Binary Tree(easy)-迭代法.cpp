@@ -1,7 +1,8 @@
 /**
- * @file 101. Symmetric Tree(easy)-层序遍历子树顺序交替.cpp
+ * @file 226. Invert Binary Tree(easy)-迭代法.cpp
  * @author SourDumplings (sourdumplings@qq.com)
- * @brief https://leetcode.cn/problems/symmetric-tree/?envType=study-plan-v2&envId=top-interview-150
+ * @brief
+ * https://leetcode.cn/problems/invert-binary-tree/?envType=study-plan-v2&envId=top-interview-150
  * @version 1.0.0
  * @date 2024-12-09
  *
@@ -23,25 +24,20 @@
 class Solution
 {
 public:
-	bool isSymmetric(TreeNode *root)
+	TreeNode *invertTree(TreeNode *root)
 	{
+		if (root == nullptr) { return nullptr; }
+
 		queue<TreeNode *> q;
-		q.push(root->left);
-		q.push(root->right);
+		q.push(root);
 		while (!q.empty())
 		{
-			TreeNode *t1 = q.front();
+			TreeNode *node = q.front();
 			q.pop();
-			TreeNode *t2 = q.front();
-			q.pop();
-			if (t1 == nullptr && t2 == nullptr) { continue; }
-			if (t1 && t2 == nullptr || t2 && t1 == nullptr || t1->val != t2->val) { return false; }
-
-			q.push(t1->left);
-			q.push(t2->right);
-			q.push(t1->right);
-			q.push(t2->left);
+			swap(node->left, node->right);
+			if (node->left) { q.push(node->left); }
+			if (node->right) { q.push(node->right); }
 		}
-		return true;
+		return root;
 	}
 };
