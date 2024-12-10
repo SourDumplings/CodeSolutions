@@ -1,8 +1,8 @@
 /**
- * @file 112. Path Sum(easy).cpp
+ * @file 114. Flatten Binary Tree to Linked List(medium)-先序遍历法.cpp
  * @author SourDumplings (sourdumplings@qq.com)
  * @brief
- * https://leetcode.cn/problems/path-sum/description/?envType=study-plan-v2&envId=top-interview-150
+ * https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/description/?envType=study-plan-v2&envId=top-interview-150
  * @version 1.0.0
  * @date 2024-12-10
  *
@@ -24,13 +24,16 @@
 class Solution
 {
 public:
-	bool hasPathSum(TreeNode *root, int targetSum)
+	void flatten(TreeNode *root)
 	{
-		if (root == nullptr) { return false; }
-
-		if (!root->left && !root->right) { return targetSum == root->val; }
-
-		return hasPathSum(root->left, targetSum - root->val) ||
-			hasPathSum(root->right, targetSum - root->val);
+		if (root == nullptr) { return; }
+		flatten(root->right);
+		flatten(root->left);
+		root->right	   = lastNode;
+		lastNode	   = root;
+		lastNode->left = nullptr;
 	}
+
+private:
+	TreeNode *lastNode = nullptr;
 };
