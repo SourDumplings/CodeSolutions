@@ -1,9 +1,13 @@
-/*
- * @Author: SourDumplings
- * @Date: 2020-12-03 11:02:34
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode-cn.com/problems/binary-search-tree-iterator/
+/**
+ * @file 173. Binary Search Tree Iterator(medium)-迭代中序遍历法.cpp
+ * @author SourDumplings (sourdumplings@qq.com)
+ * @brief
+ * https://leetcode.cn/problems/binary-search-tree-iterator/description/?envType=study-plan-v2&envId=top-interview-150
+ * @version 1.0.0
+ * @date 2024-12-16
+ *
+ * @copyright Copyright (c) 2024 SourDumplings
+ *
  */
 
 /**
@@ -19,38 +23,30 @@
  */
 class BSTIterator
 {
-private:
-    stack<TreeNode *> S;
-
-    void _left_most_in_stack(TreeNode *node)
-    {
-        while (node)
-        {
-            S.push(node);
-            node = node->left;
-        }
-    }
 public:
-    BSTIterator(TreeNode *root)
-    {
-        _left_most_in_stack(root);
-    }
+	BSTIterator(TreeNode *root) { pushAllLeftChildren(root); }
 
-    int next()
-    {
-        TreeNode *leftMost = S.top();
-        S.pop();
-        if (leftMost->right)
-        {
-            _left_most_in_stack(leftMost->right);
-        }
-        return leftMost->val;
-    }
+	int next()
+	{
+		TreeNode *leftMost = m_S.top();
+		m_S.pop();
+		if (leftMost->right) { pushAllLeftChildren(leftMost->right); }
+		return leftMost->val;
+	}
 
-    bool hasNext()
-    {
-        return !S.empty();
-    }
+	bool hasNext() { return !m_S.empty(); }
+
+private:
+	stack<TreeNode *> m_S;
+
+	void pushAllLeftChildren(TreeNode *node)
+	{
+		while (node)
+		{
+			m_S.push(node);
+			node = node->left;
+		}
+	}
 };
 
 /**
