@@ -1,50 +1,48 @@
-/*
- * @Author: SourDumplings
- * @Date: 2020-12-21 08:05:51
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode-cn.com/problems/binary-tree-right-side-view/
+/**
+ * @file 199. Binary Tree Right Side View(medium).cpp
+ * @author SourDumplings (sourdumplings@qq.com)
+ * @brief
+ * https://leetcode.cn/problems/binary-tree-right-side-view/?envType=study-plan-v2&envId=top-interview-150
+ * @version 1.0.0
+ * @date 2024-12-19
+ *
+ * @copyright Copyright (c) 2024 SourDumplings
+ *
+ * 本质上是找每一层的最有结点
  */
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution
 {
 public:
-    vector<int> rightSideView(TreeNode *root)
-    {
-        vector<int> res;
-        queue<TreeNode *> q;
-        if (!root)
-        {
-            return res;
-        }
-        q.push(root);
-        while (!q.empty())
-        {
-            queue<TreeNode *> thisLevel;
-            while (!q.empty())
-            {
-                TreeNode *node = q.front();
-                thisLevel.push(node);
-                q.pop();
-                if (q.empty())
-                {
-                    res.push_back(node->val);
-                }
-            }
-            while (!thisLevel.empty())
-            {
-                TreeNode *node = thisLevel.front();
-                if (node->left)
-                {
-                    q.push(node->left);
-                }
-                if (node->right)
-                {
-                    q.push(node->right);
-                }
-                thisLevel.pop();
-            }
-        }
-        return res;
-    }
+	vector<int> rightSideView(TreeNode *root)
+	{
+		vector<int> res;
+		if (root == nullptr) { return res; }
+
+		vector<TreeNode *> thisLevel;
+		thisLevel.push_back(root);
+		while (!thisLevel.empty())
+		{
+			vector<TreeNode *> nextLevel;
+			for (TreeNode *node : thisLevel)
+			{
+				if (node->left) { nextLevel.push_back(node->left); }
+				if (node->right) { nextLevel.push_back(node->right); }
+			}
+			res.push_back(thisLevel.back()->val);
+			thisLevel = std::move(nextLevel);
+		}
+		return res;
+	}
 };
