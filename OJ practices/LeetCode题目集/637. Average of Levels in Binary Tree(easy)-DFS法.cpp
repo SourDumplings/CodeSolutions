@@ -1,9 +1,13 @@
-/*
- * @Author: SourDumplings
- * @Date: 2019-10-11 15:26:57
- * @Link: https://github.com/SourDumplings/
- * @Email: changzheng300@foxmail.com
- * @Description: https://leetcode.com/problems/average-of-levels-in-binary-tree/
+/**
+ * @file 637. Average of Levels in Binary Tree(easy)-DFS法.cpp
+ * @author SourDumplings (sourdumplings@qq.com)
+ * @brief
+ * https://leetcode.cn/problems/average-of-levels-in-binary-tree/?envType=study-plan-v2&envId=top-interview-150
+ * @version 1.0.0
+ * @date 2024-12-20
+ *
+ * @copyright Copyright (c) 2024 SourDumplings
+ *
  */
 
 /**
@@ -12,45 +16,41 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution
 {
-private:
-    vector<long long> levelSum;
-    vector<int> levelCount;
-
 public:
-    vector<double> averageOfLevels(TreeNode *root)
-    {
-        DFS(root, 0);
-        vector<double> res;
-        int n = levelSum.size();
-        res.resize(n);
-        for (int i = 0; i < n; i++)
-        {
-            res[i] = ((double)(levelSum[i])) / levelCount[i];
-        }
-        return std::move(res);
-    }
+	vector<double> averageOfLevels(TreeNode *root)
+	{
+		vector<double> res;
+		memset(levelCount, 0, sizeof(levelCount));
+		memset(levelSum, 0, sizeof(levelSum));
+		maxLevelIdx = 0;
+		dfs(root, 0);
+		res.resize(maxLevelIdx + 1);
+		for (int i = 0; i <= maxLevelIdx; i++)
+		{
+			res[i] = levelSum[i] / levelCount[i];
+		}
+		return res;
+	}
 
-    void DFS(TreeNode *node, int l)
-    {
-        if (node)
-        {
-            if (levelSum.size() < l + 1)
-            {
-                levelSum.push_back(node->val);
-                levelCount.push_back(1);
-            }
-            else
-            {
-                levelSum[l] += node->val;
-                ++levelCount[l];
-            }
-            DFS(node->left, l + 1);
-            DFS(node->right, l + 1);
-        }
-    }
+private:
+	int levelCount[1000];
+	double levelSum[1000];
+	int maxLevelIdx;
+
+	void dfs(TreeNode *node, int levelIdx)
+	{
+		if (node == nullptr) { return; }
+		maxLevelIdx = max(maxLevelIdx, levelIdx);
+		++levelCount[levelIdx];
+		levelSum[levelIdx] += node->val;
+		dfs(node->left, levelIdx + 1);
+		dfs(node->right, levelIdx + 1);
+	}
 };
